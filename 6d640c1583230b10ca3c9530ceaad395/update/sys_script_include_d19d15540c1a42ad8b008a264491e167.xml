@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+  <sys_script_include action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>d19d15540c1a42ad8b008a264491e167</sys_id>
+    <sys_scope display_value="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+    <sys_update_name>sys_script_include_d19d15540c1a42ad8b008a264491e167</sys_update_name>
+    <access>public</access>
+    <active>true</active>
+    <api_name>x_1947064_autoca_0.VehicleMaintenanceAnalyzer</api_name>
+    <caller_access/>
+    <client_callable>false</client_callable>
+    <description>Read-only aggregator that builds a structured vehicle maintenance context (vehicle details, service history, inspections, existing recommendations) for future GenAI consumption. Does not modify any records.</description>
+    <mobile_callable>false</mobile_callable>
+    <name>VehicleMaintenanceAnalyzer</name>
+    <sandbox_callable>false</sandbox_callable>
+    <script><![CDATA[/**
+ * VehicleMaintenanceAnalyzer
+ *
+ * Read-only Script Include that aggregates Vehicle, Service History,
+ * and Inspection data into a structured JSON payload.
+ *
+ * Purpose: Prepare the input context a future GenAI integration
+ * would need to generate maintenance recommendations.
+ *
+ * This Script Include does NOT modify any records.
+ * It does NOT call any LLM, GenAI, or external AI service.
+ */
+var VehicleMaintenanceAnalyzer = Class.create();
+
+VehicleMaintenanceAnalyzer.prototype = {
+    initialize: function () {
+        this.SCOPE = 'x_1947064_autoca_0';
+    },
+
+    /**
+     * Builds a complete maintenance context for a vehicle.
+     * @param {string} vehicleSysId - sys_id of the vehicle record
+     * @returns {object|null} Structured payload or null if vehicle not found
+     */
+    buildVehicleContext: function (vehicleSysId) {
+        if (!vehicleSysId) {
+            gs.warn('VehicleMaintenanceAnalyzer: vehicleSysId is required');
+            return null;
+        }
+
+        var vehicleData = this._getVehicle(vehicleSysId);
+        if (!vehicleData) {
+            gs.warn('VehicleMaintenanceAnalyzer: Vehicle not found: ' + vehicleSysId);
+            return null;
+        }
+
+        return {
+            vehicle: vehicleData,
+            service_history: this._getServiceHistory(vehicleSysId),
+            inspections: this._getInspections(vehicleSysId),
+            existing_recommendations: this._getExistingRecommendations(vehicleSysId),
+            context_generated_at: new GlideDateTime().getDisplayValue()
+        };
+    },
+
+    /**
+     * Reads vehicle record (read-only).
+     */
+    _getVehicle: function (vehicleSysId) {
+        var gr = new GlideRecord(this.SCOPE + '_vehicle');
+        if (!gr.get(vehicleSysId)) {
+            return null;
+        }
+        return {
+            sys_id: gr.getUniqueValue(),
+            make: gr.getValue('make') || '',
+            model: gr.getValue('model') || '',
+            registration_number: gr.getValue('registration_number') || '',
+            current_mileage: parseInt(gr.getValue('current_mileage'), 10) || 0,
+            last_service_date: gr.getValue('last_service_date') || '',
+            color: gr.getValue('color') || '',
+            service_center: gr.getValue('service_center') || '',
+            owner: gr.getDisplayValue('owner') || ''
+        };
+    },
+
+    /**
+     * Reads service history records for a vehicle (read-only).
+     * Returns most recent 10 records ordered by service_date descending.
+     */
+    _getServiceHistory: function (vehicleSysId) {
+        var records = [];
+        var gr = new GlideRecord(this.SCOPE + '_service_history');
+        gr.addQuery('vehicle', vehicleSysId);
+        gr.orderByDesc('service_date');
+        gr.setLimit(10);
+        gr.query();
+
+        while (gr.next()) {
+            records.push({
+                sys_id: gr.getUniqueValue(),
+                service_date: gr.getValue('service_date') || '',
+                service_details: gr.getValue('service_details') || '',
+                description: gr.getValue('description') || '',
+                parts_replaced: gr.getValue('parts_replaced') || '',
+                mileage_at_service: parseInt(gr.getValue('mileage_at_service'), 10) || 0,
+                service_cost: parseInt(gr.getValue('service_cost'), 10) || 0,
+                service_center: gr.getValue('service_center') || '',
+                next_service_date: gr.getValue('next_service_date') || '',
+                next_service_mileage: parseInt(gr.getValue('next_service_mileage'), 10) || 0
+            });
+        }
+        return records;
+    },
+
+    /**
+     * Reads inspection records for a vehicle (read-only).
+     * Returns most recent 10 records ordered by inspection_date descending.
+     */
+    _getInspections: function (vehicleSysId) {
+        var records = [];
+        var gr = new GlideRecord(this.SCOPE + '_inspection');
+        gr.addQuery('vehicle', vehicleSysId);
+        gr.orderByDesc('inspection_date');
+        gr.setLimit(10);
+        gr.query();
+
+        while (gr.next()) {
+            records.push({
+                sys_id: gr.getUniqueValue(),
+                inspection_number: gr.getValue('inspection_number') || '',
+                inspection_date: gr.getValue('inspection_date') || '',
+                finding: gr.getValue('finding') || '',
+                severity: gr.getValue('severity') || '',
+                recommendation: gr.getValue('recommendation') || '',
+                technician: gr.getValue('technician') || '',
+                technician_notes: gr.getValue('technician_notes') || '',
+                status: gr.getValue('status') || ''
+            });
+        }
+        return records;
+    },
+
+    /**
+     * Reads existing recommendations for a vehicle (read-only).
+     * Used to avoid duplicate recommendations.
+     */
+    _getExistingRecommendations: function (vehicleSysId) {
+        var records = [];
+        var gr = new GlideRecord(this.SCOPE + '_reccommendation');
+        gr.addQuery('vehicle', vehicleSysId);
+        gr.orderByDesc('created_date');
+        gr.setLimit(20);
+        gr.query();
+
+        while (gr.next()) {
+            records.push({
+                sys_id: gr.getUniqueValue(),
+                recommendation_issue: gr.getValue('recommendation_issue') || '',
+                classification: gr.getValue('classification') || '',
+                priority: gr.getValue('priority') || '',
+                source: gr.getValue('source') || '',
+                due_date: gr.getValue('due_date') || ''
+            });
+        }
+        return records;
+    },
+
+    type: 'VehicleMaintenanceAnalyzer'
+};
+]]></script>
+    <sys_name>VehicleMaintenanceAnalyzer</sys_name>
+  </sys_script_include>
+</record_update>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+  <sys_script_include action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>cc153d70216442afb3a0990bd749b3aa</sys_id>
+    <sys_scope display_value="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+    <sys_update_name>sys_script_include_cc153d70216442afb3a0990bd749b3aa</sys_update_name>
+    <access>public</access>
+    <active>true</active>
+    <api_name>x_1947064_autoca_0.RecommendationWriter</api_name>
+    <caller_access/>
+    <client_callable>false</client_callable>
+    <description>Validates and creates a single recommendation record from structured input. Only writes when explicitly called — does not run automatically or generate data. Intended as the output handler for a future GenAI integration.</description>
+    <mobile_callable>false</mobile_callable>
+    <name>RecommendationWriter</name>
+    <sandbox_callable>false</sandbox_callable>
+    <script><![CDATA[/**
+ * RecommendationWriter
+ *
+ * Script Include that validates and writes a single recommendation
+ * record to the Recommendation table.
+ *
+ * Purpose: Provide the output handler that a future GenAI integration
+ * would call to persist its generated recommendations.
+ *
+ * This Script Include:
+ *  - Only writes when explicitly called with a complete input object
+ *  - Does NOT run automatically (no triggers, no scheduled execution)
+ *  - Does NOT call any LLM, GenAI, or external AI service
+ *  - Does NOT modify existing records — it only creates new ones
+ *  - Validates all required fields before writing
+ *  - Sets source='ai_generated' for GenAI-originated records
+ */
+var RecommendationWriter = Class.create();
+
+RecommendationWriter.prototype = {
+    initialize: function () {
+        this.TABLE = 'x_1947064_autoca_0_reccommendation';
+        this.REQUIRED_FIELDS = ['vehicle', 'recommendation_issue', 'recommended_action'];
+        this.VALID_SOURCES = ['ai_generated', 'manual', 'imported'];
+        this.VALID_PRIORITIES = ['Critical', 'High', 'Medium', 'Low'];
+    },
+
+    /**
+     * Creates a single recommendation record from a structured input.
+     * Only executes when explicitly called — never runs automatically.
+     *
+     * @param {object} input - Structured recommendation data
+     * @param {string} input.vehicle - sys_id of the Vehicle record (required)
+     * @param {string} input.recommendation_issue - The issue identified (required)
+     * @param {string} input.recommended_action - Specific action to take (required)
+     * @param {string} [input.description] - Supporting evidence / explanation
+     * @param {string} [input.classification] - Category (e.g., Engine, Brakes)
+     * @param {string} [input.priority] - Critical / High / Medium / Low
+     * @param {string} [input.ai_confidence] - AI confidence percentage string
+     * @param {number} [input.confidence] - Numeric confidence (0.0–1.0)
+     * @param {string} [input.estimated_cost] - Cost estimate string
+     * @param {string} [input.due_date] - Recommended action date (YYYY-MM-DD)
+     * @param {string} [input.source] - ai_generated / manual / imported
+     * @returns {object} Result with success flag, sys_id or error message
+     */
+    createRecommendation: function (input) {
+        if (!input || typeof input !== 'object') {
+            return this._error('Input must be a non-null object');
+        }
+
+        var validation = this._validate(input);
+        if (!validation.valid) {
+            return this._error(validation.message);
+        }
+
+        var gr = new GlideRecord(this.TABLE);
+        gr.initialize();
+
+        gr.setValue('vehicle', input.vehicle);
+        gr.setValue('recommendation_issue', input.recommendation_issue);
+        gr.setValue('recommended_action', input.recommended_action);
+        gr.setValue('source', input.source || 'ai_generated');
+        gr.setValue('created_date', new GlideDateTime().getValue());
+
+        if (input.description) {
+            gr.setValue('description', input.description);
+        }
+        if (input.classification) {
+            gr.setValue('classification', input.classification);
+        }
+        if (input.priority) {
+            gr.setValue('priority', input.priority);
+        }
+        if (input.ai_confidence) {
+            gr.setValue('ai_confidence', input.ai_confidence);
+        }
+        if (input.confidence !== undefined && input.confidence !== null) {
+            gr.setValue('confidence', input.confidence);
+        }
+        if (input.estimated_cost) {
+            gr.setValue('estimated_cost', input.estimated_cost);
+        }
+        if (input.due_date) {
+            gr.setValue('due_date', input.due_date);
+        }
+
+        var sysId = gr.insert();
+        if (sysId) {
+            gs.info('RecommendationWriter: Created recommendation ' + sysId +
+                ' for vehicle ' + input.vehicle);
+            return {
+                success: true,
+                sys_id: sysId
+            };
+        }
+
+        return this._error('Failed to insert recommendation record');
+    },
+
+    /**
+     * Validates the input object before writing.
+     */
+    _validate: function (input) {
+        for (var i = 0; i < this.REQUIRED_FIELDS.length; i++) {
+            var field = this.REQUIRED_FIELDS[i];
+            if (!input[field] || ('' + input[field]).trim() === '') {
+                return { valid: false, message: 'Missing required field: ' + field };
+            }
+        }
+
+        var vGr = new GlideRecord('x_1947064_autoca_0_vehicle');
+        if (!vGr.get(input.vehicle)) {
+            return { valid: false, message: 'Vehicle not found: ' + input.vehicle };
+        }
+
+        if (input.source && this.VALID_SOURCES.indexOf(input.source) === -1) {
+            return { valid: false, message: 'Invalid source. Must be one of: ' +
+                this.VALID_SOURCES.join(', ') };
+        }
+
+        if (input.confidence !== undefined && input.confidence !== null) {
+            var c = parseFloat(input.confidence);
+            if (isNaN(c) || c < 0 || c > 1) {
+                return { valid: false, message: 'Confidence must be between 0.0 and 1.0' };
+            }
+        }
+
+        return { valid: true };
+    },
+
+    /**
+     * Returns a standardized error result.
+     */
+    _error: function (message) {
+        gs.warn('RecommendationWriter: ' + message);
+        return { success: false, error: message };
+    },
+
+    type: 'RecommendationWriter'
+};
+]]></script>
+    <sys_name>RecommendationWriter</sys_name>
+  </sys_script_include>
+</record_update>
