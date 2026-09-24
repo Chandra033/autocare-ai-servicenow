@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_app_module">
+  <sys_app_module action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>e080003c43524b0d96098296cbe5641d</sys_id>
+    <sys_scope display_value="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+    <sys_update_name>sys_app_module_e080003c43524b0d96098296cbe5641d</sys_update_name>
+    <active>true</active>
+    <application>d101a71a6e96465890b1480a59aeedbc</application>
+    <link_type>DIRECT</link_type>
+    <order>100</order>
+    <query>x_1947064_autoca_0_vehicle_health_passport.do</query>
+    <title>Vehicle Health Passport</title>
+  </sys_app_module>
+</record_update>

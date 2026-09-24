@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+  <sys_ws_operation action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>ca04f922a1ac48cebdeb3f9b7c8cf9cb</sys_id>
+    <sys_scope display_value="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+    <sys_update_name>sys_ws_operation_ca04f922a1ac48cebdeb3f9b7c8cf9cb</sys_update_name>
+    <active>true</active>
+    <consumes>application/json</consumes>
+    <consumes_customized>false</consumes_customized>
+    <default_operation_uri>/api/x_1947064_autoca_0/vehicle_passport/summary/{vehicle_id}</default_operation_uri>
+    <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+    <http_method>GET</http_method>
+    <name>Vehicle Summary</name>
+    <operation_script><![CDATA[var SCOPE = 'x_1947064_autoca_0';
+
+function toObj(gr, fields) {
+  var obj = {};
+  for (var i = 0; i < fields.length; i++) {
+    obj[fields[i]] = gr.getValue(fields[i]) || '';
+  }
+  return obj;
+}
+
+function queryFirst(table, encoded, fields, orderDesc) {
+  var gr = new GlideRecord(table);
+  gr.addEncodedQuery(encoded);
+  if (orderDesc) gr.orderByDesc(orderDesc);
+  gr.setLimit(1);
+  gr.query();
+  return gr.next() ? toObj(gr, fields) : null;
+}
+
+function queryFirstAsc(table, encoded, fields, orderAsc) {
+  var gr = new GlideRecord(table);
+  gr.addEncodedQuery(encoded);
+  gr.orderBy(orderAsc);
+  gr.setLimit(1);
+  gr.query();
+  return gr.next() ? toObj(gr, fields) : null;
+}
+
+function countRecords(table, query) {
+  var ga = new GlideAggregate(table);
+  ga.addEncodedQuery(query);
+  ga.addAggregate('COUNT');
+  ga.query();
+  return ga.next() ? parseInt(ga.getAggregate('COUNT'), 10) : 0;
+}
+
+(function process(request, response) {
+  var vehicleId = request.pathParams.vehicle_id;
+  if (!vehicleId) {
+    response.setStatus(400);
+    response.setBody({ error: 'vehicle_id is required' });
+    return;
+  }
+
+  var vGr = new GlideRecord(SCOPE + '_vehicle');
+  if (!vGr.get(vehicleId)) {
+    response.setStatus(404);
+    response.setBody({ error: 'Vehicle not found' });
+    return;
+  }
+
+  var vehicle = toObj(vGr, [
+    'make', 'model', 'registration_number',
+    'current_mileage', 'last_service_date', 'color'
+  ]);
+  vehicle.owner = vGr.getDisplayValue('owner');
+  vehicle.sys_id = vGr.getUniqueValue();
+
+  var q = 'vehicle=' + vehicleId;
+  var now = new GlideDateTime().getValue();
+
+  var outstandingItems = [];
+  var oGr = new GlideRecord(SCOPE + '_reccommendation');
+  oGr.addEncodedQuery(q + '^due_date>=' + now + '^ORstatus!=completed');
+  oGr.query();
+  while (oGr.next()) {
+    outstandingItems.push(toObj(oGr, ['recommendation_issue', 'priority', 'due_date']));
+  }
+
+  var result = {
+    vehicle: vehicle,
+    latest_recommendation: queryFirst(
+      SCOPE + '_reccommendation', q,
+      ['recommendation_issue', 'priority', 'classification', 'ai_confidence'],
+      'created_date'
+    ),
+    upcoming_appointment: queryFirstAsc(
+      SCOPE + '_appointment', q + '^preferred_date>=' + now,
+      ['service_type', 'preferred_date', 'appointment_number', 'assigned_technician'],
+      'preferred_date'
+    ),
+    last_service_outcome: queryFirst(
+      SCOPE + '_service_outcome', q,
+      ['outcome_type', 'final_status', 'outcome_date', 'outcome_number'],
+      'outcome_date'
+    ),
+    outstanding_maintenance: outstandingItems,
+    counts: {
+      service_history: countRecords(SCOPE + '_service_history', q),
+      invoices: countRecords(SCOPE + '_invoice', q),
+      recommendations: countRecords(SCOPE + '_reccommendation', q),
+      appointments: countRecords(SCOPE + '_appointment', q),
+      inspections: countRecords(SCOPE + '_inspection', q),
+      repair_plans: countRecords(SCOPE + '_repair_plan', q),
+      service_outcomes: countRecords(SCOPE + '_service_outcome', q)
+    }
+  };
+
+  response.setBody(result);
+})(request, response);
+]]></operation_script>
+    <operation_uri>/api/x_1947064_autoca_0/vehicle_passport/summary/{vehicle_id}</operation_uri>
+    <produces>application/json</produces>
+    <produces_customized>false</produces_customized>
+    <relative_path>/summary/{vehicle_id}</relative_path>
+    <request_example/>
+    <requires_acl_authorization>true</requires_acl_authorization>
+    <requires_authentication>true</requires_authentication>
+    <requires_snc_internal_role>true</requires_snc_internal_role>
+    <short_description/>
+    <sys_policy/>
+    <web_service_definition>5defa94a59d54c9592e0f93f6e4d01ef</web_service_definition>
+    <web_service_version/>
+  </sys_ws_operation>
+</record_update>
