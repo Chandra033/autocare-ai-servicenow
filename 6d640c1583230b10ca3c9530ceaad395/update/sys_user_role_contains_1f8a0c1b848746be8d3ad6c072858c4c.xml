@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role_contains">
+  <sys_user_role_contains action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>1f8a0c1b848746be8d3ad6c072858c4c</sys_id>
+    <sys_scope display_value="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+    <sys_update_name>sys_user_role_contains_1f8a0c1b848746be8d3ad6c072858c4c</sys_update_name>
+    <contains name="x_1947064_autoca_0.user">0a91dd6d78eb42c2bdb8bf446f84e1dc</contains>
+    <role name="x_1947064_autoca_0.mechanic">4e456c07996f43ed9e5d7b9d367da76c</role>
+  </sys_user_role_contains>
+</record_update>

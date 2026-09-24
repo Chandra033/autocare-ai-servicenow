@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+  <sys_security_acl_role action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>938e8a6744ad4f00a34e037fe832c6de</sys_id>
+    <sys_scope display_value="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+    <sys_update_name>sys_security_acl_role_938e8a6744ad4f00a34e037fe832c6de</sys_update_name>
+    <sys_security_acl>48200867e57647d596fbd10139d6cd91</sys_security_acl>
+    <sys_user_role name="x_1947064_autoca_0.mechanic">4e456c07996f43ed9e5d7b9d367da76c</sys_user_role>
+  </sys_security_acl_role>
+</record_update>

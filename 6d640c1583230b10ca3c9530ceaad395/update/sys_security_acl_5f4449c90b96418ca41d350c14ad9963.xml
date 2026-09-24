@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+  <sys_security_acl action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>5f4449c90b96418ca41d350c14ad9963</sys_id>
+    <sys_scope display_value="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+    <sys_update_name>sys_security_acl_5f4449c90b96418ca41d350c14ad9963</sys_update_name>
+    <active>true</active>
+    <admin_overrides>true</admin_overrides>
+    <advanced>true</advanced>
+    <applies_to/>
+    <condition/>
+    <decision_type>deny</decision_type>
+    <description>Deny inspection read unless user is staff or owns the related vehicle</description>
+    <name>x_1947064_autoca_0_inspection</name>
+    <operation display_value="read">read</operation>
+    <script><![CDATA[
+        answer = gs.hasRole('x_1947064_autoca_0.service_advisor')
+              || gs.hasRole('x_1947064_autoca_0.mechanic')
+              || current.vehicle.owner == gs.getUserID();
+    ]]></script>
+    <security_attribute/>
+    <sys_name>x_1947064_autoca_0_inspection</sys_name>
+    <type>record</type>
+  </sys_security_acl>
+</record_update>

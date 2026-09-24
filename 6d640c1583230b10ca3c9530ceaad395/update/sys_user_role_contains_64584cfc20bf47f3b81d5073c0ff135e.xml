@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role_contains">
+  <sys_user_role_contains action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>64584cfc20bf47f3b81d5073c0ff135e</sys_id>
+    <sys_scope display_value="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+    <sys_update_name>sys_user_role_contains_64584cfc20bf47f3b81d5073c0ff135e</sys_update_name>
+    <contains name="x_1947064_autoca_0.user">82dacb7b73ed4f1fa4aff2ce1a1a3440</contains>
+    <role name="x_1947064_autoca_0.vehicle_owner">ae4d1f85bcb340f49a5a4b4736e92e4c</role>
+  </sys_user_role_contains>
+</record_update>
