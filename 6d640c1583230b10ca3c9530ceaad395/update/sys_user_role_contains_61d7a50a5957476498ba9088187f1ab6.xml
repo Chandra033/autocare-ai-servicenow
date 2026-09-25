@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role_contains">
-  <sys_user_role_contains action="INSERT_OR_UPDATE" apply_defaults="true">
-    <sys_id>61d7a50a5957476498ba9088187f1ab6</sys_id>
-    <sys_scope display_value="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_scope>
-    <sys_update_name>sys_user_role_contains_61d7a50a5957476498ba9088187f1ab6</sys_update_name>
-    <contains name="x_1947064_autoca_0.service_manager">133e222afcf94d9593cc0887f3b6da1d</contains>
-    <role name="x_1947064_autoca_0.admin">e142bf7d3c6448cc855198067681acd7</role>
-  </sys_user_role_contains>
+    <sys_user_role_contains action="INSERT_OR_UPDATE">
+        <contains display_value="x_1947064_autoca_0.service_manager" name="x_1947064_autoca_0.service_manager">133e222afcf94d9593cc0887f3b6da1d</contains>
+        <role display_value="x_1947064_autoca_0.admin" name="x_1947064_autoca_0.admin">b9640c1583230b10ca3c9530ceaad3db</role>
+        <sys_class_name>sys_user_role_contains</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-24 19:09:18</sys_created_on>
+        <sys_id>61d7a50a5957476498ba9088187f1ab6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_1947064_autoca_0.service_manager.x_1947064_autoca_0.admin</sys_name>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name>sys_user_role_contains_61d7a50a5957476498ba9088187f1ab6</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-24 19:09:18</sys_updated_on>
+    </sys_user_role_contains>
 </record_update>

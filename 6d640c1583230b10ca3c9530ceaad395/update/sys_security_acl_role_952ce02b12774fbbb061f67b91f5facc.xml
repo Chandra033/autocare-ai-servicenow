@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
-  <sys_security_acl_role action="INSERT_OR_UPDATE" apply_defaults="true">
-    <sys_id>952ce02b12774fbbb061f67b91f5facc</sys_id>
-    <sys_scope display_value="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_scope>
-    <sys_update_name>sys_security_acl_role_952ce02b12774fbbb061f67b91f5facc</sys_update_name>
-    <sys_security_acl>48200867e57647d596fbd10139d6cd91</sys_security_acl>
-    <sys_user_role name="x_1947064_autoca_0.vehicle_owner">ae4d1f85bcb340f49a5a4b4736e92e4c</sys_user_role>
-  </sys_security_acl_role>
+    <sys_security_acl_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-24 19:09:16</sys_created_on>
+        <sys_id>952ce02b12774fbbb061f67b91f5facc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_1947064_autoca_0_repair_plan.</sys_name>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_security_acl display_value="x_1947064_autoca_0_repair_plan">48200867e57647d596fbd10139d6cd91</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_952ce02b12774fbbb061f67b91f5facc</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-24 19:09:16</sys_updated_on>
+        <sys_user_role display_value="x_1947064_autoca_0.vehicle_owner" name="x_1947064_autoca_0.vehicle_owner">ae4d1f85bcb340f49a5a4b4736e92e4c</sys_user_role>
+    </sys_security_acl_role>
 </record_update>

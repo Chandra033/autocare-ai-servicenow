@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
-  <sys_ws_operation action="INSERT_OR_UPDATE" apply_defaults="true">
-    <sys_id>ca04f922a1ac48cebdeb3f9b7c8cf9cb</sys_id>
-    <sys_scope display_value="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_scope>
-    <sys_update_name>sys_ws_operation_ca04f922a1ac48cebdeb3f9b7c8cf9cb</sys_update_name>
-    <active>true</active>
-    <consumes>application/json</consumes>
-    <consumes_customized>false</consumes_customized>
-    <default_operation_uri>/api/x_1947064_autoca_0/vehicle_passport/summary/{vehicle_id}</default_operation_uri>
-    <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
-    <http_method>GET</http_method>
-    <name>Vehicle Summary</name>
-    <operation_script><![CDATA[var SCOPE = 'x_1947064_autoca_0';
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>GET</http_method>
+        <name>Vehicle Summary</name>
+        <operation_script><![CDATA[var SCOPE = 'x_1947064_autoca_0';
 
 function toObj(gr, fields) {
   var obj = {};
@@ -111,17 +108,28 @@ function countRecords(table, query) {
   response.setBody(result);
 })(request, response);
 ]]></operation_script>
-    <operation_uri>/api/x_1947064_autoca_0/vehicle_passport/summary/{vehicle_id}</operation_uri>
-    <produces>application/json</produces>
-    <produces_customized>false</produces_customized>
-    <relative_path>/summary/{vehicle_id}</relative_path>
-    <request_example/>
-    <requires_acl_authorization>true</requires_acl_authorization>
-    <requires_authentication>true</requires_authentication>
-    <requires_snc_internal_role>true</requires_snc_internal_role>
-    <short_description/>
-    <sys_policy/>
-    <web_service_definition>5defa94a59d54c9592e0f93f6e4d01ef</web_service_definition>
-    <web_service_version/>
-  </sys_ws_operation>
+        <operation_uri>/api/x_1947064_autoca_0/vehicle_passport/summary/{vehicle_id}</operation_uri>
+        <produces>application/json</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/summary/{vehicle_id}</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-24 17:25:36</sys_created_on>
+        <sys_id>ca04f922a1ac48cebdeb3f9b7c8cf9cb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Vehicle Summary</sys_name>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name>sys_ws_operation_ca04f922a1ac48cebdeb3f9b7c8cf9cb</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-24 17:25:36</sys_updated_on>
+        <web_service_definition display_value="Vehicle Passport API">5defa94a59d54c9592e0f93f6e4d01ef</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
 </record_update>

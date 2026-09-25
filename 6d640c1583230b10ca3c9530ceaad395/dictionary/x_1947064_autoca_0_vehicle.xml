@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="8af5c41983230b10ca3c9530ceaad3c2" label="Vehicle" max_length="40" name="x_1947064_autoca_0_vehicle" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Owner" max_length="40" name="owner" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Service Center" max_length="40" name="service_center" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Last Service Date" max_length="40" name="last_service_date" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true" label="Registration Number" max_length="40" name="registration_number" type="string"/>
+        <element label="Current Mileage" max_length="40" name="current_mileage" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="Service Details" max_length="40" name="service_details" type="string"/>
+        <element label="Service Cost" max_length="40" name="service_cost" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="Model" max_length="40" name="model" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Make" max_length="40" name="make" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Color" max_length="40" name="color" type="string"/>
+    </element>
+</database>

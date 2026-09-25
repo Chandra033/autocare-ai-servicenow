@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="153708d983230b10ca3c9530ceaad3ca" label="Reccommendation" max_length="40" name="x_1947064_autoca_0_reccommendation" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Recommendation / Issue" max_length="40" name="recommendation_issue" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Classification" max_length="40" name="classification" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Estimated Cost" max_length="40" name="estimated_cost" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Description" max_length="40" name="description" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="AI Confidence (%)" max_length="40" name="ai_confidence" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Created Date" max_length="40" name="created_date" type="glide_date"/>
+        <element label="Recommended Action" max_length="256" name="recommended_action" type="string"/>
+        <element label="Vehicle" name="vehicle" reference="x_1947064_autoca_0_vehicle" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Recommendation ID" max_length="40" name="recommendation_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Priority" max_length="40" name="priority" type="string"/>
+        <element label="Confidence" max_length="38" name="confidence" type="decimal"/>
+        <element attributes="edge_encryption_enabled=true" label="Due Date" max_length="40" name="due_date" type="glide_date"/>
+        <element label="Source" max_length="40" name="source" type="string"/>
+        <index name="index">
+            <element name="vehicle"/>
+        </index>
+    </element>
+</database>

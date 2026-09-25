@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module">
+    <sys_app_module action="DELETE">
+        <active>true</active>
+        <application display_value="System Import Sets">import_sets</application>
+        <assessment/>
+        <device_type/>
+        <filter/>
+        <hint/>
+        <homepage/>
+        <image/>
+        <link_type>LIST</link_type>
+        <map_page/>
+        <mobile_title>Autoca 0 1790245475938</mobile_title>
+        <mobile_view_name>Mobile</mobile_view_name>
+        <name>x_1947064_autoca_0_1790245475938</name>
+        <order>1100</order>
+        <override_menu_roles>false</override_menu_roles>
+        <query/>
+        <report/>
+        <require_confirmation>true</require_confirmation>
+        <roles/>
+        <sys_class_name>sys_app_module</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-24 10:24:52</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>4ba4c45583230b10ca3c9530ceaad39a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Autoca 0 1790245475938</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name>sys_app_module_4ba4c45583230b10ca3c9530ceaad39a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-24 10:24:52</sys_updated_on>
+        <timeline_page/>
+        <title>Autoca 0 1790245475938</title>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+        <window_name/>
+    </sys_app_module>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</application>
+        <file_path/>
+        <instance_id>05f7d97ffbd79e1852b0f3585eefdcec</instance_id>
+        <instance_name>dev294726</instance_name>
+        <name>sys_app_module_4ba4c45583230b10ca3c9530ceaad39a</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module"><sys_app_module action="INSERT_OR_UPDATE"><active>true</active><application display_value="System Import Sets">import_sets</application><assessment/><device_type/><filter/><hint/><homepage/><image/><link_type>LIST</link_type><map_page/><mobile_title>Autoca 0 1790245475938</mobile_title><mobile_view_name>Mobile</mobile_view_name><name>x_1947064_autoca_0_1790245475938</name><order>1100</order><override_menu_roles>false</override_menu_roles><query/><report/><require_confirmation>true</require_confirmation><roles/><sys_class_name>sys_app_module</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-09-24 10:24:52</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>4ba4c45583230b10ca3c9530ceaad39a</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Autoca 0 1790245475938</sys_name><sys_overrides/><sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package><sys_policy/><sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope><sys_update_name>sys_app_module_4ba4c45583230b10ca3c9530ceaad39a</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-09-24 10:24:52</sys_updated_on><timeline_page/><title>Autoca 0 1790245475938</title><uncancelable>false</uncancelable><view_name/><window_name/></sys_app_module></record_update>]]></payload>
+        <payload_hash>-97165621</payload_hash>
+        <record_name>Autoca 0 1790245475938</record_name>
+        <reverted_from/>
+        <source>e1640c1583230b10ca3c9530ceaad39e</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-24 10:24:52</sys_created_on>
+        <sys_id>8fa4c45583230b10ca3c9530ceaad3a1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1a0d2f258d50000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-24 10:24:52</sys_updated_on>
+        <type>Module</type>
+        <update_guid>0fa4c45505230b10304aaea262a25aa0</update_guid>
+        <update_guid_history>0fa4c45505230b10304aaea262a25aa0:-97165621</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Autoca 0 1790245475938">f48544d583230b10ca3c9530ceaad315</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-24 10:28:33</sys_created_on>
+        <sys_db_object display_value="" name="sys_app_module">sys_app_module</sys_db_object>
+        <sys_id>474669b8d65642ecbbc54e0931618a90</sys_id>
+        <sys_metadata>4ba4c45583230b10ca3c9530ceaad39a</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Autoca 0 1790245475938</sys_name>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_scope_delete display_value="">5939354a40604db1bb405bd64d784c49</sys_scope_delete>
+        <sys_update_name>sys_app_module_4ba4c45583230b10ca3c9530ceaad39a</sys_update_name>
+        <sys_update_version display_value="sys_app_module_4ba4c45583230b10ca3c9530ceaad39a">8fa4c45583230b10ca3c9530ceaad3a1</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-24 10:28:33</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

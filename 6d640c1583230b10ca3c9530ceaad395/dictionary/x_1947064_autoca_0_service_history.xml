@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="f9c6449983230b10ca3c9530ceaad3f5" label="Service History" max_length="40" name="x_1947064_autoca_0_service_history" type="collection">
+        <element label="Mileage at Service" max_length="40" name="mileage_at_service" type="integer"/>
+        <element label="Vehicle" name="vehicle" reference="x_1947064_autoca_0_vehicle" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Parts Replaced" max_length="40" name="parts_replaced" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Service Date" max_length="40" name="service_date" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true" label="Service Center" max_length="40" name="service_center" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Cost" max_length="40" name="cost" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Service Details" max_length="40" name="service_details" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Description" max_length="40" name="description" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Next Service Date" max_length="40" name="next_service_date" type="glide_date"/>
+        <element label="Next Service Mileage" max_length="40" name="next_service_mileage" type="integer"/>
+        <element label="Service Cost" max_length="40" name="service_cost" type="integer"/>
+        <index name="index">
+            <element name="vehicle"/>
+        </index>
+    </element>
+</database>

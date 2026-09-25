@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="b97bd89583e30b10ca3c9530ceaad30e" extends="sys_import_set_row" label="AutoCare Repair Plan Import" max_length="40" name="x_1947064_autoca_0_autocare_repair_plan_import" type="collection">
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Inspection" label="Inspection" max_length="40" name="u_inspection" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Status" label="Status" max_length="40" name="u_status" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Repair Description" label="Repair Description" max_length="40" name="u_repair_description" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Approval Date" label="Approval Date" max_length="40" name="u_approval_date" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Reason / Evidence" label="Reason / Evidence" max_length="41" name="u_reason___evidence" type="string"/>
+        <element attributes="import_attribute_name=Estimated Time (Hours)" label="Estimated Time (Hours)" max_length="15" name="u_estimated_time__hours_" type="decimal"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Vehicle" label="Vehicle" max_length="40" name="u_vehicle" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Classification" label="Classification" max_length="40" name="u_classification" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Appointment" label="Appointment" max_length="40" name="u_appointment" type="string"/>
+        <element attributes="import_attribute_name=Estimated Cost" label="Estimated Cost" max_length="40" name="u_estimated_cost" type="integer"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Repair Plan Number" label="Repair Plan Number" max_length="40" name="u_repair_plan_number" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Owner Approval" label="Owner Approval" max_length="40" name="u_owner_approval" type="string"/>
+    </element>
+</database>

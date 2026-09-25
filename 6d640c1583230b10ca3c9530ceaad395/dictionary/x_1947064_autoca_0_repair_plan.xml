@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="c3d7045d83230b10ca3c9530ceaad3ed" label="Repair Plan" max_length="40" name="x_1947064_autoca_0_repair_plan" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Status" max_length="40" name="status" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Approval Date" max_length="40" name="approval_date" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true" label="Repair Description" max_length="40" name="repair_description" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Vehicle" max_length="40" name="vehicle" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Appointment" max_length="40" name="appointment" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Classification" max_length="40" name="classification" type="string"/>
+        <element label="Estimated Cost" max_length="40" name="estimated_cost" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="Reason / Evidence" max_length="41" name="reason_evidence" type="string"/>
+        <element label="Estimated Time (Hours)" max_length="38" name="estimated_time_hours" type="decimal"/>
+        <element attributes="edge_encryption_enabled=true" label="Inspection" max_length="40" name="inspection" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Owner Approval" max_length="40" name="owner_approval" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Repair Plan Number" max_length="40" name="repair_plan_number" type="string"/>
+    </element>
+</database>
