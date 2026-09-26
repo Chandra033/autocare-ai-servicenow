@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_1947064_autoca_0.TrustReviewHandler</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Manages the review workflow for recommendations classified as Needs Further Inspection. Supports initiateReview, startReview, and completeReview. Accessible to mechanic, service_manager, and admin roles (Recommendation write access). Does not auto-execute.</description>
+        <mobile_callable>false</mobile_callable>
+        <name>TrustReviewHandler</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var TrustReviewHandler = Class.create();
+TrustReviewHandler.prototype = {
+    initialize: function() {
+        this.TABLE = 'x_1947064_autoca_0_reccommendation';
+        this.VALID_FINAL_CLASSIFICATIONS = ['required', 'recommended', 'optional'];
+    },
+
+    /**
+     * Initiate a review for a recommendation classified as needs_further_inspection.
+     * Requires: mechanic, service_manager, or admin (Recommendation write access).
+     * @param {string} recommendationSysId
+     * @returns {object} result
+     */
+    initiateReview: function(recommendationSysId) {
+        var gr = this._getRecord(recommendationSysId);
+        if (!gr) return this._error('Recommendation not found: ' + recommendationSysId);
+
+        var currentStatus = gr.getValue('review_status');
+        if (currentStatus === 'under_review' || currentStatus === 'review_complete') {
+            return this._error('Cannot initiate review — current status is: ' + currentStatus);
+        }
+
+        gr.setValue('review_status', 'pending_review');
+        gr.update();
+
+        gs.info('TrustReviewHandler: Initiated review for ' + recommendationSysId);
+        return { success: true, sys_id: recommendationSysId, review_status: 'pending_review' };
+    },
+
+    /**
+     * Start a review — assign a reviewer.
+     * Requires: mechanic, service_manager, or admin (Recommendation write access).
+     * @param {string} recommendationSysId
+     * @param {string} reviewerSysId - sys_id of the reviewing user
+     * @returns {object} result
+     */
+    startReview: function(recommendationSysId, reviewerSysId) {
+        var gr = this._getRecord(recommendationSysId);
+        if (!gr) return this._error('Recommendation not found: ' + recommendationSysId);
+
+        if (!reviewerSysId) return this._error('reviewerSysId is required');
+
+        var userGr = new GlideRecord('sys_user');
+        if (!userGr.get(reviewerSysId)) {
+            return this._error('Reviewer user not found: ' + reviewerSysId);
+        }
+
+        var currentStatus = gr.getValue('review_status');
+        if (currentStatus === 'review_complete') {
+            return this._error('Cannot start review — already complete');
+        }
+
+        gr.setValue('review_status', 'under_review');
+        gr.setValue('reviewed_by', reviewerSysId);
+        gr.update();
+
+        gs.info('TrustReviewHandler: Review started by ' + reviewerSysId + ' for ' + recommendationSysId);
+        return { success: true, sys_id: recommendationSysId, review_status: 'under_review', reviewed_by: reviewerSysId };
+    },
+
+    /**
+     * Complete a review with findings and reclassification.
+     * Requires: mechanic, service_manager, or admin (Recommendation write access).
+     * @param {string} recommendationSysId
+     * @param {object} input
+     * @param {string} input.new_classification - required|recommended|optional (NOT needs_further_inspection)
+     * @param {string} input.review_notes - findings from the review
+     * @param {number} input.new_confidence - reviewer's confidence (0.0–1.0)
+     * @returns {object} result
+     */
+    completeReview: function(recommendationSysId, input) {
+        var gr = this._getRecord(recommendationSysId);
+        if (!gr) return this._error('Recommendation not found: ' + recommendationSysId);
+
+        if (!input || typeof input !== 'object') {
+            return this._error('Input must be a non-null object');
+        }
+
+        // Validate new_classification
+        if (!input.new_classification) {
+            return this._error('new_classification is required');
+        }
+        if (this.VALID_FINAL_CLASSIFICATIONS.indexOf(input.new_classification) === -1) {
+            return this._error('new_classification must be one of: ' + this.VALID_FINAL_CLASSIFICATIONS.join(', ') + ' (cannot remain needs_further_inspection)');
+        }
+
+        // Validate confidence
+        if (input.new_confidence !== undefined && input.new_confidence !== null) {
+            var c = parseFloat(input.new_confidence);
+            if (isNaN(c) || c < 0 || c > 1) {
+                return this._error('new_confidence must be between 0.0 and 1.0');
+            }
+        }
+
+        // Apply review results
+        gr.setValue('review_status', 'review_complete');
+        gr.setValue('trust_classification', input.new_classification);
+
+        if (input.new_confidence !== undefined && input.new_confidence !== null) {
+            gr.setValue('confidence', input.new_confidence);
+        }
+
+        // Append review notes to description
+        if (input.review_notes) {
+            var existing = gr.getValue('description') || '';
+            var separator = existing ? ' | Review: ' : 'Review: ';
+            gr.setValue('description', existing + separator + input.review_notes);
+        }
+
+        gr.update();
+
+        gs.info('TrustReviewHandler: Review completed for ' + recommendationSysId +
+            ' — reclassified as ' + input.new_classification);
+        return {
+            success: true,
+            sys_id: recommendationSysId,
+            review_status: 'review_complete',
+            trust_classification: input.new_classification,
+            confidence: input.new_confidence || gr.getValue('confidence')
+        };
+    },
+
+    _getRecord: function(sysId) {
+        var gr = new GlideRecord(this.TABLE);
+        if (!gr.get(sysId)) return null;
+        return gr;
+    },
+
+    _error: function(message) {
+        gs.warn('TrustReviewHandler: ' + message);
+        return { success: false, error: message };
+    },
+
+    type: 'TrustReviewHandler'
+};
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-25 16:57:38</sys_created_on>
+        <sys_id>57d82b577b744ca8b3aeb107d4e1af0a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>TrustReviewHandler</sys_name>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name>sys_script_include_57d82b577b744ca8b3aeb107d4e1af0a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-25 16:57:38</sys_updated_on>
+    </sys_script_include>
+</record_update>

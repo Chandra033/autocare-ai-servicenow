@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_1947064_autoca_0.RepairTrustEngine</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Deterministic, rule-based Repair Trust Engine. Classifies recommendations as Required, Recommended, Optional, or Needs Further Inspection based on explainable evidence evaluation. No LLM, no GenAI, no external AI. Explicitly callable only — no automatic triggers.</description>
+        <mobile_callable>false</mobile_callable>
+        <name>RepairTrustEngine</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var RepairTrustEngine = Class.create();
+RepairTrustEngine.prototype = {
+    initialize: function() {
+        this.SCOPE = 'x_1947064_autoca_0';
+        this.VALID_CLASSIFICATIONS = ['required', 'recommended', 'optional', 'needs_further_inspection'];
+    },
+
+    /**
+     * Classify a single recommendation using deterministic rules.
+     * Only writes when explicitly called — no triggers, no scheduled execution.
+     * @param {string} recommendationSysId
+     * @returns {object} classification result
+     */
+    classifyRecommendation: function(recommendationSysId) {
+        if (!recommendationSysId) {
+            return this._error('recommendationSysId is required');
+        }
+
+        // 1. Get the recommendation to find the vehicle
+        var recGr = new GlideRecord(this.SCOPE + '_reccommendation');
+        if (!recGr.get(recommendationSysId)) {
+            return this._error('Recommendation not found: ' + recommendationSysId);
+        }
+
+        var vehicleSysId = recGr.getValue('vehicle');
+        if (!vehicleSysId) {
+            // No vehicle linked — cannot collect evidence
+            return this._applyClassification(recGr, {
+                trust_classification: 'needs_further_inspection',
+                confidence: 0.50,
+                reason: 'No vehicle linked to this recommendation — cannot evaluate evidence',
+                review_required: true
+            });
+        }
+
+        // 2. Collect evidence
+        var collector = new TrustEvidenceCollector();
+        var evidence = collector.collectEvidence(vehicleSysId, recommendationSysId);
+
+        // 3. Classify based on evidence
+        var result = this._evaluate(evidence);
+
+        // 4. Apply classification to the recommendation record
+        return this._applyClassification(recGr, result);
+    },
+
+    /**
+     * Classify all recommendations for a vehicle.
+     * Only writes when explicitly called.
+     * @param {string} vehicleSysId
+     * @returns {object} batch result
+     */
+    classifyAllForVehicle: function(vehicleSysId) {
+        if (!vehicleSysId) {
+            return this._error('vehicleSysId is required');
+        }
+
+        var results = [];
+        var gr = new GlideRecord(this.SCOPE + '_reccommendation');
+        gr.addQuery('vehicle', vehicleSysId);
+        gr.query();
+
+        while (gr.next()) {
+            var res = this.classifyRecommendation(gr.getUniqueValue());
+            results.push(res);
+        }
+
+        return {
+            success: true,
+            classified: results.length,
+            results: results
+        };
+    },
+
+    /**
+     * Deterministic classification logic.
+     * STEP 1: Insufficient evidence → needs_further_inspection
+     * STEP 2: Safety-critical path → required
+     * STEP 3: Strong evidence path → required
+     * STEP 4: Moderate evidence path → recommended
+     * STEP 5: Weak evidence path → optional
+     * STEP 6: Default fallback → needs_further_inspection
+     */
+    _evaluate: function(evidence) {
+        var ev = evidence;
+        var existingConfidence = parseFloat((ev.recommendation || {}).confidence) || 0;
+
+        // STEP 1: Insufficient evidence check — gates everything
+        if (ev.evidence_count < 2 || ev.has_conflicting_evidence) {
+            var reason = '';
+            if (ev.evidence_count < 2) {
+                reason = 'Insufficient evidence (' + ev.evidence_count + ' signal(s) found, minimum 2 required)';
+            } else {
+                reason = 'Conflicting evidence detected — recent service contradicts current finding';
+            }
+            return {
+                trust_classification: 'needs_further_inspection',
+                confidence: Math.min(existingConfidence, 0.65),
+                reason: reason,
+                review_required: true,
+                evidence_summary: ev.evidence_summary
+            };
+        }
+
+        // STEP 2: Safety-critical path
+        if (ev.safety_keywords_found.length > 0) {
+            var hasSevereInspection = false;
+            for (var i = 0; i < ev.inspection_findings.length; i++) {
+                var sev = (ev.inspection_findings[i].severity || '').toLowerCase();
+                if (sev === 'high' || sev === 'critical') {
+                    hasSevereInspection = true;
+                    break;
+                }
+            }
+            if (hasSevereInspection) {
+                return {
+                    trust_classification: 'required',
+                    confidence: Math.max(0.85, existingConfidence),
+                    reason: 'Safety-critical: ' + ev.safety_keywords_found.join(', ') + ' with high/critical severity inspection finding',
+                    review_required: false,
+                    evidence_summary: ev.evidence_summary
+                };
+            }
+        }
+
+        // STEP 3: Strong evidence path
+        if (ev.overdue_services.length > 0 && ev.evidence_count >= 3) {
+            return {
+                trust_classification: 'required',
+                confidence: Math.max(0.80, existingConfidence),
+                reason: 'Overdue service with ' + ev.evidence_count + ' supporting evidence signals',
+                review_required: false,
+                evidence_summary: ev.evidence_summary
+            };
+        }
+
+        // Recurring issue with strong corroboration
+        var hasRecurring = false;
+        for (var i = 0; i < ev.service_patterns.length; i++) {
+            if (ev.service_patterns[i].is_recurring) {
+                hasRecurring = true;
+                break;
+            }
+        }
+        if (hasRecurring && ev.evidence_count >= 3) {
+            return {
+                trust_classification: 'required',
+                confidence: Math.max(0.80, existingConfidence),
+                reason: 'Recurring issue with corroborating evidence (' + ev.evidence_count + ' signals)',
+                review_required: false,
+                evidence_summary: ev.evidence_summary
+            };
+        }
+
+        // STEP 4: Moderate evidence path
+        if (ev.inspection_findings.length > 0 && ev.evidence_count >= 2) {
+            return {
+                trust_classification: 'recommended',
+                confidence: Math.max(0.70, existingConfidence),
+                reason: 'Inspection finding with supporting evidence (' + ev.evidence_count + ' signals)',
+                review_required: false,
+                evidence_summary: ev.evidence_summary
+            };
+        }
+
+        if (ev.repair_plan_context.length > 0 && ev.evidence_count >= 2) {
+            return {
+                trust_classification: 'recommended',
+                confidence: Math.max(0.70, existingConfidence),
+                reason: 'Active repair plan with supporting context (' + ev.evidence_count + ' signals)',
+                review_required: false,
+                evidence_summary: ev.evidence_summary
+            };
+        }
+
+        // STEP 5: Weak evidence path
+        if (ev.evidence_count >= 2 && ev.safety_keywords_found.length === 0) {
+            return {
+                trust_classification: 'optional',
+                confidence: Math.max(0.60, existingConfidence),
+                reason: 'Non-critical maintenance with limited supporting evidence',
+                review_required: false,
+                evidence_summary: ev.evidence_summary
+            };
+        }
+
+        // STEP 6: Default fallback
+        return {
+            trust_classification: 'needs_further_inspection',
+            confidence: Math.min(existingConfidence, 0.65),
+            reason: 'Insufficient evidence to classify confidently — manual review recommended',
+            review_required: true,
+            evidence_summary: ev.evidence_summary
+        };
+    },
+
+    /**
+     * Writes classification result to the recommendation record.
+     */
+    _applyClassification: function(recGr, result) {
+        recGr.setValue('trust_classification', result.trust_classification);
+        recGr.setValue('confidence', result.confidence);
+        recGr.setValue('source', 'trust_engine');
+        recGr.setValue('description', result.reason + '. Evidence: ' + (result.evidence_summary || ''));
+
+        if (result.review_required) {
+            recGr.setValue('review_status', 'pending_review');
+        }
+
+        recGr.update();
+
+        gs.info('RepairTrustEngine: Classified ' + recGr.getUniqueValue() + ' as ' + result.trust_classification);
+
+        return {
+            success: true,
+            sys_id: recGr.getUniqueValue(),
+            trust_classification: result.trust_classification,
+            confidence: result.confidence,
+            reason: result.reason,
+            review_required: result.review_required || false,
+            evidence_summary: result.evidence_summary || ''
+        };
+    },
+
+    _error: function(message) {
+        gs.warn('RepairTrustEngine: ' + message);
+        return { success: false, error: message };
+    },
+
+    type: 'RepairTrustEngine'
+};
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-25 16:57:39</sys_created_on>
+        <sys_id>e16473cf1cc448fa90dc8867a0177381</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>RepairTrustEngine</sys_name>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name>sys_script_include_e16473cf1cc448fa90dc8867a0177381</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-25 16:57:39</sys_updated_on>
+    </sys_script_include>
+</record_update>

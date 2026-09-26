@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update>
-    <sys_choice action="INSERT_OR_UPDATE" field="source" table="x_1947064_autoca_0_reccommendation" version="3">
+    <sys_choice action="INSERT_OR_UPDATE" field="review_status" table="x_1947064_autoca_0_reccommendation" version="3">
         <sys_choice_set action="INSERT_OR_UPDATE">
-            <element>source</element>
+            <element>review_status</element>
             <name>x_1947064_autoca_0_reccommendation</name>
             <sys_class_name>sys_choice_set</sys_class_name>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2026-09-24 18:35:14</sys_created_on>
+            <sys_created_on>2026-09-25 16:57:17</sys_created_on>
             <sys_mod_count>0</sys_mod_count>
-            <sys_name>source</sys_name>
+            <sys_name>review_status</sys_name>
             <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
             <sys_policy/>
             <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
-            <sys_update_name>sys_choice_x_1947064_autoca_0_reccommendation_source</sys_update_name>
+            <sys_update_name>sys_choice_x_1947064_autoca_0_reccommendation_review_status</sys_update_name>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2026-09-24 18:35:14</sys_updated_on>
+            <sys_updated_on>2026-09-25 16:57:17</sys_updated_on>
         </sys_choice_set>
         <sys_choice action="INSERT_OR_UPDATE">
             <dependent_value/>
-            <element>source</element>
+            <element>review_status</element>
             <hint/>
             <inactive>false</inactive>
-            <label>Imported</label>
+            <label>Pending Review</label>
             <language>en</language>
             <name>x_1947064_autoca_0_reccommendation</name>
             <sequence>1</sequence>
@@ -32,64 +32,45 @@
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
             <sys_updated_on>2026-09-25 16:57:17</sys_updated_on>
-            <value>imported</value>
+            <value>pending_review</value>
         </sys_choice>
         <sys_choice action="INSERT_OR_UPDATE">
             <dependent_value/>
-            <element>source</element>
+            <element>review_status</element>
             <hint/>
             <inactive>false</inactive>
-            <label>Manual</label>
+            <label>Under Review</label>
             <language>en</language>
             <name>x_1947064_autoca_0_reccommendation</name>
             <sequence>2</sequence>
             <synonyms/>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2026-09-25 16:57:18</sys_created_on>
+            <sys_created_on>2026-09-25 16:57:17</sys_created_on>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2026-09-25 16:57:18</sys_updated_on>
-            <value>manual</value>
+            <sys_updated_on>2026-09-25 16:57:17</sys_updated_on>
+            <value>under_review</value>
         </sys_choice>
         <sys_choice action="INSERT_OR_UPDATE">
             <dependent_value/>
-            <element>source</element>
+            <element>review_status</element>
             <hint/>
             <inactive>false</inactive>
-            <label>AI Generated</label>
+            <label>Review Complete</label>
             <language>en</language>
             <name>x_1947064_autoca_0_reccommendation</name>
             <sequence>3</sequence>
             <synonyms/>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2026-09-25 16:57:18</sys_created_on>
+            <sys_created_on>2026-09-25 16:57:17</sys_created_on>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2026-09-25 16:57:18</sys_updated_on>
-            <value>ai_generated</value>
-        </sys_choice>
-        <sys_choice action="INSERT_OR_UPDATE">
-            <dependent_value/>
-            <element>source</element>
-            <hint/>
-            <inactive>false</inactive>
-            <label>Trust Engine</label>
-            <language>en</language>
-            <name>x_1947064_autoca_0_reccommendation</name>
-            <sequence>4</sequence>
-            <synonyms/>
-            <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2026-09-25 16:57:18</sys_created_on>
-            <sys_domain>global</sys_domain>
-            <sys_domain_path>/</sys_domain_path>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2026-09-25 16:57:18</sys_updated_on>
-            <value>trust_engine</value>
+            <sys_updated_on>2026-09-25 16:57:17</sys_updated_on>
+            <value>review_complete</value>
         </sys_choice>
     </sys_choice>
 </record_update>

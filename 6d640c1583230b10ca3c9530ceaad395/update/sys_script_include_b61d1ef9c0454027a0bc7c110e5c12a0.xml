@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_1947064_autoca_0.TrustEvidenceCollector</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Read-only evidence collector for the Repair Trust Engine. Aggregates inspection findings, service patterns, repair plan context, safety keywords, overdue services, and mileage data. Does not modify any records.</description>
+        <mobile_callable>false</mobile_callable>
+        <name>TrustEvidenceCollector</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var TrustEvidenceCollector = Class.create();
+TrustEvidenceCollector.prototype = {
+    initialize: function() {
+        this.SCOPE = 'x_1947064_autoca_0';
+        this.SAFETY_KEYWORDS = ['brake', 'brakes', 'steering', 'tire', 'tires', 'suspension', 'airbag', 'airbags', 'seatbelt', 'abs', 'stability'];
+    },
+
+    /**
+     * Collects structured evidence for a recommendation.
+     * STRICTLY READ-ONLY — does not modify any records.
+     * @param {string} vehicleSysId
+     * @param {string} recommendationSysId
+     * @returns {object} evidence payload
+     */
+    collectEvidence: function(vehicleSysId, recommendationSysId) {
+        // 1. Use VehicleMaintenanceAnalyzer to get base context
+        var analyzer = new VehicleMaintenanceAnalyzer();
+        var context = analyzer.buildVehicleContext(vehicleSysId);
+        if (!context) {
+            return this._emptyEvidence('Vehicle not found');
+        }
+
+        // 2. Get the recommendation record
+        var rec = this._getRecommendation(recommendationSysId);
+        if (!rec) {
+            return this._emptyEvidence('Recommendation not found');
+        }
+
+        // 3. Collect evidence signals
+        var issueText = (rec.recommendation_issue || '').toLowerCase();
+        var safetyKeywords = this._findSafetyKeywords(issueText);
+        var inspectionFindings = this._matchInspectionFindings(context.inspections, issueText);
+        var servicePatterns = this._findServicePatterns(context.service_history, issueText);
+        var repairPlanContext = this._getRepairPlanContext(vehicleSysId);
+        var overdueServices = this._findOverdueServices(context.service_history);
+        var mileageGap = this._calculateMileageGap(context.vehicle, context.service_history);
+        var conflicting = this._detectConflictingEvidence(inspectionFindings, servicePatterns);
+
+        var evidenceCount = 0;
+        if (inspectionFindings.length > 0) evidenceCount++;
+        if (servicePatterns.length > 0) evidenceCount++;
+        if (repairPlanContext.length > 0) evidenceCount++;
+        if (safetyKeywords.length > 0) evidenceCount++;
+        if (overdueServices.length > 0) evidenceCount++;
+        if (mileageGap > 5000) evidenceCount++;
+        if (rec.confidence && parseFloat(rec.confidence) >= 0.8) evidenceCount++;
+
+        // Build summary
+        var parts = [];
+        if (inspectionFindings.length > 0) parts.push(inspectionFindings.length + ' inspection finding(s)');
+        if (servicePatterns.length > 0) parts.push(servicePatterns.length + ' service pattern(s)');
+        if (repairPlanContext.length > 0) parts.push(repairPlanContext.length + ' repair plan(s)');
+        if (safetyKeywords.length > 0) parts.push('safety keywords: ' + safetyKeywords.join(', '));
+        if (overdueServices.length > 0) parts.push(overdueServices.length + ' overdue service(s)');
+        if (mileageGap > 0) parts.push('mileage gap: ' + mileageGap);
+
+        return {
+            inspection_findings: inspectionFindings,
+            service_patterns: servicePatterns,
+            repair_plan_context: repairPlanContext,
+            safety_keywords_found: safetyKeywords,
+            overdue_services: overdueServices,
+            mileage_gap: mileageGap,
+            evidence_count: evidenceCount,
+            has_conflicting_evidence: conflicting,
+            evidence_summary: parts.length > 0 ? parts.join('; ') : 'No evidence signals found',
+            recommendation: rec
+        };
+    },
+
+    _getRecommendation: function(recSysId) {
+        var gr = new GlideRecord(this.SCOPE + '_reccommendation');
+        if (!gr.get(recSysId)) return null;
+        return {
+            sys_id: gr.getUniqueValue(),
+            recommendation_issue: gr.getValue('recommendation_issue') || '',
+            classification: gr.getValue('classification') || '',
+            priority: gr.getValue('priority') || '',
+            confidence: gr.getValue('confidence') || '',
+            due_date: gr.getValue('due_date') || '',
+            description: gr.getValue('description') || '',
+            source: gr.getValue('source') || ''
+        };
+    },
+
+    _findSafetyKeywords: function(issueText) {
+        var found = [];
+        for (var i = 0; i < this.SAFETY_KEYWORDS.length; i++) {
+            if (issueText.indexOf(this.SAFETY_KEYWORDS[i]) !== -1) {
+                found.push(this.SAFETY_KEYWORDS[i]);
+            }
+        }
+        return found;
+    },
+
+    _matchInspectionFindings: function(inspections, issueText) {
+        var matched = [];
+        for (var i = 0; i < inspections.length; i++) {
+            var insp = inspections[i];
+            var findingLower = (insp.finding || '').toLowerCase();
+            var notesLower = (insp.technician_notes || '').toLowerCase();
+            // Check if any words from the issue appear in the finding or notes
+            var issueWords = issueText.split(/\s+/);
+            var matchScore = 0;
+            for (var w = 0; w < issueWords.length; w++) {
+                if (issueWords[w].length > 3 && (findingLower.indexOf(issueWords[w]) !== -1 || notesLower.indexOf(issueWords[w]) !== -1)) {
+                    matchScore++;
+                }
+            }
+            if (matchScore >= 2 || findingLower.indexOf(issueText.substring(0, 15)) !== -1) {
+                matched.push({
+                    finding: insp.finding,
+                    severity: insp.severity,
+                    date: insp.inspection_date,
+                    technician_notes: insp.technician_notes
+                });
+            }
+        }
+        return matched;
+    },
+
+    _findServicePatterns: function(serviceHistory, issueText) {
+        var patterns = [];
+        var detailCounts = {};
+        // Count recurring service details/parts
+        for (var i = 0; i < serviceHistory.length; i++) {
+            var sh = serviceHistory[i];
+            var detail = (sh.service_details || '').toLowerCase();
+            var parts = (sh.parts_replaced || '').toLowerCase();
+            var key = detail.substring(0, 20);
+            if (key.length > 5) {
+                detailCounts[key] = (detailCounts[key] || 0) + 1;
+            }
+        }
+        for (var i = 0; i < serviceHistory.length; i++) {
+            var sh = serviceHistory[i];
+            var detail = (sh.service_details || '').toLowerCase();
+            var key = detail.substring(0, 20);
+            var isRecurring = detailCounts[key] && detailCounts[key] >= 2;
+            // Match against the recommendation issue
+            var issueWords = issueText.split(/\s+/);
+            var matchScore = 0;
+            for (var w = 0; w < issueWords.length; w++) {
+                if (issueWords[w].length > 3 && detail.indexOf(issueWords[w]) !== -1) {
+                    matchScore++;
+                }
+            }
+            if (matchScore >= 2 || isRecurring) {
+                patterns.push({
+                    description: sh.service_details || sh.description,
+                    parts_replaced: sh.parts_replaced,
+                    date: sh.service_date,
+                    is_recurring: isRecurring
+                });
+            }
+        }
+        return patterns;
+    },
+
+    _getRepairPlanContext: function(vehicleSysId) {
+        var plans = [];
+        var gr = new GlideRecord(this.SCOPE + '_repair_plan');
+        gr.addQuery('vehicle', vehicleSysId);
+        gr.orderByDesc('sys_created_on');
+        gr.setLimit(10);
+        gr.query();
+        while (gr.next()) {
+            plans.push({
+                description: gr.getValue('repair_description') || '',
+                classification: gr.getValue('classification') || '',
+                status: gr.getValue('status') || '',
+                estimated_cost: gr.getValue('estimated_cost') || ''
+            });
+        }
+        return plans;
+    },
+
+    _findOverdueServices: function(serviceHistory) {
+        var overdue = [];
+        var today = new GlideDateTime();
+        for (var i = 0; i < serviceHistory.length; i++) {
+            var nextDate = serviceHistory[i].next_service_date;
+            if (nextDate) {
+                var nsd = new GlideDateTime();
+                nsd.setValue(nextDate);
+                if (nsd.compareTo(today) < 0) {
+                    var diff = gs.dateDiff(nextDate, today.getValue(), true);
+                    overdue.push({
+                        next_service_date: nextDate,
+                        days_overdue: parseInt(diff, 10) || 0
+                    });
+                }
+            }
+        }
+        return overdue;
+    },
+
+    _calculateMileageGap: function(vehicle, serviceHistory) {
+        if (!vehicle || !vehicle.current_mileage) return 0;
+        if (serviceHistory.length === 0) return vehicle.current_mileage;
+        var lastServiceMileage = serviceHistory[0].mileage_at_service || 0;
+        return Math.max(0, vehicle.current_mileage - lastServiceMileage);
+    },
+
+    _detectConflictingEvidence: function(inspectionFindings, servicePatterns) {
+        // If we have inspection findings saying something is wrong but recent service says it was just fixed, that's conflicting
+        if (inspectionFindings.length > 0 && servicePatterns.length > 0) {
+            for (var i = 0; i < servicePatterns.length; i++) {
+                if (servicePatterns[i].parts_replaced && servicePatterns[i].date) {
+                    // A part was recently replaced — if an inspection finding about the same area exists, it could be conflicting
+                    var daysSinceService = 0;
+                    try {
+                        var svcDate = new GlideDateTime();
+                        svcDate.setValue(servicePatterns[i].date);
+                        var now = new GlideDateTime();
+                        daysSinceService = parseInt(gs.dateDiff(svcDate.getValue(), now.getValue(), true), 10) || 0;
+                    } catch (e) { /* ignore */ }
+                    if (daysSinceService < 90) {
+                        return true; // Recent service + current finding = potentially conflicting
+                    }
+                }
+            }
+        }
+        return false;
+    },
+
+    _emptyEvidence: function(reason) {
+        return {
+            inspection_findings: [],
+            service_patterns: [],
+            repair_plan_context: [],
+            safety_keywords_found: [],
+            overdue_services: [],
+            mileage_gap: 0,
+            evidence_count: 0,
+            has_conflicting_evidence: false,
+            evidence_summary: reason || 'No evidence available',
+            recommendation: null
+        };
+    },
+
+    type: 'TrustEvidenceCollector'
+};
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-25 16:57:39</sys_created_on>
+        <sys_id>b61d1ef9c0454027a0bc7c110e5c12a0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>TrustEvidenceCollector</sys_name>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name>sys_script_include_b61d1ef9c0454027a0bc7c110e5c12a0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-25 16:57:39</sys_updated_on>
+    </sys_script_include>
+</record_update>

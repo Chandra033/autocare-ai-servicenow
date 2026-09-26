@@ -32,7 +32,7 @@ RecommendationWriter.prototype = {
     initialize: function () {
         this.TABLE = 'x_1947064_autoca_0_reccommendation';
         this.REQUIRED_FIELDS = ['vehicle', 'recommendation_issue', 'recommended_action'];
-        this.VALID_SOURCES = ['ai_generated', 'manual', 'imported'];
+        this.VALID_SOURCES = ['ai_generated', 'manual', 'imported', 'trust_engine'];
         this.VALID_PRIORITIES = ['Critical', 'High', 'Medium', 'Low'];
     },
 
@@ -93,6 +93,15 @@ RecommendationWriter.prototype = {
         }
         if (input.due_date) {
             gr.setValue('due_date', input.due_date);
+        }
+        if (input.trust_classification) {
+            gr.setValue('trust_classification', input.trust_classification);
+        }
+        if (input.review_status) {
+            gr.setValue('review_status', input.review_status);
+        }
+        if (input.reviewed_by) {
+            gr.setValue('reviewed_by', input.reviewed_by);
         }
 
         var sysId = gr.insert();
