@@ -1,0 +1,1394 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation/>
+        <attributes>timeFromCreateToActivate=4257000</attributes>
+        <authored_on_release_version/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Creates a repair plan with trust engine context when an inspection is completed.</description>
+        <display_name_after_preview/>
+        <flow_priority>MEDIUM</flow_priority>
+        <generation_source>fluent</generation_source>
+        <internal_name>autocare_repair_plan_creation</internal_name>
+        <label_cache>[{"name":"Updated_1.current.sys_id","label":"Trigger - Record Updated➛x_1947064_autoca_0_inspection Record➛Sys Id","type":"string","base_type":"string","usedInstances":{"e744a8ac-8cf8-42a5-8c74-bfd3086327b1":["conditions"],"4d73bfaf-522d-4a1c-9ac4-380008169bd6":["values"],"19328a47-9eaf-4512-8489-3717d00087c6":["values"]},"attributes":{}},{"name":"e744a8ac-8cf8-42a5-8c74-bfd3086327b1.Count","label":"e744a8ac-8cf8-42a5-8c74-bfd3086327b1➛Count","type":"integer","base_type":"integer","usedInstances":{"98ff0604-5c92-4f87-811b-5b78c3f77e87":["condition"]},"attributes":{}},{"name":"Updated_1.current.recommendation","label":"Trigger - Record Updated➛x_1947064_autoca_0_inspection Record➛Recommendation","type":"string","base_type":"string","usedInstances":{"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102":["conditions"]},"attributes":{}},{"name":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102.status","label":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102➛status","type":"string","base_type":"string","usedInstances":{"74589c5b-ccb5-4a19-a241-f7f3f7700a80":["condition"]},"attributes":{}},{"name":"Updated_1.current.vehicle","label":"Trigger - Record Updated➛x_1947064_autoca_0_inspection Record➛Vehicle","type":"string","base_type":"string","usedInstances":{"4d73bfaf-522d-4a1c-9ac4-380008169bd6":["values"],"19328a47-9eaf-4512-8489-3717d00087c6":["values"]},"attributes":{}},{"name":"Updated_1.current.appointment","label":"Trigger - Record Updated➛x_1947064_autoca_0_inspection Record➛Appointment","type":"string","base_type":"string","usedInstances":{"4d73bfaf-522d-4a1c-9ac4-380008169bd6":["values"],"19328a47-9eaf-4512-8489-3717d00087c6":["values"]},"attributes":{}},{"name":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102.Record.recommended_action","label":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102➛Record➛recommended_action","type":"string","base_type":"string","usedInstances":{"4d73bfaf-522d-4a1c-9ac4-380008169bd6":["values"]},"attributes":{}},{"name":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102.Record.estimated_cost","label":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102➛Record➛estimated_cost","type":"string","base_type":"string","usedInstances":{"4d73bfaf-522d-4a1c-9ac4-380008169bd6":["values"]},"attributes":{}},{"name":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102.Record.trust_classification","label":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102➛Record➛trust_classification","type":"string","base_type":"string","usedInstances":{"4d73bfaf-522d-4a1c-9ac4-380008169bd6":["values"]},"attributes":{}},{"name":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102.Record.description","label":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102➛Record➛description","type":"string","base_type":"string","usedInstances":{"4d73bfaf-522d-4a1c-9ac4-380008169bd6":["values"]},"attributes":{}},{"name":"Updated_1.current.finding","label":"Trigger - Record Updated➛x_1947064_autoca_0_inspection Record➛Finding","type":"string","base_type":"string","usedInstances":{"19328a47-9eaf-4512-8489-3717d00087c6":["values"]},"attributes":{}}]</label_cache>
+        <master_snapshot>0b46800a83e38f1037749ea6feaad364</master_snapshot>
+        <master_snapshot_digest/>
+        <name>AutoCare Repair Plan Creation</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <remote_trigger_id>bf76dc8a83678f1037749ea6feaad323</remote_trigger_id>
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <substatus/>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:11</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>c5f4698035c646cbba091c45a7d3f06e</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>AutoCare Repair Plan Creation</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name>sys_hub_flow_c5f4698035c646cbba091c45a7d3f06e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:12</sys_updated_on>
+        <type>flow</type>
+        <updation_source/>
+        <version>2</version>
+        <version_record/>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=c5f4698035c646cbba091c45a7d3f06e"/>
+    <sys_variable_value action="delete_multiple" query="document_key=c5f4698035c646cbba091c45a7d3f06e"/>
+    <sys_flow_record_trigger action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <condition table="x_1947064_autoca_0_inspection">status=completed<item endquery="false" field="status" goto="false" newquery="false" operator="=" or="false" value="completed"/>
+        </condition>
+        <name/>
+        <on_delete>false</on_delete>
+        <on_insert>false</on_insert>
+        <on_update>true</on_update>
+        <published_version/>
+        <run_flow_in>background</run_flow_in>
+        <run_on_extended>false</run_on_extended>
+        <run_when_setting>both</run_when_setting>
+        <run_when_user_list/>
+        <run_when_user_setting>any</run_when_user_setting>
+        <sys_class_name>sys_flow_record_trigger</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:38:11</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>bf76dc8a83678f1037749ea6feaad323</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:11</sys_updated_on>
+        <table>x_1947064_autoca_0_inspection</table>
+        <trigger_definition/>
+    </sys_flow_record_trigger>
+    <sys_trigger_runner_mapping action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <data>{"run_flow_in":"background","run_when_user_list":[],"run_when_setting":"both","run_when_user_setting":"any","run_on_extended":"false"}</data>
+        <identifier>c5f4698035c646cbba091c45a7d3f06e</identifier>
+        <identifier_type>flow</identifier_type>
+        <runner>FDTriggerRunner</runner>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:38:11</sys_created_on>
+        <sys_id>bb76dc8a83678f1037749ea6feaad324</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:11</sys_updated_on>
+        <trigger display_value="">bf76dc8a83678f1037749ea6feaad323</trigger>
+    </sys_trigger_runner_mapping>
+    <sys_trigger_runner_mapping action="delete_multiple" query="identifier=c5f4698035c646cbba091c45a7d3f06e^sys_idNOT INbb76dc8a83678f1037749ea6feaad324"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=c5f4698035c646cbba091c45a7d3f06e"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=c5f4698035c646cbba091c45a7d3f06e"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=c5f4698035c646cbba091c45a7d3f06e^sys_idNOT IN2246400a83e38f1037749ea6feaad3a6,2646400a83e38f1037749ea6feaad39c,2e46400a83e38f1037749ea6feaad386"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>child_label=FDChangeDetails,child_name=FDChangeDetails,child_type=object,child_type_label=Object,co_type_name=FDCollection,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,pwd2droppable=true,uiType=array.object,uiTypeLabel=Array.Object</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>changed_fields</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Changed Fields</label>
+        <mandatory>false</mandatory>
+        <max_length>4000</max_length>
+        <model display_value="AutoCare Repair Plan Creation">c5f4698035c646cbba091c45a7d3f06e</model>
+        <model_id>c5f4698035c646cbba091c45a7d3f06e</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_c5f4698035c646cbba091c45a7d3f06e</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:22</sys_created_on>
+        <sys_id>2246400a83e38f1037749ea6feaad3a6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 18:27:22</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=2246400a83e38f1037749ea6feaad3a6"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,timeFromCreateToActivate=5000,uiType=document_id</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+        <model display_value="AutoCare Repair Plan Creation">c5f4698035c646cbba091c45a7d3f06e</model>
+        <model_id>c5f4698035c646cbba091c45a7d3f06e</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_c5f4698035c646cbba091c45a7d3f06e</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:22</sys_created_on>
+        <sys_id>2646400a83e38f1037749ea6feaad39c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 18:27:22</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=2646400a83e38f1037749ea6feaad39c"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+        <model display_value="AutoCare Repair Plan Creation">c5f4698035c646cbba091c45a7d3f06e</model>
+        <model_id>c5f4698035c646cbba091c45a7d3f06e</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_c5f4698035c646cbba091c45a7d3f06e</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:22</sys_created_on>
+        <sys_id>2e46400a83e38f1037749ea6feaad386</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 18:27:22</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=2e46400a83e38f1037749ea6feaad386"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=c5f4698035c646cbba091c45a7d3f06e"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=c5f4698035c646cbba091c45a7d3f06e"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=c5f4698035c646cbba091c45a7d3f06e^sys_idNOT IN2a6293a849ba4df7b675878b867503cd"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">c5f4698035c646cbba091c45a7d3f06e</flow>
+        <generation_source/>
+        <name>Updated</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:11</sys_created_on>
+        <sys_id>2a6293a849ba4df7b675878b867503cd</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:08</sys_updated_on>
+        <trigger_definition display_value="Updated">bb695e60c31322002841b63b12d3aea5</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/+1Y32/bNhD+VwQ9rYALOFixonlb2wUIkC5Ak20PbSDQ5MkmSpMuebKjBfnfd5Qom5HkRmnkZsPylOj44767+z6S5083KVo5n4M91Q6Z5nBRulORHqfpJFVsBor+vWQzBfQtNYLVTF2WKyAzenOm2dKPCViBFqCxXsoXRnI4k46+P11N0iXTgqGxZXqMtoBJmluzvITlSjGkvXKmHBmNFWDT46PpdJJW+wYntOGaqcJ/X2dHb169nv7yKmMFGs6yaSa1WwFHabTHIR3tWf45cDpfSCUs6Brlilnyih7DTSf6FiDsSULAT+jhGn06xDa0KAHBYoGJc63KaMq1k39Dtb5wkEUpDTPyi4XZfIQcCDGHE6krd2FQUXhq+8WQ6jorEBzFcnu7TcyJBBXK67iVK/yVUrFuSnA7GcKHj4VO/lqATv5wYJOqyB1yzJUUkKl6bDg5mkDvY0dFhwhaKI4tdLYhZBnlzzbeG+p02TGMAL3hfssh9qTg30qNlIm1L7PPo1dmeiiuXIBzpDn6iyj1vMuYmhX3sOUmzZviVctZjYjiPwsOfd4S7zU3tq7Y6W5ig8IvOF2yeSBBfgGKjoSoJjmtjL4+SFpGoHeRb2Foo7MhUH43+uVhkcwMLmL3jee3ZL+TBOLbPjjukXi+T81tMbktR9Z3Y2vpN1gfouEuDfc7xxYx/88azpXZEIkeL1umyw5J/d5SEy/LhBva/hpHlAVJAObWFFrs83t3xlhqZPzLt93uZiQ/CchZofDFU8vPY6PjLFZeHEdbf/HYQBXuiNTr9llzu1Sd6+S3EHRSvULd4+VXYW0Rko5DXlhKAFZXQ5PoBBufo0nRW7re6ZaMIDQP7CfVAV3qW77ttNDgb8mgMQ9UQG9Z9/p+FkSduXdGCxm6trYGmiF3kF4jlIZHABpCEFos3OdiOv1ZcEN7AELPOblv2gDCxGH3AMGeDByMIaFz/16CbJhGl6HJmBBZhHh7KC2NAPU+ql9gBd0MqwJdehtVl1SybcYP2d2O1q70vXvoce7fPL53HPGUNRoyk/c2IjJPQgLo7JmVCS6AUCi6fWmvCseYx702vkxtMO9NQgOJ/SFwxulHqua+25TUJW1pvTY++GeF/f1Iy/nzfbBL32U96/HiLLT8WkDGF0zP6xdPw9YT0igwvkjqKUk9ZVS18taPBnzM7WENtuwE5I1JsRJeAOP5YmrDStc5eEjlXvDhfUcGorauyfxk0m5uFoeWZs7LSNUdLrQE3hkfqPUdWfdj+K+Ie7iWr/4Bjgzeg2IYAAA=</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>record_update</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=c5f4698035c646cbba091c45a7d3f06e^sys_idNOT IN19328a479eaf451284893717d00087c6,4d73bfaf522d4a1c9ac4380008169bd6,56b60b57cc4442ed8d11f6e841a3e0df,7f6ddf66fd3b40caa504ffb8dcf1f102,b240c8afdb24449dad0150a67c62e88e,e744a8ac8cf842a58c74bfd3086327b1"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="">2de05916c31332002841b63b12d3aee1</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">c5f4698035c646cbba091c45a7d3f06e</flow>
+        <generation_source/>
+        <order>9</order>
+        <parent_ui_id>a577d248-9fda-444c-bfd1-9ad33047c539</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:11</sys_created_on>
+        <sys_id>19328a479eaf451284893717d00087c6</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:08</sys_updated_on>
+        <ui_id>19328a47-9eaf-4512-8489-3717d00087c6</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VVTXPTMBD9Kx2dMx67DqHJjWnJCdqBQi6l0aytdaIZWTaSnA8y+e+sbMU10AAHLh1yinbfrt57Xq8fDkxDiWzGHGQKeXsYsQ2oxgd3PJmOX8eTMYfGVTnwmBusQRpeK9AEFNLSv/3ib/E1GLrBoWGzA8vXUgmDms0eHkdMCmowSTB+NU0meZqk6WUcX16Nk2ySZsmlSAFxTC0UZKgI+skTpvNz/N2+fjb2blh7cdslKiM8n3jEcOdQCyQiBSiLI1aCFuAqs2czZxoKGARxp9W+R6yldtSQeezOym907VXscQWSshy7XH/kwbAuXNyAg3vqnLvGBGi+rmSOtvNEYAGNctfDWAe4q52sdFfSygzVlWpKfdtZwvoGp+dDkcYSCay9Ts88yCju19X244nlXOrWkpBU9CRVfwLnjMwa5/kcGCosqREvoa6lXvHaVBvZFhOXMlopOkSFqrZ0qZUrHUHuiUdkK0Rzit+04QUY6VW8pzZUfBwxu7fXCqx90kIm8q+NZ9IpCxp4Z4MvyY2s3Ru6YIOB7nHUD3g703Yw3Btcy1zhlyaOU3E4fK6JEwqeRHljyAYXBcDxuJTa1tgSP48mwlwKApOEiqbC23IePQBRSXhJyKJWwm/vKejhkNNUVW01Gk6dyHNQXYU3hbJL68A19odYj1y+/fDrq/ufu/HHxSQwnp5dTEk2WExziUrYp83UD95pK2FJxjvk3SD+tJlC8mIRkmE7Jf9qOyWTuP29oB3ViXvxK2rwNTqzrB6/A6PHBZuPBwAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=19328a479eaf451284893717d00087c6"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="">2de05916c31332002841b63b12d3aee1</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">c5f4698035c646cbba091c45a7d3f06e</flow>
+        <generation_source/>
+        <order>7</order>
+        <parent_ui_id>74589c5b-ccb5-4a19-a241-f7f3f7700a80</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:11</sys_created_on>
+        <sys_id>4d73bfaf522d4a1c9ac4380008169bd6</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:08</sys_updated_on>
+        <ui_id>4d73bfaf-522d-4a1c-9ac4-380008169bd6</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1WwVLbMBD9lY7OiceOg4HcOlBOLUyh5UJBs5bWRDOy7EpyIM3k37uyjTEtaTtML8yQC9Hq6ent84uXqw0zUCJbMA+5Rt4uJmwFugnFe54czvfjbM6h8ZUAHnOLNSjLaw2GgFI5+ra+/Fd8DZZu8GjZYsPEUmlp0bDF1fWEKUkEWYLx3mGSiTRJ01kczw7mSZ6leTKTKSDOiUJDjpqgX4JgWj+n36/rZ2sfx2ffnXYblZVBTzxheO/RSCQhBWiHE1aCkeAru2YLbxsqWAR5ZvR6QCyV8UTIAvbeqR907UEccAVSZwK7vWHJe8O6cnEMHi6IWfjG9lCxrJRA13kisYBG+6NxrQOc1V5VpjvSttmfrnRTmtPOEjYQPDwfqjSORGAd+gzK+zaKi2V1d/6g8kSZ1pJ+U9OT1MMKvLcqb3zQs2GosSQiXkJdK3PLa1utVHuYtJTRraZFVOjqji516tZEIILwiGyF6ITqx235EqwKXXwiGjq8nTC3dkcanHvshUzk35ugpOus74F3NoQjwqrav6cLVtjL3U6GgLeZdqNwr3CphMZvTRyncrP5WpMmlDyJRGPJBh/1gO32RhlXYyt8N5oEcyUJTC1UlIpgy270CERH+h8JWdS2MLpnv8ikLLJsWsg0n85jAVPYi+fTosgPpCiSIoln0TkKCnFk6U9Ztgnmnc1Ejc6rsr1cVM6/hPYpA1GK8FxUoQS8VClF3nn+lKe1AVxlOIYEUQxfwjyykAirO4OWk9eUStAdX4gNJfXGefCNe1IbkDcfPv/+cnvLy1te/piXvw43ifHhzuGW5KPhdqJQS/c43YaX18Nkw5Ki6ZF3L7Nfplu/+e6y3+wnXPK/JlySxe3nFc25rrlXP+ZG/9HsGHjXPwHuJKJM0wkAAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=4d73bfaf522d4a1c9ac4380008169bd6"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent display_value="">5bc1bcc6531003003bf1d9109ec587d4</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">c5f4698035c646cbba091c45a7d3f06e</flow>
+        <generation_source/>
+        <order>3</order>
+        <parent_ui_id>98ff0604-5c92-4f87-811b-5b78c3f77e87</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:11</sys_created_on>
+        <sys_id>56b60b57cc4442ed8d11f6e841a3e0df</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:08</sys_updated_on>
+        <ui_id>56b60b57-cc44-42ed-8d11-f6e841a3e0df</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VU24rbMBD9FaPnJMTJptvN25J0obAX2ED6sCxmIo8TUVlyJTmXhkA/ol/YL+nIVhKzG9oG8lbwyxwfaebMHM3LlinIkQ2Z1PNE4hIla7ElyNJjQmWawlTYQsJmGtDPNVqAoZMODRtuGV8ImRpUbPjy2mIiJdpgxuMZ5x8G/bjb7dM3y+L0Ju7eIB98vE6v6QoJM8o3ZPch74lS3KbwEF9owTHE9+HYaA9qk/oyui2Ga4cqRcqfgbTYYjmoFJw2mwNiENInJY/AQihHtzFPXlvxnfJddT0vQ1LEsf53CJPQjhrOxuBg4kzJXWkCtS7WUi+2B4ntdvSoFUbtdqO/jdJ3rSM3NPjNFAIzbjK/gFFCzRvkFSFHcq9J/mSMNg0qhjhw+zuaXIoZlNKNzlcQ/7OC3jkK+mcouPIK6uY/FU5ociOLvWdgJvej0bLM1WPtM3bQO31j+Bodn/R9ackCWHibed8EE2WThV497z1yJ1RVUfgpNQd5iMA5I2al8/3dMpSY00VJDkVBjUgKo5eiOkzF5p25pKCTSb2ipFbMVQe4l9YhV0PnjvBxBU/BCC/zga6hw7sWsxs7kmDtUSxZOPlW+kpq6UFDUjWqOsKNKNwtJVhiKNe3v/Esc7QW5tiYwW3p9AgMDqNnLECYiFqmIpD+mW0iXAvrbJRpE7mFsJFQtsBKQPTrx8/IfhWV6ogTvZrYu21z8fv/trd6/T/tLRw09tbDoRsnWxR2l6VxVw5v7q7JHtw/n4vtrt5gcJnldWodvH9gZ72v/+/5vP4GWtLuNmIHAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=56b60b57cc4442ed8d11f6e841a3e0df"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Record">9d09f99587003300663ca1bb36cb0ba3</action_type>
+        <action_type_parent display_value="">9d09f99587003300663ca1bb36cb0ba3</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">c5f4698035c646cbba091c45a7d3f06e</flow>
+        <generation_source/>
+        <order>5</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:11</sys_created_on>
+        <sys_id>7f6ddf66fd3b40caa504ffb8dcf1f102</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:08</sys_updated_on>
+        <ui_id>7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VYYW/aPBD+K1E+U94EAoF+m1ohTdpWae36ZZssJ3aKNWNnttOWIv77e06cEEEGZQVp0z4hn8++u+fuuYv5uvIFXlD/0tdSGWSWOfV7/iPmRSPDOgURYTrneHnvdrBnpPcC8hwrOG+o8i9XfjpnnCgq/Muv33s+I6A4IsE0m05HkzgIhsMgGI+HKQ6TZDhOkyBJQriC44RyUL0Fa95d5UGHU+XPJdiQLK3XH9zRq1ooFbGuDHs+fTZUEAo+ZJhr2vMXWBBspFo2EkUxuRF8I5gzYeA23yo/a/YC9oYDq5dRiCql1V6zRA6USpxdY4NvjSpSUyinWjmrAY9VE2YDXQfKzv1g3dvov1h9vK1PaPtAuAa8Cc1wwc3V79kMj7U5sDarAG9ywyRk3R/avOCE1+FLXizEpyqXfuPhfUd5VTvXv6iyQgPYNLcJtRly6cpu5/Lpc52NGROlX26TyxTzZoWNUSwpjMVl5WcEZYxygpjgTFhLkDZbPpTTBVhAC5znTDygXMlHVt4KsSz6DxwW/YzLJ4sFexB9nNrI+1BYuD8D+XUpvseKWRQ+wjVwuGcNzuGos4d0qlhu0BMjD9RsrNdaRJonzH907buKQ3WiyvD8dc/XS33FsdYbsKFM0c/CYlBB79BDZaLKI6UX7yCCR+qAsjXgqJdKQZgNTrfLYKkRI98K4DJZrb7kEDclKOynhYIcmL6iABMgCHI4uV7vNo7fuOFQiyGjfS0GT1st5qodVFegdZPZln3ouqBmzsmaTRQEwWnaTVc72KXrUWzdpaEtyzew8DxkO54LFQQHCYGQFilwE45lmHE4i6hSUrXoEezWe0XQw0WcUpxEAzyOh2EYBGFA4mASx+FknGRjHEdZq4ivpbD8GcTGs454Uni1I4dddQWeSMkpFlvVfQcJ/W/mPHbVPTphdf9Ftf3WEVOwu22kK1En1ueaOwX7ItjPgr63JTahwWASkvRiEofxRZSR8cWU4NEFniajeEhoGmXnGSVVHjY0eUbhNIqDcYRwYQBDFCBo++2+v8ujV505OCmmeydF1CLZnfN5KwRHn3KJyr0tBtkN71O1UX/NnYxBk3+JQWf7FmMcKgRVKdSyUCWUjyjlhS43FBa6uussbGAZWgBwLAfz9mtHEY2woiiThSDIGd6QxaKaMaWNU96lxmcKORYwBvjSM3Pqldpeo32IFOFeUiTtz6f3mVe77u7XHrjula57jevHBXrMuy7644bR5s00s7PY4g9VlLcSWE/errfdgdTtqYFXPvxe6VR4Uqfe/jLsKvrOF+IBX/+KlnSOJlM+rSuQdxvGa5rC3r9tMGk1hRubdC9Zbv1r0xh3/K4e3B0jc2Y3tkbm4N8cmX/kg6r3q79LTvzS+v4/oqVRn4wUAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=7f6ddf66fd3b40caa504ffb8dcf1f102"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent display_value="">5bc1bcc6531003003bf1d9109ec587d4</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">c5f4698035c646cbba091c45a7d3f06e</flow>
+        <generation_source/>
+        <order>10</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:11</sys_created_on>
+        <sys_id>b240c8afdb24449dad0150a67c62e88e</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:08</sys_updated_on>
+        <ui_id>b240c8af-db24-449d-ad01-50a67c62e88e</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VUTWvjMBD9K0ZnJ8RJvd3mVpItLPQDGugeSjGyPE4EsqSV5KTZkP++I1txTBu6m6W3BV/m+Ukzb/RmnndE0grIlAi1zASsQZCYrKmoPcZlqTAsuNWCbp8C+r1FNTV40oEh0x1hKy4KA5JMn19iwgukpTlLcsa+pJNkNJrgl5dJcZWMroClXy+LS7xC0BzzTcltyHuiFLfVHmIrxRmE+DYcmx1AZQpfxigm8OpAFoD5SyosxKSisqBOmW2HGKDFgxRHYMWlw9uIJ79a/gvzXYw8rwRUxKD914VZaEcLl3Pq6MKZmrnaBGpbrMVe7DqJg0F0ryREg0Gvv73S9/GRGxr85hUCM+kzf1AjuVz2yBtEjuRxn/zNGGV6VAhx4E72+HIFlLQWbna+guSvFYzPUTA5Q8GFV9A2/0E7rtCNJPGeobk4PI0SdSXvW5+RTu/TG8O36Pyk72uLFgDtbeZ9E0xULlZq83jwyA2XTUXhp1CMii6izhme1873d0dAQIUXZRXVGhuRaaPWvDmMxVbDpcBgWAq1waSWL+WQMi9tiK6mwxvE5w38RA33Mu/wGjy8j4nd2pmg1h7FooWzn7WvpJUeNGRNo5ojzHDtrjHBGkK5vv29sazAWrqE3htc107NqIFp9AiachNhy2TEcMocFFGpTIQytAAfcWk1NOW/3yr/fM+f9tB48tEegrS3h+46dSclh11k8fkax/Z30eIAHsbh03bROE0/ZxmdGu/3A3PWvPx/4/DyG/Wh+bIyBwAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=b240c8afdb24449dad0150a67c62e88e"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Records">43400a1587003300663ca1bb36cb0b4b</action_type>
+        <action_type_parent display_value="">43400a1587003300663ca1bb36cb0b4b</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">c5f4698035c646cbba091c45a7d3f06e</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:11</sys_created_on>
+        <sys_id>e744a8ac8cf842a58c74bfd3086327b1</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:08</sys_updated_on>
+        <ui_id>e744a8ac-8cf8-42a5-8c74-bfd3086327b1</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VXW0/bMBT+K5WfoyqhpVzeJhDSpAESMF42ZDmx01pzncx2WkrV/77jS9KsDdcVCbTHHJ/bd/ydc5wfSyTJlKFjlBWScsMLqVGEZkRUVsilLllmpT+rOB7Q5fJ7SYlhFCf9rFKKSdPXC405Xa3AjHJdCrK4fZt1SRSkYphCx0uUTbigoIGOf9xFiFNwd5gP45gk+4cH4GwQx6PRICNJmg5GWRqn+zG4ECRlAlRP2mC6AJpF2Sn71uWgUNQmlUSI3RsmKYNsciI0i9CUSEBUqEUjUYzQSynWggmXBjwiq3yv+QPEBRyx1cwZIMyYP20+cSijF+enxJBro6rMVCqoZpOCZ0z72lCWk0qYk7bMK1yWFoE3MSQVtXUhqqm88FVBjYP61kBSaUiClRaqzR2CA478elLMr+okz7h0RQkgRZER0XwRYxRPK2PTWSIm2BT84CkpSy7HuFTFjDtjSGXaHwv46OeimENMzceyTxxn+lBY0j8D+akT3xLFLYhzcAPGqwgBd04E0XoNBWqIf1c2Ew8sQMCuCr4E1i5TvDRfIMqMhZxXUdMIXm3dA/c4ORoexKMhJpUBmDjGipWEKwyXJLdZ/6z+v/F8mLZ4fhNy3Ug9sNt9Ynf2N7udWe/CHwR2xztj9+Fn4naA8cHIDQlxAQzB/gp1USlXyhnORKXdgSJSe19vaIXnu0AXymDHo3UnOBnR2TbnSc8UvYcXcDt+eoYftbh9DdF6Nz6DjqTqCe7YsDm9a2Hg9mBn3B7s7YbbywZmU7qOKtetae+l1n+w+mRTH8jVMkhWXb3zqpjJa2PurbZ7c/Cq5mzTy5+cPsKyHfdwTnHOmaCYS8Glm5yw8SDOuzU3xRMwDfGw70Q853TMzDp6rUULMyfiV9d5YByuL8rBe5d5AB0Aa0zDpbTfh8n2KEheMAWGT06BUdKaAufkvnfVxO1MJkwCaFY2duVtj4KvjTTwdLjDV9yH3XMJPDAfbaMk8qefYhO+227zFdzm7wvomx08ucT2W/S9tKTrpYuNHdYED9z146fjpXZmDzZeanv/50vtQ/6FRI8tjx3/ntz9AcAhBRSpDwAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=e744a8ac8cf842a58c74bfd3086327b1"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=c5f4698035c646cbba091c45a7d3f06e"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=c5f4698035c646cbba091c45a7d3f06e^sys_idNOT IN4362a18d5cda459ab141c7d6cacb143b,74589c5bccb54a19a241f7f3f7700a80,98ff06045c924f87811b5b78c3f77e87,a577d2489fda444cbfd19ad33047c539"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <block display_value="">b246800a83e38f1037749ea6feaad314</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">c5f4698035c646cbba091c45a7d3f06e</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="End">d176605ea76103004f27b0d2187901c7</logic_definition>
+        <order>4</order>
+        <outputs_assigned/>
+        <parent_ui_id>98ff0604-5c92-4f87-811b-5b78c3f77e87</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:11</sys_created_on>
+        <sys_id>4362a18d5cda459ab141c7d6cacb143b</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:08</sys_updated_on>
+        <ui_id>4362a18d-5cda-459a-b141-c7d6cacb143b</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/6tWyi8tKSgtKQ7JdywuzkzPU7KKjtVRyswDiUHYZYlFmYlJOalQbkpqcmZxZn5eCEjME0ldSmVeYm5mMrJQeX5RdlpOfjlCrBYAD1ouqHEAAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <block display_value="">3e46800a83e38f1037749ea6feaad317</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">c5f4698035c646cbba091c45a7d3f06e</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>6</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:11</sys_created_on>
+        <sys_id>74589c5bccb54a19a241f7f3f7700a80</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:08</sys_updated_on>
+        <ui_id>74589c5b-ccb5-4a19-a241-f7f3f7700a80</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1Vy27bMBD8lYJn26Beft2CBAECpA3QBL20gbDiwyZKiSpJJVEF/3uXkmwHjYukzbU3cchdzqxmpI6YxteNd3fmzDm1qcj66/2EqCpg+NwRxcmakAmpoBT4xEzFlVemQugBdBOwrlvIOedyPp9KnhTTlDKYQkbTqZTFkjMZyYjGM+fBN263+9ZQmnCKDbhytYb2y3v7sK3S3IqRfA0WuXphybr7basXs4JMZhHNWBLPk5jSeJlGxTwpopgnINI5NtRQCI1Hz5+pPTEA39YBct6qajOur8fS2z1oLA9UYjoh4smLigskIUE7MSElVBy8sS1Ze9sgYAXwm0q3hxNbVfnhBZTw5NRPETpRGk5KgbqYGHYPy3wc6gDLC/CAVBrmGzseZVujmHDDRLiQ0Gh//hwbDtzUvcq+xEOh99VGN2X1aRgGOTTYv0NEGockRB2UBu6jEHm7NY+f9ywvVdVPZdzUhoE+rMDj7IrGBz4dEVqU2Cgvoa5xonltzYPqi5FLOdtoXMykNo94aXDwDFggPsPBwuwS8Yse/gJWBRUfsQ0Woxdc7phV9V5bfznZTYhr3bkG544acbj5jyYwHBSP2vJhPKGkb3SGFz+IUcZu0pHA6tpsFLuq0LQo+7Z1V8GCizRbrlhWMFZkKUQriNNILmQiFwtKYRk83VtVUpDRikWnrQrJCVvmPXAM58uYkdcj8oZ7X0Tkw+D8PzP6m7REr6RlRN4Ulyz7n5Z3pyXQLMAplvf/BmwXPlj/GJdx6JdKaH7SQqfydB88PbA6vA2mHJbdBexq/8sKGy1aLqTuCD0a+z3IPmK7X7Td08H8BgAA</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <block display_value="">f646800a83e38f1037749ea6feaad310</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">c5f4698035c646cbba091c45a7d3f06e</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>2</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:11</sys_created_on>
+        <sys_id>98ff06045c924f87811b5b78c3f77e87</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:08</sys_updated_on>
+        <ui_id>98ff0604-5c92-4f87-811b-5b78c3f77e87</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXU/bMBT9K5OfS+V8NaFvqAgJiQ1pIF42FN04dmvNsbPYAbKo/33XSdoi6AQbr3uLj32vzzm5J+mJaV3dOntrzqyVa02W3+5nRGqP4XNPZEmWhMyIhorjEzO6lE4ajdADqNZjfc/TOIYM2EnGRHYSh5DgUxqfFKKMaLaIwrQI5ivTarfdfm8pjTjF+lLaWkF398E2bCNV2fCJeg0NMnW8Icv+xdYg5RQSkQQ0YVGIDSkNszgoFlERhGUEPF5gQwUFV3h09UzrEfmuqz1kXSP1elpfTaU3O9A0pacS0hnhT47rkiMJAcryGalAl+BM05Gla1oEGg7ltVbd/sRGajfaX8GTlb+470SpPyk46mJ83N0v88nTERbn4ACptMy1zXSUbYxk3I6OlFxAq9zqOTYeuK4HlUOJg0Ltqo1qK/1lNIPsG+xeISKtRRK89ko990mIuNmYx687lhdSD65Mm8owUPsVOPSuaJ3n0xOueIWN8grqGh3N68Y8yKEYuVTztcLFXCjziJf6+Z0D88TnaCzMLxA/H+A7aKRX8RnbYDHOgs0ta2S90zZcTrYzYju7UmDtQSOam/9sPcNR8aQtH+3xJUOjM7z4gU8ytrOeeFZXZi3ZpbYOUPZNZy+HEcyEoAsaJ+w0jEWWZkFQJEWasUikKc9SMo2qoCCCUxYcH1WIjoxlPgCHaL5OGXk7Iu+491VEPo2T/2dGf5OW4I20TMi74pIk/9Py4bR4mgVYyfLhz4Dt/AfrH+MymX4huSqPjtCxPN37mR5Z7d8GkxbLbj12ufth+Y0OR86n7gA9muaHl33Atr8BMyyh7/oGAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <block display_value="">f246800a83e38f1037749ea6feaad31b</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">c5f4698035c646cbba091c45a7d3f06e</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="Else">1f781bf3c32232002841b63b12d3aee6</logic_definition>
+        <order>8</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:11</sys_created_on>
+        <sys_id>a577d2489fda444cbfd19ad33047c539</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:08</sys_updated_on>
+        <ui_id>a577d248-9fda-444c-bfd1-9ad33047c539</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/6tWyi8tKSgtKQ7JdywuzkzPU7KKjtVRyswDiUHYZYlFmYlJOalQbkpqcmZxZn5eCEjME0ldSmVeYm5mMrJQeX5RdlpOfjlCrBYAD1ouqHEAAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=c5f4698035c646cbba091c45a7d3f06e"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=c5f4698035c646cbba091c45a7d3f06e"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>changed_fields</element>
+        <help/>
+        <hint/>
+        <label>Changed Fields</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_c5f4698035c646cbba091c45a7d3f06e</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:23</sys_created_on>
+        <sys_id>2246400a83e38f1037749ea6feaad3ad</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 18:27:23</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_c5f4698035c646cbba091c45a7d3f06e</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:22</sys_created_on>
+        <sys_id>e646400a83e38f1037749ea6feaad3a2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 18:27:22</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_c5f4698035c646cbba091c45a7d3f06e</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:22</sys_created_on>
+        <sys_id>ea46400a83e38f1037749ea6feaad398</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 18:27:22</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_c5f4698035c646cbba091c45a7d3f06e"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_c5f4698035c646cbba091c45a7d3f06e"/>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>false</active>
+        <annotation/>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <authored_on_release_version>-1</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Creates a repair plan with trust engine context when an inspection is completed.</description>
+        <flow_priority>MEDIUM</flow_priority>
+        <internal_name>autocare_repair_plan_creation</internal_name>
+        <label_cache>[{"name":"Updated_1.current.sys_id","label":"Trigger - Record Updated➛x_1947064_autoca_0_inspection Record➛Sys Id","type":"string","base_type":"string","usedInstances":{"e744a8ac-8cf8-42a5-8c74-bfd3086327b1":["conditions"],"4d73bfaf-522d-4a1c-9ac4-380008169bd6":["values"],"19328a47-9eaf-4512-8489-3717d00087c6":["values"]},"attributes":{}},{"name":"e744a8ac-8cf8-42a5-8c74-bfd3086327b1.Count","label":"e744a8ac-8cf8-42a5-8c74-bfd3086327b1➛Count","type":"integer","base_type":"integer","usedInstances":{"98ff0604-5c92-4f87-811b-5b78c3f77e87":["condition"]},"attributes":{}},{"name":"Updated_1.current.recommendation","label":"Trigger - Record Updated➛x_1947064_autoca_0_inspection Record➛Recommendation","type":"string","base_type":"string","usedInstances":{"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102":["conditions"]},"attributes":{}},{"name":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102.status","label":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102➛status","type":"string","base_type":"string","usedInstances":{"74589c5b-ccb5-4a19-a241-f7f3f7700a80":["condition"]},"attributes":{}},{"name":"Updated_1.current.vehicle","label":"Trigger - Record Updated➛x_1947064_autoca_0_inspection Record➛Vehicle","type":"string","base_type":"string","usedInstances":{"4d73bfaf-522d-4a1c-9ac4-380008169bd6":["values"],"19328a47-9eaf-4512-8489-3717d00087c6":["values"]},"attributes":{}},{"name":"Updated_1.current.appointment","label":"Trigger - Record Updated➛x_1947064_autoca_0_inspection Record➛Appointment","type":"string","base_type":"string","usedInstances":{"4d73bfaf-522d-4a1c-9ac4-380008169bd6":["values"],"19328a47-9eaf-4512-8489-3717d00087c6":["values"]},"attributes":{}},{"name":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102.Record.recommended_action","label":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102➛Record➛recommended_action","type":"string","base_type":"string","usedInstances":{"4d73bfaf-522d-4a1c-9ac4-380008169bd6":["values"]},"attributes":{}},{"name":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102.Record.estimated_cost","label":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102➛Record➛estimated_cost","type":"string","base_type":"string","usedInstances":{"4d73bfaf-522d-4a1c-9ac4-380008169bd6":["values"]},"attributes":{}},{"name":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102.Record.trust_classification","label":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102➛Record➛trust_classification","type":"string","base_type":"string","usedInstances":{"4d73bfaf-522d-4a1c-9ac4-380008169bd6":["values"]},"attributes":{}},{"name":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102.Record.description","label":"7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102➛Record➛description","type":"string","base_type":"string","usedInstances":{"4d73bfaf-522d-4a1c-9ac4-380008169bd6":["values"]},"attributes":{}},{"name":"Updated_1.current.finding","label":"Trigger - Record Updated➛x_1947064_autoca_0_inspection Record➛Finding","type":"string","base_type":"string","usedInstances":{"19328a47-9eaf-4512-8489-3717d00087c6":["values"]},"attributes":{}}]</label_cache>
+        <master>true</master>
+        <name>AutoCare Repair Plan Creation</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="AutoCare Repair Plan Creation">c5f4698035c646cbba091c45a7d3f06e</parent_flow>
+        <remote_trigger_id/>
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>draft</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:25</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>0b46800a83e38f1037749ea6feaad364</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:11</sys_updated_on>
+        <type>flow</type>
+        <version>2</version>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=0b46800a83e38f1037749ea6feaad364"/>
+    <sys_variable_value action="delete_multiple" query="document_key=0b46800a83e38f1037749ea6feaad364"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=0b46800a83e38f1037749ea6feaad364"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=0b46800a83e38f1037749ea6feaad364^sys_idNOT INc346800a83e38f1037749ea6feaad365"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>0b46800a83e38f1037749ea6feaad364</id>
+        <name>AutoCare Repair Plan Creation</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:25</sys_created_on>
+        <sys_id>c346800a83e38f1037749ea6feaad365</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 18:27:25</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=c346800a83e38f1037749ea6feaad365"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=0b46800a83e38f1037749ea6feaad364^sys_idNOT IN0b46800a83e38f1037749ea6feaad366,0b46800a83e38f1037749ea6feaad376,9f46800a83e38f1037749ea6feaad380"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,timeFromCreateToActivate=5000,uiType=document_id</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+        <model display_value="AutoCare Repair Plan Creation">0b46800a83e38f1037749ea6feaad364</model>
+        <model_id>0b46800a83e38f1037749ea6feaad364</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_0b46800a83e38f1037749ea6feaad364</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:25</sys_created_on>
+        <sys_id>0b46800a83e38f1037749ea6feaad366</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 18:27:25</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=0b46800a83e38f1037749ea6feaad366"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>child_label=FDChangeDetails,child_name=FDChangeDetails,child_type=object,child_type_label=Object,co_type_name=FDCollection,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,pwd2droppable=true,uiType=array.object,uiTypeLabel=Array.Object</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>changed_fields</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Changed Fields</label>
+        <mandatory>false</mandatory>
+        <max_length>4000</max_length>
+        <model display_value="AutoCare Repair Plan Creation">0b46800a83e38f1037749ea6feaad364</model>
+        <model_id>0b46800a83e38f1037749ea6feaad364</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_0b46800a83e38f1037749ea6feaad364</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:25</sys_created_on>
+        <sys_id>0b46800a83e38f1037749ea6feaad376</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:12:59</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=0b46800a83e38f1037749ea6feaad376"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+        <model display_value="AutoCare Repair Plan Creation">0b46800a83e38f1037749ea6feaad364</model>
+        <model_id>0b46800a83e38f1037749ea6feaad364</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_0b46800a83e38f1037749ea6feaad364</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:25</sys_created_on>
+        <sys_id>9f46800a83e38f1037749ea6feaad380</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 18:27:25</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=9f46800a83e38f1037749ea6feaad380"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=0b46800a83e38f1037749ea6feaad364"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=0b46800a83e38f1037749ea6feaad364"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=0b46800a83e38f1037749ea6feaad364^sys_idNOT IN5346800a83e38f1037749ea6feaad3af"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">0b46800a83e38f1037749ea6feaad364</flow>
+        <generation_source/>
+        <name>Updated</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:26</sys_created_on>
+        <sys_id>5346800a83e38f1037749ea6feaad3af</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 18:27:26</sys_updated_on>
+        <trigger_definition display_value="Updated">bb695e60c31322002841b63b12d3aea5</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/+1Y32/bNhD+VwQ9rYALOFixonlb2wUIkC5Ak20PbSDQ5MkmSpMuebKjBfnfd5Qom5HkRmnkZsPylOj44767+z6S5083KVo5n4M91Q6Z5nBRulORHqfpJFVsBor+vWQzBfQtNYLVTF2WKyAzenOm2dKPCViBFqCxXsoXRnI4k46+P11N0iXTgqGxZXqMtoBJmluzvITlSjGkvXKmHBmNFWDT46PpdJJW+wYntOGaqcJ/X2dHb169nv7yKmMFGs6yaSa1WwFHabTHIR3tWf45cDpfSCUs6Brlilnyih7DTSf6FiDsSULAT+jhGn06xDa0KAHBYoGJc63KaMq1k39Dtb5wkEUpDTPyi4XZfIQcCDGHE6krd2FQUXhq+8WQ6jorEBzFcnu7TcyJBBXK67iVK/yVUrFuSnA7GcKHj4VO/lqATv5wYJOqyB1yzJUUkKl6bDg5mkDvY0dFhwhaKI4tdLYhZBnlzzbeG+p02TGMAL3hfssh9qTg30qNlIm1L7PPo1dmeiiuXIBzpDn6iyj1vMuYmhX3sOUmzZviVctZjYjiPwsOfd4S7zU3tq7Y6W5ig8IvOF2yeSBBfgGKjoSoJjmtjL4+SFpGoHeRb2Foo7MhUH43+uVhkcwMLmL3jee3ZL+TBOLbPjjukXi+T81tMbktR9Z3Y2vpN1gfouEuDfc7xxYx/88azpXZEIkeL1umyw5J/d5SEy/LhBva/hpHlAVJAObWFFrs83t3xlhqZPzLt93uZiQ/CchZofDFU8vPY6PjLFZeHEdbf/HYQBXuiNTr9llzu1Sd6+S3EHRSvULd4+VXYW0Rko5DXlhKAFZXQ5PoBBufo0nRW7re6ZaMIDQP7CfVAV3qW77ttNDgb8mgMQ9UQG9Z9/p+FkSduXdGCxm6trYGmiF3kF4jlIZHABpCEFos3OdiOv1ZcEN7AELPOblv2gDCxGH3AMGeDByMIaFz/16CbJhGl6HJmBBZhHh7KC2NAPU+ql9gBd0MqwJdehtVl1SybcYP2d2O1q70vXvoce7fPL53HPGUNRoyk/c2IjJPQgLo7JmVCS6AUCi6fWmvCseYx702vkxtMO9NQgOJ/SFwxulHqua+25TUJW1pvTY++GeF/f1Iy/nzfbBL32U96/HiLLT8WkDGF0zP6xdPw9YT0igwvkjqKUk9ZVS18taPBnzM7WENtuwE5I1JsRJeAOP5YmrDStc5eEjlXvDhfUcGorauyfxk0m5uFoeWZs7LSNUdLrQE3hkfqPUdWfdj+K+Ie7iWr/4Bjgzeg2IYAAA=</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>record_update</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=0b46800a83e38f1037749ea6feaad364^sys_idNOT IN5f46800a83e38f1037749ea6feaad39d,9346800a83e38f1037749ea6feaad39a,9346800a83e38f1037749ea6feaad39c,9f46800a83e38f1037749ea6feaad39e,d746800a83e38f1037749ea6feaad398,df46800a83e38f1037749ea6feaad39f"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="Create Record">02f0b88cc3c632002841b63b12d3aeff</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">0b46800a83e38f1037749ea6feaad364</flow>
+        <generation_source/>
+        <order>7</order>
+        <parent_ui_id>74589c5b-ccb5-4a19-a241-f7f3f7700a80</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:25</sys_created_on>
+        <sys_id>5f46800a83e38f1037749ea6feaad39d</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 18:27:25</sys_updated_on>
+        <ui_id>4d73bfaf-522d-4a1c-9ac4-380008169bd6</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1WwVLbMBD9lY7OiceOg4HcOlBOLUyh5UJBs5bWRDOy7EpyIM3k37uyjTEtaTtML8yQC9Hq6ent84uXqw0zUCJbMA+5Rt4uJmwFugnFe54czvfjbM6h8ZUAHnOLNSjLaw2GgFI5+ra+/Fd8DZZu8GjZYsPEUmlp0bDF1fWEKUkEWYLx3mGSiTRJ01kczw7mSZ6leTKTKSDOiUJDjpqgX4JgWj+n36/rZ2sfx2ffnXYblZVBTzxheO/RSCQhBWiHE1aCkeAru2YLbxsqWAR5ZvR6QCyV8UTIAvbeqR907UEccAVSZwK7vWHJe8O6cnEMHi6IWfjG9lCxrJRA13kisYBG+6NxrQOc1V5VpjvSttmfrnRTmtPOEjYQPDwfqjSORGAd+gzK+zaKi2V1d/6g8kSZ1pJ+U9OT1MMKvLcqb3zQs2GosSQiXkJdK3PLa1utVHuYtJTRraZFVOjqji516tZEIILwiGyF6ITqx235EqwKXXwiGjq8nTC3dkcanHvshUzk35ugpOus74F3NoQjwqrav6cLVtjL3U6GgLeZdqNwr3CphMZvTRyncrP5WpMmlDyJRGPJBh/1gO32RhlXYyt8N5oEcyUJTC1UlIpgy270CERH+h8JWdS2MLpnv8ikLLJsWsg0n85jAVPYi+fTosgPpCiSIoln0TkKCnFk6U9Ztgnmnc1Ejc6rsr1cVM6/hPYpA1GK8FxUoQS8VClF3nn+lKe1AVxlOIYEUQxfwjyykAirO4OWk9eUStAdX4gNJfXGefCNe1IbkDcfPv/+cnvLy1te/piXvw43ifHhzuGW5KPhdqJQS/c43YaX18Nkw5Ki6ZF3L7Nfplu/+e6y3+wnXPK/JlySxe3nFc25rrlXP+ZG/9HsGHjXPwHuJKJM0wkAAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=5f46800a83e38f1037749ea6feaad39d"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent display_value="Log">0e0ae8c2531003003bf1d9109ec587c8</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot>5bc1bcc6531003003bf1d9109ec587d4</compiled_snapshot>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">0b46800a83e38f1037749ea6feaad364</flow>
+        <generation_source/>
+        <order>3</order>
+        <parent_ui_id>98ff0604-5c92-4f87-811b-5b78c3f77e87</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:25</sys_created_on>
+        <sys_id>9346800a83e38f1037749ea6feaad39a</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 18:27:25</sys_updated_on>
+        <ui_id>56b60b57-cc44-42ed-8d11-f6e841a3e0df</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VU24rbMBD9FaPnJMTJptvN25J0obAX2ED6sCxmIo8TUVlyJTmXhkA/ol/YL+nIVhKzG9oG8lbwyxwfaebMHM3LlinIkQ2Z1PNE4hIla7ElyNJjQmWawlTYQsJmGtDPNVqAoZMODRtuGV8ImRpUbPjy2mIiJdpgxuMZ5x8G/bjb7dM3y+L0Ju7eIB98vE6v6QoJM8o3ZPch74lS3KbwEF9owTHE9+HYaA9qk/oyui2Ga4cqRcqfgbTYYjmoFJw2mwNiENInJY/AQihHtzFPXlvxnfJddT0vQ1LEsf53CJPQjhrOxuBg4kzJXWkCtS7WUi+2B4ntdvSoFUbtdqO/jdJ3rSM3NPjNFAIzbjK/gFFCzRvkFSFHcq9J/mSMNg0qhjhw+zuaXIoZlNKNzlcQ/7OC3jkK+mcouPIK6uY/FU5ociOLvWdgJvej0bLM1WPtM3bQO31j+Bodn/R9ackCWHibed8EE2WThV497z1yJ1RVUfgpNQd5iMA5I2al8/3dMpSY00VJDkVBjUgKo5eiOkzF5p25pKCTSb2ipFbMVQe4l9YhV0PnjvBxBU/BCC/zga6hw7sWsxs7kmDtUSxZOPlW+kpq6UFDUjWqOsKNKNwtJVhiKNe3v/Esc7QW5tiYwW3p9AgMDqNnLECYiFqmIpD+mW0iXAvrbJRpE7mFsJFQtsBKQPTrx8/IfhWV6ogTvZrYu21z8fv/trd6/T/tLRw09tbDoRsnWxR2l6VxVw5v7q7JHtw/n4vtrt5gcJnldWodvH9gZ72v/+/5vP4GWtLuNmIHAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=9346800a83e38f1037749ea6feaad39a"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Record">9d09f99587003300663ca1bb36cb0ba3</action_type>
+        <action_type_parent display_value="Look Up Record">b93f42810b30030085c083eb37673a63</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot>9d09f99587003300663ca1bb36cb0ba3</compiled_snapshot>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">0b46800a83e38f1037749ea6feaad364</flow>
+        <generation_source/>
+        <order>5</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:25</sys_created_on>
+        <sys_id>9346800a83e38f1037749ea6feaad39c</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:13:00</sys_updated_on>
+        <ui_id>7f6ddf66-fd3b-40ca-a504-ffb8dcf1f102</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VYYW/aPBD+K1E+U94EAoF+m1ohTdpWae36ZZssJ3aKNWNnttOWIv77e06cEEEGZQVp0z4hn8++u+fuuYv5uvIFXlD/0tdSGWSWOfV7/iPmRSPDOgURYTrneHnvdrBnpPcC8hwrOG+o8i9XfjpnnCgq/Muv33s+I6A4IsE0m05HkzgIhsMgGI+HKQ6TZDhOkyBJQriC44RyUL0Fa95d5UGHU+XPJdiQLK3XH9zRq1ooFbGuDHs+fTZUEAo+ZJhr2vMXWBBspFo2EkUxuRF8I5gzYeA23yo/a/YC9oYDq5dRiCql1V6zRA6USpxdY4NvjSpSUyinWjmrAY9VE2YDXQfKzv1g3dvov1h9vK1PaPtAuAa8Cc1wwc3V79kMj7U5sDarAG9ywyRk3R/avOCE1+FLXizEpyqXfuPhfUd5VTvXv6iyQgPYNLcJtRly6cpu5/Lpc52NGROlX26TyxTzZoWNUSwpjMVl5WcEZYxygpjgTFhLkDZbPpTTBVhAC5znTDygXMlHVt4KsSz6DxwW/YzLJ4sFexB9nNrI+1BYuD8D+XUpvseKWRQ+wjVwuGcNzuGos4d0qlhu0BMjD9RsrNdaRJonzH907buKQ3WiyvD8dc/XS33FsdYbsKFM0c/CYlBB79BDZaLKI6UX7yCCR+qAsjXgqJdKQZgNTrfLYKkRI98K4DJZrb7kEDclKOynhYIcmL6iABMgCHI4uV7vNo7fuOFQiyGjfS0GT1st5qodVFegdZPZln3ouqBmzsmaTRQEwWnaTVc72KXrUWzdpaEtyzew8DxkO54LFQQHCYGQFilwE45lmHE4i6hSUrXoEezWe0XQw0WcUpxEAzyOh2EYBGFA4mASx+FknGRjHEdZq4ivpbD8GcTGs454Uni1I4dddQWeSMkpFlvVfQcJ/W/mPHbVPTphdf9Ftf3WEVOwu22kK1En1ueaOwX7ItjPgr63JTahwWASkvRiEofxRZSR8cWU4NEFniajeEhoGmXnGSVVHjY0eUbhNIqDcYRwYQBDFCBo++2+v8ujV505OCmmeydF1CLZnfN5KwRHn3KJyr0tBtkN71O1UX/NnYxBk3+JQWf7FmMcKgRVKdSyUCWUjyjlhS43FBa6uussbGAZWgBwLAfz9mtHEY2woiiThSDIGd6QxaKaMaWNU96lxmcKORYwBvjSM3Pqldpeo32IFOFeUiTtz6f3mVe77u7XHrjula57jevHBXrMuy7644bR5s00s7PY4g9VlLcSWE/errfdgdTtqYFXPvxe6VR4Uqfe/jLsKvrOF+IBX/+KlnSOJlM+rSuQdxvGa5rC3r9tMGk1hRubdC9Zbv1r0xh3/K4e3B0jc2Y3tkbm4N8cmX/kg6r3q79LTvzS+v4/oqVRn4wUAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=9346800a83e38f1037749ea6feaad39c"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="Create Record">02f0b88cc3c632002841b63b12d3aeff</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">0b46800a83e38f1037749ea6feaad364</flow>
+        <generation_source/>
+        <order>9</order>
+        <parent_ui_id>a577d248-9fda-444c-bfd1-9ad33047c539</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:25</sys_created_on>
+        <sys_id>9f46800a83e38f1037749ea6feaad39e</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 18:27:25</sys_updated_on>
+        <ui_id>19328a47-9eaf-4512-8489-3717d00087c6</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VVTXPTMBD9Kx2dMx67DqHJjWnJCdqBQi6l0aytdaIZWTaSnA8y+e+sbMU10AAHLh1yinbfrt57Xq8fDkxDiWzGHGQKeXsYsQ2oxgd3PJmOX8eTMYfGVTnwmBusQRpeK9AEFNLSv/3ib/E1GLrBoWGzA8vXUgmDms0eHkdMCmowSTB+NU0meZqk6WUcX16Nk2ySZsmlSAFxTC0UZKgI+skTpvNz/N2+fjb2blh7cdslKiM8n3jEcOdQCyQiBSiLI1aCFuAqs2czZxoKGARxp9W+R6yldtSQeezOym907VXscQWSshy7XH/kwbAuXNyAg3vqnLvGBGi+rmSOtvNEYAGNctfDWAe4q52sdFfSygzVlWpKfdtZwvoGp+dDkcYSCay9Ts88yCju19X244nlXOrWkpBU9CRVfwLnjMwa5/kcGCosqREvoa6lXvHaVBvZFhOXMlopOkSFqrZ0qZUrHUHuiUdkK0Rzit+04QUY6VW8pzZUfBwxu7fXCqx90kIm8q+NZ9IpCxp4Z4MvyY2s3Ru6YIOB7nHUD3g703Yw3Btcy1zhlyaOU3E4fK6JEwqeRHljyAYXBcDxuJTa1tgSP48mwlwKApOEiqbC23IePQBRSXhJyKJWwm/vKejhkNNUVW01Gk6dyHNQXYU3hbJL68A19odYj1y+/fDrq/ufu/HHxSQwnp5dTEk2WExziUrYp83UD95pK2FJxjvk3SD+tJlC8mIRkmE7Jf9qOyWTuP29oB3ViXvxK2rwNTqzrB6/A6PHBZuPBwAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=9f46800a83e38f1037749ea6feaad39e"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Records">43400a1587003300663ca1bb36cb0b4b</action_type>
+        <action_type_parent display_value="Look Up Records">d1c56ec50b30030085c083eb37673a50</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot>43400a1587003300663ca1bb36cb0b4b</compiled_snapshot>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">0b46800a83e38f1037749ea6feaad364</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:25</sys_created_on>
+        <sys_id>d746800a83e38f1037749ea6feaad398</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 18:27:25</sys_updated_on>
+        <ui_id>e744a8ac-8cf8-42a5-8c74-bfd3086327b1</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VXW0/bMBT+K5WfoyqhpVzeJhDSpAESMF42ZDmx01pzncx2WkrV/77jS9KsDdcVCbTHHJ/bd/ydc5wfSyTJlKFjlBWScsMLqVGEZkRUVsilLllmpT+rOB7Q5fJ7SYlhFCf9rFKKSdPXC405Xa3AjHJdCrK4fZt1SRSkYphCx0uUTbigoIGOf9xFiFNwd5gP45gk+4cH4GwQx6PRICNJmg5GWRqn+zG4ECRlAlRP2mC6AJpF2Sn71uWgUNQmlUSI3RsmKYNsciI0i9CUSEBUqEUjUYzQSynWggmXBjwiq3yv+QPEBRyx1cwZIMyYP20+cSijF+enxJBro6rMVCqoZpOCZ0z72lCWk0qYk7bMK1yWFoE3MSQVtXUhqqm88FVBjYP61kBSaUiClRaqzR2CA478elLMr+okz7h0RQkgRZER0XwRYxRPK2PTWSIm2BT84CkpSy7HuFTFjDtjSGXaHwv46OeimENMzceyTxxn+lBY0j8D+akT3xLFLYhzcAPGqwgBd04E0XoNBWqIf1c2Ew8sQMCuCr4E1i5TvDRfIMqMhZxXUdMIXm3dA/c4ORoexKMhJpUBmDjGipWEKwyXJLdZ/6z+v/F8mLZ4fhNy3Ug9sNt9Ynf2N7udWe/CHwR2xztj9+Fn4naA8cHIDQlxAQzB/gp1USlXyhnORKXdgSJSe19vaIXnu0AXymDHo3UnOBnR2TbnSc8UvYcXcDt+eoYftbh9DdF6Nz6DjqTqCe7YsDm9a2Hg9mBn3B7s7YbbywZmU7qOKtetae+l1n+w+mRTH8jVMkhWXb3zqpjJa2PurbZ7c/Cq5mzTy5+cPsKyHfdwTnHOmaCYS8Glm5yw8SDOuzU3xRMwDfGw70Q853TMzDp6rUULMyfiV9d5YByuL8rBe5d5AB0Aa0zDpbTfh8n2KEheMAWGT06BUdKaAufkvnfVxO1MJkwCaFY2duVtj4KvjTTwdLjDV9yH3XMJPDAfbaMk8qefYhO+227zFdzm7wvomx08ucT2W/S9tKTrpYuNHdYED9z146fjpXZmDzZeanv/50vtQ/6FRI8tjx3/ntz9AcAhBRSpDwAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=d746800a83e38f1037749ea6feaad398"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent display_value="Log">0e0ae8c2531003003bf1d9109ec587c8</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot>5bc1bcc6531003003bf1d9109ec587d4</compiled_snapshot>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">0b46800a83e38f1037749ea6feaad364</flow>
+        <generation_source/>
+        <order>10</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:25</sys_created_on>
+        <sys_id>df46800a83e38f1037749ea6feaad39f</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 18:27:25</sys_updated_on>
+        <ui_id>b240c8af-db24-449d-ad01-50a67c62e88e</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VUTWvjMBD9K0ZnJ8RJvd3mVpItLPQDGugeSjGyPE4EsqSV5KTZkP++I1txTBu6m6W3BV/m+Ukzb/RmnndE0grIlAi1zASsQZCYrKmoPcZlqTAsuNWCbp8C+r1FNTV40oEh0x1hKy4KA5JMn19iwgukpTlLcsa+pJNkNJrgl5dJcZWMroClXy+LS7xC0BzzTcltyHuiFLfVHmIrxRmE+DYcmx1AZQpfxigm8OpAFoD5SyosxKSisqBOmW2HGKDFgxRHYMWlw9uIJ79a/gvzXYw8rwRUxKD914VZaEcLl3Pq6MKZmrnaBGpbrMVe7DqJg0F0ryREg0Gvv73S9/GRGxr85hUCM+kzf1AjuVz2yBtEjuRxn/zNGGV6VAhx4E72+HIFlLQWbna+guSvFYzPUTA5Q8GFV9A2/0E7rtCNJPGeobk4PI0SdSXvW5+RTu/TG8O36Pyk72uLFgDtbeZ9E0xULlZq83jwyA2XTUXhp1CMii6izhme1873d0dAQIUXZRXVGhuRaaPWvDmMxVbDpcBgWAq1waSWL+WQMi9tiK6mwxvE5w38RA33Mu/wGjy8j4nd2pmg1h7FooWzn7WvpJUeNGRNo5ojzHDtrjHBGkK5vv29sazAWrqE3htc107NqIFp9AiachNhy2TEcMocFFGpTIQytAAfcWk1NOW/3yr/fM+f9tB48tEegrS3h+46dSclh11k8fkax/Z30eIAHsbh03bROE0/ZxmdGu/3A3PWvPx/4/DyG/Wh+bIyBwAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=df46800a83e38f1037749ea6feaad39f"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=0b46800a83e38f1037749ea6feaad364"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=0b46800a83e38f1037749ea6feaad364^sys_idNOT IN5746800a83e38f1037749ea6feaad394,5b46800a83e38f1037749ea6feaad395,5f46800a83e38f1037749ea6feaad396,d346800a83e38f1037749ea6feaad392"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <block display_value="">b246800a83e38f1037749ea6feaad314</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">0b46800a83e38f1037749ea6feaad364</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="End">d176605ea76103004f27b0d2187901c7</logic_definition>
+        <order>4</order>
+        <outputs_assigned/>
+        <parent_ui_id>98ff0604-5c92-4f87-811b-5b78c3f77e87</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:25</sys_created_on>
+        <sys_id>5746800a83e38f1037749ea6feaad394</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:10</sys_updated_on>
+        <ui_id>4362a18d-5cda-459a-b141-c7d6cacb143b</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/6tWyi8tKSgtKQ7JdywuzkzPU7KKjtVRyswDiUHYZYlFmYlJOalQbkpqcmZxZn5eCEjME0ldSmVeYm5mMrJQeX5RdlpOfjlCrBYAD1ouqHEAAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <block display_value="">3e46800a83e38f1037749ea6feaad317</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">0b46800a83e38f1037749ea6feaad364</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>6</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:25</sys_created_on>
+        <sys_id>5b46800a83e38f1037749ea6feaad395</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:10</sys_updated_on>
+        <ui_id>74589c5b-ccb5-4a19-a241-f7f3f7700a80</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1Vy27bMBD8lYJn26Beft2CBAECpA3QBL20gbDiwyZKiSpJJVEF/3uXkmwHjYukzbU3cchdzqxmpI6YxteNd3fmzDm1qcj66/2EqCpg+NwRxcmakAmpoBT4xEzFlVemQugBdBOwrlvIOedyPp9KnhTTlDKYQkbTqZTFkjMZyYjGM+fBN263+9ZQmnCKDbhytYb2y3v7sK3S3IqRfA0WuXphybr7basXs4JMZhHNWBLPk5jSeJlGxTwpopgnINI5NtRQCI1Hz5+pPTEA39YBct6qajOur8fS2z1oLA9UYjoh4smLigskIUE7MSElVBy8sS1Ze9sgYAXwm0q3hxNbVfnhBZTw5NRPETpRGk5KgbqYGHYPy3wc6gDLC/CAVBrmGzseZVujmHDDRLiQ0Gh//hwbDtzUvcq+xEOh99VGN2X1aRgGOTTYv0NEGockRB2UBu6jEHm7NY+f9ywvVdVPZdzUhoE+rMDj7IrGBz4dEVqU2Cgvoa5xonltzYPqi5FLOdtoXMykNo94aXDwDFggPsPBwuwS8Yse/gJWBRUfsQ0Woxdc7phV9V5bfznZTYhr3bkG544acbj5jyYwHBSP2vJhPKGkb3SGFz+IUcZu0pHA6tpsFLuq0LQo+7Z1V8GCizRbrlhWMFZkKUQriNNILmQiFwtKYRk83VtVUpDRikWnrQrJCVvmPXAM58uYkdcj8oZ7X0Tkw+D8PzP6m7REr6RlRN4Ulyz7n5Z3pyXQLMAplvf/BmwXPlj/GJdx6JdKaH7SQqfydB88PbA6vA2mHJbdBexq/8sKGy1aLqTuCD0a+z3IPmK7X7Td08H8BgAA</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <block display_value="">f246800a83e38f1037749ea6feaad31b</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">0b46800a83e38f1037749ea6feaad364</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="Else">1f781bf3c32232002841b63b12d3aee6</logic_definition>
+        <order>8</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:25</sys_created_on>
+        <sys_id>5f46800a83e38f1037749ea6feaad396</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:10</sys_updated_on>
+        <ui_id>a577d248-9fda-444c-bfd1-9ad33047c539</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/6tWyi8tKSgtKQ7JdywuzkzPU7KKjtVRyswDiUHYZYlFmYlJOalQbkpqcmZxZn5eCEjME0ldSmVeYm5mMrJQeX5RdlpOfjlCrBYAD1ouqHEAAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <block display_value="">f646800a83e38f1037749ea6feaad310</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="AutoCare Repair Plan Creation">0b46800a83e38f1037749ea6feaad364</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>2</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:25</sys_created_on>
+        <sys_id>d346800a83e38f1037749ea6feaad392</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:10</sys_updated_on>
+        <ui_id>98ff0604-5c92-4f87-811b-5b78c3f77e87</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXU/bMBT9K5OfS+V8NaFvqAgJiQ1pIF42FN04dmvNsbPYAbKo/33XSdoi6AQbr3uLj32vzzm5J+mJaV3dOntrzqyVa02W3+5nRGqP4XNPZEmWhMyIhorjEzO6lE4ajdADqNZjfc/TOIYM2EnGRHYSh5DgUxqfFKKMaLaIwrQI5ivTarfdfm8pjTjF+lLaWkF398E2bCNV2fCJeg0NMnW8Icv+xdYg5RQSkQQ0YVGIDSkNszgoFlERhGUEPF5gQwUFV3h09UzrEfmuqz1kXSP1elpfTaU3O9A0pacS0hnhT47rkiMJAcryGalAl+BM05Gla1oEGg7ltVbd/sRGajfaX8GTlb+470SpPyk46mJ83N0v88nTERbn4ACptMy1zXSUbYxk3I6OlFxAq9zqOTYeuK4HlUOJg0Ltqo1qK/1lNIPsG+xeISKtRRK89ko990mIuNmYx687lhdSD65Mm8owUPsVOPSuaJ3n0xOueIWN8grqGh3N68Y8yKEYuVTztcLFXCjziJf6+Z0D88TnaCzMLxA/H+A7aKRX8RnbYDHOgs0ta2S90zZcTrYzYju7UmDtQSOam/9sPcNR8aQtH+3xJUOjM7z4gU8ytrOeeFZXZi3ZpbYOUPZNZy+HEcyEoAsaJ+w0jEWWZkFQJEWasUikKc9SMo2qoCCCUxYcH1WIjoxlPgCHaL5OGXk7Iu+491VEPo2T/2dGf5OW4I20TMi74pIk/9Py4bR4mgVYyfLhz4Dt/AfrH+MymX4huSqPjtCxPN37mR5Z7d8GkxbLbj12ufth+Y0OR86n7gA9muaHl33Atr8BMyyh7/oGAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=0b46800a83e38f1037749ea6feaad364"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=0b46800a83e38f1037749ea6feaad364"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>changed_fields</element>
+        <help/>
+        <hint/>
+        <label>Changed Fields</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_0b46800a83e38f1037749ea6feaad364</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:25</sys_created_on>
+        <sys_id>5746800a83e38f1037749ea6feaad37d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 18:27:25</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_0b46800a83e38f1037749ea6feaad364</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:25</sys_created_on>
+        <sys_id>9346800a83e38f1037749ea6feaad387</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 18:27:25</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_0b46800a83e38f1037749ea6feaad364</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:25</sys_created_on>
+        <sys_id>cf46800a83e38f1037749ea6feaad372</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 18:27:25</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_0b46800a83e38f1037749ea6feaad364"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_0b46800a83e38f1037749ea6feaad364"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>c5f4698035c646cbba091c45a7d3f06e</sys_id>
+        <latest_snapshot>0b46800a83e38f1037749ea6feaad364</latest_snapshot>
+        <compiler_build/>
+        <version_record/>
+    </sys_hub_flow>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=c5f4698035c646cbba091c45a7d3f06e^sys_idNOT INab46c00a83e38f1037749ea6feaad300"/>
+    <sys_flow_trigger_plan action="INSERT_OR_UPDATE">
+        <binding_strategy>com.snc.process_flow.engine.binding.OncePerUniqueChange</binding_strategy>
+        <plan/>
+        <plan_id>c5f4698035c646cbba091c45a7d3f06e</plan_id>
+        <snapshot>0b46800a83e38f1037749ea6feaad364</snapshot>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:27:26</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>ab46c00a83e38f1037749ea6feaad300</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:11</sys_updated_on>
+        <trigger display_value="">bf76dc8a83678f1037749ea6feaad323</trigger>
+    </sys_flow_trigger_plan>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=c5f4698035c646cbba091c45a7d3f06e"/>
+</record_update>

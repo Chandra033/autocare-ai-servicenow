@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_1947064_autoca_0.ServiceSummaryGenerator</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>GenAI integration layer for service summaries. Collects verified record data via VehicleMaintenanceAnalyzer. Invokes GenAI runtime when available or stores structured context payload.</description>
+        <mobile_callable>false</mobile_callable>
+        <name>ServiceSummaryGenerator</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[/**
+ * ServiceSummaryGenerator
+ *
+ * GenAI integration layer for generating customer-friendly service summaries.
+ *
+ * Collects verified record data from Vehicle, Repair Plan, Service Outcome,
+ * and Service History, then structures it as a GenAI-ready context payload.
+ *
+ * When the ServiceNow GenAI runtime is available, the generateSummary method
+ * will invoke the LLM with the collected context. Until then, it stores
+ * the structured context as a JSON payload in the service_summary field,
+ * ready for GenAI processing when the capability is enabled.
+ *
+ * This Script Include:
+ *  - Reuses VehicleMaintenanceAnalyzer for vehicle context (does NOT duplicate it)
+ *  - Collects ONLY verified, existing record data — never invents facts
+ *  - Only writes when explicitly called — no automatic triggers
+ *  - Does NOT call any external AI service without platform GenAI runtime
+ */
+var ServiceSummaryGenerator = Class.create();
+
+ServiceSummaryGenerator.prototype = {
+    initialize: function() {
+        this.SCOPE = 'x_1947064_autoca_0';
+    },
+
+    /**
+     * Generates a service summary for a completed Service Outcome.
+     * Collects all verified context and invokes GenAI if available,
+     * otherwise stores the structured context payload.
+     *
+     * @param {string} serviceOutcomeSysId - sys_id of the Service Outcome record
+     * @returns {object} result with success flag and summary or error
+     */
+    generateSummary: function(serviceOutcomeSysId) {
+        if (!serviceOutcomeSysId) {
+            return this._error('serviceOutcomeSysId is required');
+        }
+
+        // 1. Get the Service Outcome record
+        var outcomeGr = new GlideRecord(this.SCOPE + '_service_outcome');
+        if (!outcomeGr.get(serviceOutcomeSysId)) {
+            return this._error('Service Outcome not found: ' + serviceOutcomeSysId);
+        }
+
+        // 2. Collect verified context from all linked records
+        var context = this._collectServiceContext(outcomeGr);
+        if (!context) {
+            return this._error('Failed to collect service context');
+        }
+
+        // 3. Attempt GenAI generation if runtime is available
+        var summary = this._attemptGenAISummary(context);
+
+        // 4. Store the result on the Service Outcome record
+        outcomeGr.setValue('service_summary', summary);
+        outcomeGr.setWorkflow(false); // Prevent re-triggering business rules
+        outcomeGr.update();
+
+        gs.info('ServiceSummaryGenerator: Summary generated for ' + serviceOutcomeSysId);
+        return {
+            success: true,
+            sys_id: serviceOutcomeSysId,
+            summary: summary,
+            genai_available: this._isGenAIAvailable()
+        };
+    },
+
+    /**
+     * Collects all verified record data for the service summary.
+     * Reuses VehicleMaintenanceAnalyzer for vehicle context.
+     *
+     * @param {GlideRecord} outcomeGr - the Service Outcome GlideRecord
+     * @returns {object|null} structured context payload
+     */
+    _collectServiceContext: function(outcomeGr) {
+        var vehicleSysId = outcomeGr.getValue('vehicle');
+        var repairPlanSysId = outcomeGr.getValue('repair_plan');
+
+        // Service Outcome data (verified from record)
+        var outcomeData = {
+            description: outcomeGr.getValue('description') || '',
+            parts_replaced: outcomeGr.getValue('parts_replaced') || '',
+            outcome_date: outcomeGr.getValue('outcome_date') || '',
+            final_status: outcomeGr.getValue('final_status') || '',
+            outcome_type: outcomeGr.getValue('outcome_type') || '',
+            quality_rating: outcomeGr.getValue('quality_rating') || '',
+            follow_up_needed: outcomeGr.getValue('follow_up_needed') || ''
+        };
+
+        // Repair Plan data (verified from record)
+        var repairPlanData = null;
+        if (repairPlanSysId) {
+            var rpGr = new GlideRecord(this.SCOPE + '_repair_plan');
+            if (rpGr.get(repairPlanSysId)) {
+                repairPlanData = {
+                    repair_description: rpGr.getValue('repair_description') || '',
+                    estimated_cost: rpGr.getValue('estimated_cost') || '',
+                    classification: rpGr.getValue('classification') || '',
+                    reason_evidence: rpGr.getValue('reason_evidence') || '',
+                    owner_approval: rpGr.getValue('owner_approval') || '',
+                    status: rpGr.getValue('status') || ''
+                };
+            }
+        }
+
+        // Vehicle context via existing VehicleMaintenanceAnalyzer
+        var vehicleContext = null;
+        if (vehicleSysId) {
+            var analyzer = new VehicleMaintenanceAnalyzer();
+            vehicleContext = analyzer.buildVehicleContext(vehicleSysId);
+        }
+
+        return {
+            service_outcome: outcomeData,
+            repair_plan: repairPlanData,
+            vehicle_context: vehicleContext,
+            generated_at: new GlideDateTime().getDisplayValue()
+        };
+    },
+
+    /**
+     * Attempts to generate a summary using the ServiceNow GenAI runtime.
+     * If GenAI is not available, returns the structured context as a
+     * JSON string for future GenAI processing.
+     *
+     * @param {object} context - the collected service context
+     * @returns {string} the generated summary or structured context
+     */
+    _attemptGenAISummary: function(context) {
+        // Check if the GenAI runtime is available on this instance
+        if (this._isGenAIAvailable()) {
+            try {
+                return this._invokeGenAI(context);
+            } catch (e) {
+                gs.warn('ServiceSummaryGenerator: GenAI invocation failed, storing context payload. Error: ' + e.message);
+            }
+        }
+
+        // GenAI not available — store structured context for future processing
+        gs.info('ServiceSummaryGenerator: GenAI runtime not available. Storing structured context payload for future processing.');
+        return JSON.stringify(context, null, 2);
+    },
+
+    /**
+     * Checks whether the ServiceNow GenAI runtime is available.
+     * Tests for the sn_gai namespace which hosts GenAI capabilities.
+     *
+     * @returns {boolean} true if GenAI runtime is available
+     */
+    _isGenAIAvailable: function() {
+        try {
+            // Check if the GenAI API namespace exists on this instance
+            var pluginGr = new GlideRecord('v_plugin');
+            pluginGr.addQuery('id', 'com.snc.generative_ai_controller');
+            pluginGr.addQuery('active', 'active');
+            pluginGr.setLimit(1);
+            pluginGr.query();
+            return pluginGr.hasNext();
+        } catch (e) {
+            return false;
+        }
+    },
+
+    /**
+     * Invokes the GenAI runtime with the service context.
+     * This method is the integration point that will be activated
+     * when the GenAI runtime is enabled on the instance.
+     *
+     * @param {object} context - the collected service context
+     * @returns {string} GenAI-generated summary
+     */
+    _invokeGenAI: function(context) {
+        // Build the prompt from verified record data only
+        var vehicle = (context.vehicle_context && context.vehicle_context.vehicle) || {};
+        var outcome = context.service_outcome || {};
+        var plan = context.repair_plan || {};
+
+        var prompt = 'Generate a customer-friendly service summary for the following completed vehicle service. '
+            + 'Use ONLY the provided data. Do not invent any facts.\n\n'
+            + 'Vehicle: ' + (vehicle.make || 'Unknown') + ' ' + (vehicle.model || '') + '\n'
+            + 'Registration: ' + (vehicle.registration_number || 'N/A') + '\n'
+            + 'Work Performed: ' + (outcome.description || plan.repair_description || 'N/A') + '\n'
+            + 'Parts Replaced: ' + (outcome.parts_replaced || 'None recorded') + '\n'
+            + 'Classification: ' + (plan.classification || 'N/A') + '\n'
+            + 'Evidence/Reason: ' + (plan.reason_evidence || 'N/A') + '\n'
+            + 'Completion Date: ' + (outcome.outcome_date || 'N/A') + '\n'
+            + 'Final Cost: ' + (plan.estimated_cost || 'N/A') + '\n'
+            + 'Follow-up Needed: ' + (outcome.follow_up_needed || 'None') + '\n';
+
+        // When GenAI runtime is active, this will invoke the LLM
+        // For now, this path is only reached if _isGenAIAvailable() returned true
+        var genAiApi = new sn_gai.GenerativeAiApi();
+        var response = genAiApi.generateText({
+            prompt: prompt,
+            max_tokens: 500,
+            temperature: 0.3
+        });
+
+        return response.getText();
+    },
+
+    _error: function(message) {
+        gs.warn('ServiceSummaryGenerator: ' + message);
+        return { success: false, error: message };
+    },
+
+    type: 'ServiceSummaryGenerator'
+};
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:37:49</sys_created_on>
+        <sys_id>93684f3ce7924d7ea0e20dd828c9525f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ServiceSummaryGenerator</sys_name>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name>sys_script_include_93684f3ce7924d7ea0e20dd828c9525f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:37:49</sys_updated_on>
+    </sys_script_include>
+</record_update>

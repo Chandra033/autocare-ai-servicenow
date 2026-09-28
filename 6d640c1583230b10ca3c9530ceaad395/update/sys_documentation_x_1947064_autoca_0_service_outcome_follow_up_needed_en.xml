@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update>
-    <sys_documentation element="follow_up_needed" label="Follow-up Needed" language="en" table="x_1947064_autoca_0_service_outcome">
+    <sys_documentation element="follow_up_needed" label="Follow Up Needed" language="en" table="x_1947064_autoca_0_service_outcome">
         <sys_documentation action="INSERT_OR_UPDATE">
             <element>follow_up_needed</element>
             <help/>
             <hint/>
-            <label>Follow-up Needed</label>
+            <label>Follow Up Needed</label>
             <language>en</language>
             <name>x_1947064_autoca_0_service_outcome</name>
-            <plural>Follow-up Needed</plural>
+            <plural>Follow Up Needed</plural>
             <sys_class_name>sys_documentation</sys_class_name>
             <sys_created_by>admin</sys_created_by>
             <sys_created_on>2026-09-24 10:40:04</sys_created_on>

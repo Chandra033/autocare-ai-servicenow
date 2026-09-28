@@ -1,0 +1,1190 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation/>
+        <attributes>timeFromCreateToActivate=2660000</attributes>
+        <authored_on_release_version/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Creates a service outcome when a repair plan is approved, ready for the technician to complete.</description>
+        <display_name_after_preview/>
+        <flow_priority>MEDIUM</flow_priority>
+        <generation_source>fluent</generation_source>
+        <internal_name>autocare_service_outcome_creation</internal_name>
+        <label_cache>[{"name":"Updated_1.current.sys_id","label":"Trigger - Record Updated➛x_1947064_autoca_0_repair_plan Record➛Sys Id","type":"string","base_type":"string","usedInstances":{"ffaaf5df-0efd-4d4d-b855-0abd15acafa4":["conditions"]},"attributes":{}},{"name":"ffaaf5df-0efd-4d4d-b855-0abd15acafa4.Count","label":"ffaaf5df-0efd-4d4d-b855-0abd15acafa4➛Count","type":"integer","base_type":"integer","usedInstances":{"897abba6-8e59-40b2-8bbe-545057eb4ff1":["condition"]},"attributes":{}},{"name":"Updated_1.current","label":"Trigger - Record Updated➛x_1947064_autoca_0_repair_plan Record","type":"reference","base_type":"reference","usedInstances":{"9a3efe74-52fd-4556-9010-b799e4fea6ff":["values"]},"attributes":{}},{"name":"Updated_1.current.vehicle","label":"Trigger - Record Updated➛x_1947064_autoca_0_repair_plan Record➛Vehicle","type":"string","base_type":"string","usedInstances":{"9a3efe74-52fd-4556-9010-b799e4fea6ff":["values"]},"attributes":{}},{"name":"Updated_1.current.appointment","label":"Trigger - Record Updated➛x_1947064_autoca_0_repair_plan Record➛Appointment","type":"string","base_type":"string","usedInstances":{"9a3efe74-52fd-4556-9010-b799e4fea6ff":["values"]},"attributes":{}},{"name":"Updated_1.current.repair_description","label":"Trigger - Record Updated➛x_1947064_autoca_0_repair_plan Record➛Repair Description","type":"string","base_type":"string","usedInstances":{"9a3efe74-52fd-4556-9010-b799e4fea6ff":["values"]},"attributes":{}}]</label_cache>
+        <master_snapshot>85b0148e83278f1037749ea6feaad3f8</master_snapshot>
+        <master_snapshot_digest/>
+        <name>AutoCare Service Outcome Creation</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <remote_trigger_id>26765c8a83678f1037749ea6feaad337</remote_trigger_id>
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <substatus/>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:53:44</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>ac498000f2a74815aeb8f6a671e9317d</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>AutoCare Service Outcome Creation</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name>sys_hub_flow_ac498000f2a74815aeb8f6a671e9317d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:06</sys_updated_on>
+        <type>flow</type>
+        <updation_source/>
+        <version>2</version>
+        <version_record/>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=ac498000f2a74815aeb8f6a671e9317d"/>
+    <sys_variable_value action="delete_multiple" query="document_key=ac498000f2a74815aeb8f6a671e9317d"/>
+    <sys_flow_record_trigger action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <condition table="x_1947064_autoca_0_repair_plan">status=approved<item endquery="false" field="status" goto="false" newquery="false" operator="=" or="false" value="approved"/>
+        </condition>
+        <name/>
+        <on_delete>false</on_delete>
+        <on_insert>false</on_insert>
+        <on_update>true</on_update>
+        <published_version/>
+        <run_flow_in>background</run_flow_in>
+        <run_on_extended>false</run_on_extended>
+        <run_when_setting>both</run_when_setting>
+        <run_when_user_list/>
+        <run_when_user_setting>any</run_when_user_setting>
+        <sys_class_name>sys_flow_record_trigger</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:38:06</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>26765c8a83678f1037749ea6feaad337</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:06</sys_updated_on>
+        <table>x_1947064_autoca_0_repair_plan</table>
+        <trigger_definition/>
+    </sys_flow_record_trigger>
+    <sys_trigger_runner_mapping action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <data>{"run_flow_in":"background","run_when_user_list":[],"run_when_setting":"both","run_when_user_setting":"any","run_on_extended":"false"}</data>
+        <identifier>ac498000f2a74815aeb8f6a671e9317d</identifier>
+        <identifier_type>flow</identifier_type>
+        <runner>FDTriggerRunner</runner>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:38:06</sys_created_on>
+        <sys_id>22765c8a83678f1037749ea6feaad338</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:06</sys_updated_on>
+        <trigger display_value="">26765c8a83678f1037749ea6feaad337</trigger>
+    </sys_trigger_runner_mapping>
+    <sys_trigger_runner_mapping action="delete_multiple" query="identifier=ac498000f2a74815aeb8f6a671e9317d^sys_idNOT IN22765c8a83678f1037749ea6feaad338"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=ac498000f2a74815aeb8f6a671e9317d"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=ac498000f2a74815aeb8f6a671e9317d"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=ac498000f2a74815aeb8f6a671e9317d^sys_idNOT IN50b0148e83278f1037749ea6feaad32e,64b0148e83278f1037749ea6feaad37f,a8b0148e83278f1037749ea6feaad34f"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+        <model display_value="AutoCare Service Outcome Creation">ac498000f2a74815aeb8f6a671e9317d</model>
+        <model_id>ac498000f2a74815aeb8f6a671e9317d</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_ac498000f2a74815aeb8f6a671e9317d</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:49</sys_created_on>
+        <sys_id>50b0148e83278f1037749ea6feaad32e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:12:49</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=50b0148e83278f1037749ea6feaad32e"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>child_label=FDChangeDetails,child_name=FDChangeDetails,child_type=object,child_type_label=Object,co_type_name=FDCollection,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,pwd2droppable=true,uiType=array.object,uiTypeLabel=Array.Object</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>changed_fields</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Changed Fields</label>
+        <mandatory>false</mandatory>
+        <max_length>4000</max_length>
+        <model display_value="AutoCare Service Outcome Creation">ac498000f2a74815aeb8f6a671e9317d</model>
+        <model_id>ac498000f2a74815aeb8f6a671e9317d</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_ac498000f2a74815aeb8f6a671e9317d</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:50</sys_created_on>
+        <sys_id>64b0148e83278f1037749ea6feaad37f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:12:50</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=64b0148e83278f1037749ea6feaad37f"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,timeFromCreateToActivate=5000,uiType=document_id</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+        <model display_value="AutoCare Service Outcome Creation">ac498000f2a74815aeb8f6a671e9317d</model>
+        <model_id>ac498000f2a74815aeb8f6a671e9317d</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_ac498000f2a74815aeb8f6a671e9317d</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:50</sys_created_on>
+        <sys_id>a8b0148e83278f1037749ea6feaad34f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:12:50</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=a8b0148e83278f1037749ea6feaad34f"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=ac498000f2a74815aeb8f6a671e9317d"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=ac498000f2a74815aeb8f6a671e9317d"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=ac498000f2a74815aeb8f6a671e9317d^sys_idNOT IN758eb82050e74cdfacc282eb43afd22e"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="AutoCare Service Outcome Creation">ac498000f2a74815aeb8f6a671e9317d</flow>
+        <generation_source/>
+        <name>Updated</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:53:44</sys_created_on>
+        <sys_id>758eb82050e74cdfacc282eb43afd22e</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:03</sys_updated_on>
+        <trigger_definition display_value="Updated">bb695e60c31322002841b63b12d3aea5</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/+1Y227UMBD9lShPIC3SIhCIvnGrVImLRAs8FBR57cmuhdcO9mS3oeq/M85l102yNKVZCqJPbcaXOTNzju3Z0/MYrZzPwR5ph0xzOC7ckYgP4ngSKzYDRf+esJkC+pYawWqmTooMyIzenGi29GMCMtACNFZL+cJIDm+ko+/Tr5N4ybRgaGwRH6DNYRKn1ixPYJkphrRXypQjo7ECbHzwcDqdxOW+tRPacMVU7r/PkofPHj+dPnmcsBwNZ8k0sZAxaRPaSnsg0tF/xaeh8/lCKmFBVzgzZskvehTnnfhbkLAnDXUEhB/O0CdEbIILUlBbLDDxXqsimHLm5A8o1+cOkiCp9Yz0eGHWHyAFQszhUOrSXT2oKD61+WJIlZ3lCI5iubjYZOZQgqoL7LiVGT7nKFdNES4mQxjxIdfR5wXo6KMDG5Vl7tBjrqSARFVjw+nRBHoVP0pCBNDq4thcJ2tCllD+bOO9IU+XHsMI0BvurxxiTwr+VmrETKx8mX0evTbjfXHlGJyTxv9FlHreZUzFiivYch6nTfHK5axCRPG/qR36vEXea2psVbGj7cQGhV9wtGTzmgTpMSjgGNQkpZXB11tJywj0NvINDG10MgTKO6Mf7BfJzOAidN94fkH2S0kgvu2C426I5/fU3BaT23BkdTm2ln5r63U03KXhbufYIub/rOFUmTWR6OayZbrokNTvLTXxsoi4oe3PcERZkARgbk2uxS6/l2eMpUbGv/3a7XZGdE9AynKF929bfh4bHWeh8sI42voLxwaqcEukXrd3mtum6r2OXtdBR+Ur1N1cfiXWFiHpOOS5pQRgeTU0iY6w8TmaFL2l651uyQBC88C+VR3Qpb7h21YLDf6WDBrzQAX0lnWn7ztBVJl7abSQWL2Y2hpohtxeeo26NDwA0BCC0GLuvuTT6SPBssyaFfQckztmDaBLGHQPDOyJf2/8qDv336XHmml0CZqECZEEiDdH0tIIUK+C6tWcoHshy9HFF0FtSSObVnyfve1ozUrfq4ee5v7F4zvHEc9YoyExaW8bItOoTgCdPLMiwgUQCkV3L+1V4hjzsNfGl6kN5pWJaCCyfwTOON1I2dp3W5KqpC2pV8Zr/6iwuxtpOb+7DbbpO6lm3VycuZbfc0j4gul59d5p2HpIGgXGF1E1JaqmjKpW3vrJgI+5PazAFp2AvDHKM+EFMJ4vptascJ2Dh1TuBV+/7shA1NYVmW9N2s3N4tDSzHkRqLrDhZbAO+MDtb4l624M/4q4h2v5608VzdKVYhgAAA==</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>record_update</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=ac498000f2a74815aeb8f6a671e9317d^sys_idNOT IN33272a09c97c483bbbce5e3994bc54d3,4e8afd8b340747bc8a517d878d3bcc82,9a3efe7452fd45569010b799e4fea6ff,ffaaf5df0efd4d4db8550abd15acafa4"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent display_value="">5bc1bcc6531003003bf1d9109ec587d4</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="AutoCare Service Outcome Creation">ac498000f2a74815aeb8f6a671e9317d</flow>
+        <generation_source/>
+        <order>6</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:53:44</sys_created_on>
+        <sys_id>33272a09c97c483bbbce5e3994bc54d3</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:03</sys_updated_on>
+        <ui_id>33272a09-c97c-483b-bbce-5e3994bc54d3</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VUTY/aMBD9K5HPARHYdLvcVtCVKu2HVCR6WK3QxJmAJcdObQeWIv57x4mBaBe1Rd1bpVzm5dkzb/xmnndMQYlszKReLiSuUbKYrUHWHhOq0BTmwlYStvOAfm3RCgyddGjYeMf4SsjcoGLj55eYiZxoacaTjPNP6SgZDEb0ZUWS3ySDG+Tp5+v8mq6QkFG+MbsPec+U4raVh/hKC44hvg/HJgdQm9yXMYgZvjpUOVL+AqTFmJWgcnDabI+IQciflDwBK6Ec3cY8+dWKn5TvauB5BZIiju2/Y7gI7WjhYgoOZs7U3NUmUNtiLfVid5TY60WPWmHU63X62yl9H5+4ocFvXiEwky7zOxgl1LJD3hByIg+75C/GaNOhYogDd7Snl8uxgFq6yeUKkr9WMLxEwegCBVdeQdv8p8oJTW5kifcMZPLwNFrWpXpsfcaOeudvDN+i07O+ry1ZACtvM++bYKJittKbbweP3AnVVBR+Ss1BHiNwzoisdr6/O4YSS7poUUJVUSMWldFr0RymYsv+UlLQL6TeUFIrlqoP3Evrk6uhf0f4tIHnYISX+UDX0OF9zOzWTiRYexJLFl78qH0lrfSgYdE0qjnCjajcLSVYYyjXt78zliVaC0vsvMFt7fQEDI6jGZo1tT7StaPKMeI0aQ7zqNAmoqpIFwUGKxAmor6q95vln+760z4ajn63jzDt7KOHo8qz0sNOsvSMjXO7O2l2AA9j8WE7aZimH7OUzo35+8G5aG7+v7F4+QW5AWqwOgcAAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=33272a09c97c483bbbce5e3994bc54d3"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent display_value="">5bc1bcc6531003003bf1d9109ec587d4</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="AutoCare Service Outcome Creation">ac498000f2a74815aeb8f6a671e9317d</flow>
+        <generation_source/>
+        <order>3</order>
+        <parent_ui_id>897abba6-8e59-40b2-8bbe-545057eb4ff1</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:53:44</sys_created_on>
+        <sys_id>4e8afd8b340747bc8a517d878d3bcc82</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:03</sys_updated_on>
+        <ui_id>4e8afd8b-3407-47bc-8a51-7d878d3bcc82</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VU22obMRD9FaFn23jtuGn8FuwGCrlADe5DCGasnbVFtdJW0vpSE+hH9Av7JR3tyvaSmLaG9KmwLzp7pJlzdDSPO64hRz7kyixmCleoeIuvQJUBkzoztEylKxRspxH9WKMFWNrp0fLhjoulVKlFzYePTy0uU6IN5iKZC/Fu0E+63T598yxJr5LuFYrB+8v0ko5QMKd6Q34b655oxW+LAImlkQLj+jZuG+1BY9PQRrfFceNRp0j1M1AOWzwHnYI3dntALEL6oNURWErt6TQeyBsnv1G9i27gZUiKBNb/DstZtKOGszF4mHhbCl/aSK2bdeTF7iCx3Wb3RiNrtxv+Nlp/bh250eAXtxCZSZP5GayWetEgrwk5kntN8gdrjW1QMa4jt/9MN5diBqXyo/MVJH+toHeOgv4ZCi6Cgtr8h8JLQ2nkScgMzNX+aowqc31f54wf9E5fBL5GxydzXzqKABYhZiE3MUTZZGnWn/YZuZG66ij+VEaAOqzAeyvnpQ/+7jgqzOmgWQ5FQUbMCmtWstpMzeadhaJFJ1NmTUWdXOgOiCCtQ6mGzg3h4wqegpVB5h0dQ5ufW9xt3UiBc0exFOHZ1zJ0UkuPGmaVUdUWYWXhr6nACmO7wf7Gs8zROVhg4w6uS29GYHHIJmhXZD0zpafOkYEKT23LcCOddywzlvmldMxiAdIyslazn99/MPdFVtKZIH51ba9Gzr8p8qcJ1uv/boLhoDHB7g6+nDQrTjFHF19lvTnFJntw/5DebIr1BoO3GWOnBsPrp3bWS/v/HtLTL0ktZd1sBwAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=4e8afd8b340747bc8a517d878d3bcc82"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="">2de05916c31332002841b63b12d3aee1</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="AutoCare Service Outcome Creation">ac498000f2a74815aeb8f6a671e9317d</flow>
+        <generation_source/>
+        <order>5</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:53:44</sys_created_on>
+        <sys_id>9a3efe7452fd45569010b799e4fea6ff</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:03</sys_updated_on>
+        <ui_id>9a3efe74-52fd-4556-9010-b799e4fea6ff</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VVTW8aMRD9K5HPaLUbKA3cqqSc2kRtWi5psIb1LFjyerf+IFDEf+94bciqDaoq9RKVm2fejN88zz4e9kxDjWzKHCwV8u4wYBtQPgS3vJiM3ubjEQfvmhJ4zi2ajSyRN96VTQcW0rYKdvO/qWnB0E0ODZvuWbmWShjUbPrwOGBSUJNxgfmbSTEuh8VweJnnl1ejYjkeLotLMQTEEbVQsERF0C+BOJ1fmsPt2hdjH/q1F7cx0RgR+OQDhluHWiARqUBZHLAatADXmB2bOuMpYBDEnVa7E2IttaOGLGC3Vv6ga6/ygKuQJisx5k5HnkSL4eoGHNxT59J5k6DluiHJbNREYAVeuet+LALuWicbHUu6MVN1o3ytb6Mk7NTg+EYU8ZZIYBvmDMzTGNX9unn6fGQ5k7qTJCUVvaY6ncA5I5feBT57hgprasRraFupV7w1zUZ2xcSlzlaKDlmlmie61MqVzqAMxDOSFbIZxW+68ByMDFN8pDZUfBgwu7PXCqx9noVE5N99YBInSzPwKEMoKY1s3Tu6YIOJ7mFwWvRut21vyQ22IA2n59DffJ4PxX7/tSVeKHiRld6QFO5wWGxwLUuFZyFZAhCUyDe0D0GQ8/AeiEpIlY41aXK+JDHtYamykhoUtw6ct7FU6iD/yqC1i/TJ8bD1MRubLN5/+v3T/Y+V+KMhCcwnZw2pWPYMaSZRCfvsSKeFO7oR1qSwQx4X8BdHSsmLeUomVyr+lSsV47z7vSJvisO9emvq/QudManHn/RqVcGPBwAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=9a3efe7452fd45569010b799e4fea6ff"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Records">43400a1587003300663ca1bb36cb0b4b</action_type>
+        <action_type_parent display_value="">43400a1587003300663ca1bb36cb0b4b</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="AutoCare Service Outcome Creation">ac498000f2a74815aeb8f6a671e9317d</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:53:44</sys_created_on>
+        <sys_id>ffaaf5df0efd4d4db8550abd15acafa4</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:03</sys_updated_on>
+        <ui_id>ffaaf5df-0efd-4d4d-b855-0abd15acafa4</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VXW0/bMBT+K1WeoyohpVzeJhDSpAESMF4Yshzbaa25TmY7vVD1v+84dtKsDaywIoH2mHP/jr9z7DwsA4knLDgNSC4pNzyXOgiDKRalFSpWYK5QIbD8UUZRQpfL7wXFhlEU90mpFJOmrxcacbpagR/lGmwX9290L7CCYgxTwekyIGMuKFgEpw+PYcApxDvOBlGE48PjIwiWRNFwmBAcp2kyJGmUHkYQQuCUCTA9a8PpgmgWRafsW1eAXFFbVBwGbG6YpAyqybDQLAwmWAKiXC0aiWKYXkuxFoy5NBAxsMZzzZ8gL+CIrGXGACFhTtt8It9HJ87OscG3RpXElMqbknHOCdOuN5RluBTmrC1zBteFReBcDE5F7Z2LciKvXFeCJkB9bCApNRTBCgvV1g7JAUd2O85nN3WRF1xWTfEgRU6waL6wMYqnpbHlLAMm2ATioAkuCi5HqFD5lFfOUMqkPxLw0c9EPoOcmo9kHxNbdx8ai/sXID+vxPdYcQviEsKA8yoMgDtnAmu9hgI9RL9KW4kD5iGgqguuBdaPKF6YL5BlynzNq7AZBWe2noI5ik8GR9FwgHBpACaKkGZqCv1FeWkAAdum/k4+/8b3Qdri+52veQOCZ3n1iSrdnyyv3HpXTuFZHu2N5cefieMexgcjORTEBTAEuSPUeamqVk4REaWuFApL7WK9YST+Pg06VwZVPFpPRCXDmmzzHvdM3nvagdvRy7v8pMXtW8jWu3MVdBRVb/KKDZtbvBZ6bid743ZysB9uLxuYTes6ulyPpj2X2v7J2uNNeyBXyyFedc3Oq3LGr815sNqezeRVw9mml9OcP8OyPc9wRlHGmaCIS8FltTnh5oM87zbcFI3B1edDbhLRjNMRM+vstRXNzQyLn116zzhUH1QF7132AUwAUkzDobRfivH2Koh32AKDF7fAMG5tgUs87900eTuL8ZsAhpWNqva2V8HXRup5Otjja+7D3nMxPDSfHaM4dNpPcRO+293mOrjN3x3oS45evMQOW/S9tqTrpYuNO6xJ7rnr1k/HS+3CKjZeagf/50vtQ/6NhM9dHnv+TXn8DYuVscuzDwAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=ffaaf5df0efd4d4db8550abd15acafa4"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=ac498000f2a74815aeb8f6a671e9317d"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=ac498000f2a74815aeb8f6a671e9317d^sys_idNOT IN897abba68e5940b28bbe545057eb4ff1,d23bb21f1a8e4fe39bc0008f732e37da"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <block display_value="">30b0148e83278f1037749ea6feaad3be</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="AutoCare Service Outcome Creation">ac498000f2a74815aeb8f6a671e9317d</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>2</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:53:44</sys_created_on>
+        <sys_id>897abba68e5940b28bbe545057eb4ff1</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:03</sys_updated_on>
+        <ui_id>897abba6-8e59-40b2-8bbe-545057eb4ff1</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1Vy27bMBD8lYJn26BsybF9CxwECJA2QBP00gbC8mUTpUhVpJKogv+9S0m2g8ZF0ubamzjkLmdGO1JLXB3KOvg7d+693liy+no/ItpGDJ9bogVZETIiFgqJT9xZoYN2FqEHMHXE2lYpAJUJNaZSiXEqUjFmiywbU2AiyYCDgnSydrUNu923mtKZpFgvtC8NNF/e2YZvtRGVHKiXUCHTICuyan/b6qQsIVNZQjM+m85nU0qnizRh8xlLpmIGMp1jQwNMGjy6fqb1hPzQlBHyodJ2M6yvh9LbPegqEalM6YjIpyCtkEhCgfFyRAqwAoKrGrIKVY1AJUHcWNMcTmy1Db39BTx5/VPGTpTGk0qiLi773cMyHzztYXUBAZBKzUNdDUf51mkufe+IkApqE9bPsf7ATdmp7EoCMLOvdqYu7KfeDHJosH+FiNQeScgyKo3cByHqduseP+9ZXmrbuTJsGsfBHFYQ0DtWh8inJdLIAhvlBZQlOpqXlXvQXTFyKSYbg4uJMu4RL43zOwEeiU/QWJhcIn7RwV+g0lHFR2yDxTgLPve80uVeW3c52Y2Ib/zagPdHjWhu/qOODHvFg7a8tyeWdI3O8eIHOcjYjVoSWV27jeZX1gdA2beNv4ojuFieAWMwX8hsmVI2XTAmszSj2ZlkqVIJGUZVUVDJkienRxVmJ8Yy74BjNF+mjLwekTfc+yIiH/rJ/zOjv0lL8kpaBuRNccmy/2l5d1oiTQZe87z7M2C7+MH6x7gMpl9qacTJETqVp/s40z2rw9vg2mPZXcSu9j+suNHgyMXUHaFHV32Pso/Y7hcUJ1e8+gYAAA==</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <block display_value="">30b0148e83278f1037749ea6feaad3c2</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="AutoCare Service Outcome Creation">ac498000f2a74815aeb8f6a671e9317d</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="End">d176605ea76103004f27b0d2187901c7</logic_definition>
+        <order>4</order>
+        <outputs_assigned/>
+        <parent_ui_id>897abba6-8e59-40b2-8bbe-545057eb4ff1</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 18:53:44</sys_created_on>
+        <sys_id>d23bb21f1a8e4fe39bc0008f732e37da</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:03</sys_updated_on>
+        <ui_id>d23bb21f-1a8e-4fe3-9bc0-008f732e37da</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/6tWyi8tKSgtKQ7JdywuzkzPU7KKjtVRyswDiUHYZYlFmYlJOalQbkpqcmZxZn5eCEjME0ldSmVeYm5mMrJQeX5RdlpOfjlCrBYAD1ouqHEAAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=ac498000f2a74815aeb8f6a671e9317d"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=ac498000f2a74815aeb8f6a671e9317d"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_ac498000f2a74815aeb8f6a671e9317d</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:50</sys_created_on>
+        <sys_id>1cb0148e83278f1037749ea6feaad34b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:12:50</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>changed_fields</element>
+        <help/>
+        <hint/>
+        <label>Changed Fields</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_ac498000f2a74815aeb8f6a671e9317d</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:50</sys_created_on>
+        <sys_id>60b0148e83278f1037749ea6feaad393</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:12:50</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_ac498000f2a74815aeb8f6a671e9317d</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:50</sys_created_on>
+        <sys_id>e4b0148e83278f1037749ea6feaad37b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:12:50</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_ac498000f2a74815aeb8f6a671e9317d"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_ac498000f2a74815aeb8f6a671e9317d"/>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>false</active>
+        <annotation/>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <authored_on_release_version>-1</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Creates a service outcome when a repair plan is approved, ready for the technician to complete.</description>
+        <flow_priority>MEDIUM</flow_priority>
+        <internal_name>autocare_service_outcome_creation</internal_name>
+        <label_cache>[{"name":"Updated_1.current.sys_id","label":"Trigger - Record Updated➛x_1947064_autoca_0_repair_plan Record➛Sys Id","type":"string","base_type":"string","usedInstances":{"ffaaf5df-0efd-4d4d-b855-0abd15acafa4":["conditions"]},"attributes":{}},{"name":"ffaaf5df-0efd-4d4d-b855-0abd15acafa4.Count","label":"ffaaf5df-0efd-4d4d-b855-0abd15acafa4➛Count","type":"integer","base_type":"integer","usedInstances":{"897abba6-8e59-40b2-8bbe-545057eb4ff1":["condition"]},"attributes":{}},{"name":"Updated_1.current","label":"Trigger - Record Updated➛x_1947064_autoca_0_repair_plan Record","type":"reference","base_type":"reference","usedInstances":{"9a3efe74-52fd-4556-9010-b799e4fea6ff":["values"]},"attributes":{}},{"name":"Updated_1.current.vehicle","label":"Trigger - Record Updated➛x_1947064_autoca_0_repair_plan Record➛Vehicle","type":"string","base_type":"string","usedInstances":{"9a3efe74-52fd-4556-9010-b799e4fea6ff":["values"]},"attributes":{}},{"name":"Updated_1.current.appointment","label":"Trigger - Record Updated➛x_1947064_autoca_0_repair_plan Record➛Appointment","type":"string","base_type":"string","usedInstances":{"9a3efe74-52fd-4556-9010-b799e4fea6ff":["values"]},"attributes":{}},{"name":"Updated_1.current.repair_description","label":"Trigger - Record Updated➛x_1947064_autoca_0_repair_plan Record➛Repair Description","type":"string","base_type":"string","usedInstances":{"9a3efe74-52fd-4556-9010-b799e4fea6ff":["values"]},"attributes":{}}]</label_cache>
+        <master>true</master>
+        <name>AutoCare Service Outcome Creation</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="AutoCare Service Outcome Creation">ac498000f2a74815aeb8f6a671e9317d</parent_flow>
+        <remote_trigger_id/>
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>draft</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:52</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>85b0148e83278f1037749ea6feaad3f8</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:05</sys_updated_on>
+        <type>flow</type>
+        <version>2</version>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=85b0148e83278f1037749ea6feaad3f8"/>
+    <sys_variable_value action="delete_multiple" query="document_key=85b0148e83278f1037749ea6feaad3f8"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=85b0148e83278f1037749ea6feaad3f8"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=85b0148e83278f1037749ea6feaad3f8^sys_idNOT IN85b0148e83278f1037749ea6feaad3f9"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>85b0148e83278f1037749ea6feaad3f8</id>
+        <name>AutoCare Service Outcome Creation</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:52</sys_created_on>
+        <sys_id>85b0148e83278f1037749ea6feaad3f9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:12:52</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=85b0148e83278f1037749ea6feaad3f9"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=85b0148e83278f1037749ea6feaad3f8^sys_idNOT IN01b0548e83278f1037749ea6feaad317,01b0548e83278f1037749ea6feaad322,c9b0148e83278f1037749ea6feaad3fa"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>child_label=FDChangeDetails,child_name=FDChangeDetails,child_type=object,child_type_label=Object,co_type_name=FDCollection,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,pwd2droppable=true,uiType=array.object,uiTypeLabel=Array.Object</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>changed_fields</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Changed Fields</label>
+        <mandatory>false</mandatory>
+        <max_length>4000</max_length>
+        <model display_value="AutoCare Service Outcome Creation">85b0148e83278f1037749ea6feaad3f8</model>
+        <model_id>85b0148e83278f1037749ea6feaad3f8</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_85b0148e83278f1037749ea6feaad3f8</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:52</sys_created_on>
+        <sys_id>01b0548e83278f1037749ea6feaad317</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:05</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=01b0548e83278f1037749ea6feaad317"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+        <model display_value="AutoCare Service Outcome Creation">85b0148e83278f1037749ea6feaad3f8</model>
+        <model_id>85b0148e83278f1037749ea6feaad3f8</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_85b0148e83278f1037749ea6feaad3f8</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:52</sys_created_on>
+        <sys_id>01b0548e83278f1037749ea6feaad322</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:12:52</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=01b0548e83278f1037749ea6feaad322"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,timeFromCreateToActivate=5000,uiType=document_id</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+        <model display_value="AutoCare Service Outcome Creation">85b0148e83278f1037749ea6feaad3f8</model>
+        <model_id>85b0148e83278f1037749ea6feaad3f8</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_85b0148e83278f1037749ea6feaad3f8</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:52</sys_created_on>
+        <sys_id>c9b0148e83278f1037749ea6feaad3fa</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:12:52</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=c9b0148e83278f1037749ea6feaad3fa"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=85b0148e83278f1037749ea6feaad3f8"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=85b0148e83278f1037749ea6feaad3f8"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=85b0148e83278f1037749ea6feaad3f8^sys_idNOT IN59b0548e83278f1037749ea6feaad396"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="AutoCare Service Outcome Creation">85b0148e83278f1037749ea6feaad3f8</flow>
+        <generation_source/>
+        <name>Updated</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:53</sys_created_on>
+        <sys_id>59b0548e83278f1037749ea6feaad396</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:12:53</sys_updated_on>
+        <trigger_definition display_value="Updated">bb695e60c31322002841b63b12d3aea5</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/+1Y227UMBD9lShPIC3SIhCIvnGrVImLRAs8FBR57cmuhdcO9mS3oeq/M85l102yNKVZCqJPbcaXOTNzju3Z0/MYrZzPwR5ph0xzOC7ckYgP4ngSKzYDRf+esJkC+pYawWqmTooMyIzenGi29GMCMtACNFZL+cJIDm+ko+/Tr5N4ybRgaGwRH6DNYRKn1ixPYJkphrRXypQjo7ECbHzwcDqdxOW+tRPacMVU7r/PkofPHj+dPnmcsBwNZ8k0sZAxaRPaSnsg0tF/xaeh8/lCKmFBVzgzZskvehTnnfhbkLAnDXUEhB/O0CdEbIILUlBbLDDxXqsimHLm5A8o1+cOkiCp9Yz0eGHWHyAFQszhUOrSXT2oKD61+WJIlZ3lCI5iubjYZOZQgqoL7LiVGT7nKFdNES4mQxjxIdfR5wXo6KMDG5Vl7tBjrqSARFVjw+nRBHoVP0pCBNDq4thcJ2tCllD+bOO9IU+XHsMI0BvurxxiTwr+VmrETKx8mX0evTbjfXHlGJyTxv9FlHreZUzFiivYch6nTfHK5axCRPG/qR36vEXea2psVbGj7cQGhV9wtGTzmgTpMSjgGNQkpZXB11tJywj0NvINDG10MgTKO6Mf7BfJzOAidN94fkH2S0kgvu2C426I5/fU3BaT23BkdTm2ln5r63U03KXhbufYIub/rOFUmTWR6OayZbrokNTvLTXxsoi4oe3PcERZkARgbk2uxS6/l2eMpUbGv/3a7XZGdE9AynKF929bfh4bHWeh8sI42voLxwaqcEukXrd3mtum6r2OXtdBR+Ur1N1cfiXWFiHpOOS5pQRgeTU0iY6w8TmaFL2l651uyQBC88C+VR3Qpb7h21YLDf6WDBrzQAX0lnWn7ztBVJl7abSQWL2Y2hpohtxeeo26NDwA0BCC0GLuvuTT6SPBssyaFfQckztmDaBLGHQPDOyJf2/8qDv336XHmml0CZqECZEEiDdH0tIIUK+C6tWcoHshy9HFF0FtSSObVnyfve1ozUrfq4ee5v7F4zvHEc9YoyExaW8bItOoTgCdPLMiwgUQCkV3L+1V4hjzsNfGl6kN5pWJaCCyfwTOON1I2dp3W5KqpC2pV8Zr/6iwuxtpOb+7DbbpO6lm3VycuZbfc0j4gul59d5p2HpIGgXGF1E1JaqmjKpW3vrJgI+5PazAFp2AvDHKM+EFMJ4vptascJ2Dh1TuBV+/7shA1NYVmW9N2s3N4tDSzHkRqLrDhZbAO+MDtb4l624M/4q4h2v5608VzdKVYhgAAA==</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>record_update</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=85b0148e83278f1037749ea6feaad3f8^sys_idNOT IN41b0548e83278f1037749ea6feaad361,81b0548e83278f1037749ea6feaad362,85b0548e83278f1037749ea6feaad35f,c9b0548e83278f1037749ea6feaad35d"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="Create Record">02f0b88cc3c632002841b63b12d3aeff</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="AutoCare Service Outcome Creation">85b0148e83278f1037749ea6feaad3f8</flow>
+        <generation_source/>
+        <order>5</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:53</sys_created_on>
+        <sys_id>41b0548e83278f1037749ea6feaad361</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:12:53</sys_updated_on>
+        <ui_id>9a3efe74-52fd-4556-9010-b799e4fea6ff</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VVTW8aMRD9K5HPaLUbKA3cqqSc2kRtWi5psIb1LFjyerf+IFDEf+94bciqDaoq9RKVm2fejN88zz4e9kxDjWzKHCwV8u4wYBtQPgS3vJiM3ubjEQfvmhJ4zi2ajSyRN96VTQcW0rYKdvO/qWnB0E0ODZvuWbmWShjUbPrwOGBSUJNxgfmbSTEuh8VweJnnl1ejYjkeLotLMQTEEbVQsERF0C+BOJ1fmsPt2hdjH/q1F7cx0RgR+OQDhluHWiARqUBZHLAatADXmB2bOuMpYBDEnVa7E2IttaOGLGC3Vv6ga6/ygKuQJisx5k5HnkSL4eoGHNxT59J5k6DluiHJbNREYAVeuet+LALuWicbHUu6MVN1o3ytb6Mk7NTg+EYU8ZZIYBvmDMzTGNX9unn6fGQ5k7qTJCUVvaY6ncA5I5feBT57hgprasRraFupV7w1zUZ2xcSlzlaKDlmlmie61MqVzqAMxDOSFbIZxW+68ByMDFN8pDZUfBgwu7PXCqx9noVE5N99YBInSzPwKEMoKY1s3Tu6YIOJ7mFwWvRut21vyQ22IA2n59DffJ4PxX7/tSVeKHiRld6QFO5wWGxwLUuFZyFZAhCUyDe0D0GQ8/AeiEpIlY41aXK+JDHtYamykhoUtw6ct7FU6iD/yqC1i/TJ8bD1MRubLN5/+v3T/Y+V+KMhCcwnZw2pWPYMaSZRCfvsSKeFO7oR1qSwQx4X8BdHSsmLeUomVyr+lSsV47z7vSJvisO9emvq/QudManHn/RqVcGPBwAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=41b0548e83278f1037749ea6feaad361"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent display_value="Log">0e0ae8c2531003003bf1d9109ec587c8</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot>5bc1bcc6531003003bf1d9109ec587d4</compiled_snapshot>
+        <display_text/>
+        <flow display_value="AutoCare Service Outcome Creation">85b0148e83278f1037749ea6feaad3f8</flow>
+        <generation_source/>
+        <order>6</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:53</sys_created_on>
+        <sys_id>81b0548e83278f1037749ea6feaad362</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:12:53</sys_updated_on>
+        <ui_id>33272a09-c97c-483b-bbce-5e3994bc54d3</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VUTY/aMBD9K5HPARHYdLvcVtCVKu2HVCR6WK3QxJmAJcdObQeWIv57x4mBaBe1Rd1bpVzm5dkzb/xmnndMQYlszKReLiSuUbKYrUHWHhOq0BTmwlYStvOAfm3RCgyddGjYeMf4SsjcoGLj55eYiZxoacaTjPNP6SgZDEb0ZUWS3ySDG+Tp5+v8mq6QkFG+MbsPec+U4raVh/hKC44hvg/HJgdQm9yXMYgZvjpUOVL+AqTFmJWgcnDabI+IQciflDwBK6Ec3cY8+dWKn5TvauB5BZIiju2/Y7gI7WjhYgoOZs7U3NUmUNtiLfVid5TY60WPWmHU63X62yl9H5+4ocFvXiEwky7zOxgl1LJD3hByIg+75C/GaNOhYogDd7Snl8uxgFq6yeUKkr9WMLxEwegCBVdeQdv8p8oJTW5kifcMZPLwNFrWpXpsfcaOeudvDN+i07O+ry1ZACtvM++bYKJittKbbweP3AnVVBR+Ss1BHiNwzoisdr6/O4YSS7poUUJVUSMWldFr0RymYsv+UlLQL6TeUFIrlqoP3Evrk6uhf0f4tIHnYISX+UDX0OF9zOzWTiRYexJLFl78qH0lrfSgYdE0qjnCjajcLSVYYyjXt78zliVaC0vsvMFt7fQEDI6jGZo1tT7StaPKMeI0aQ7zqNAmoqpIFwUGKxAmor6q95vln+760z4ajn63jzDt7KOHo8qz0sNOsvSMjXO7O2l2AA9j8WE7aZimH7OUzo35+8G5aG7+v7F4+QW5AWqwOgcAAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=81b0548e83278f1037749ea6feaad362"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent display_value="Log">0e0ae8c2531003003bf1d9109ec587c8</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot>5bc1bcc6531003003bf1d9109ec587d4</compiled_snapshot>
+        <display_text/>
+        <flow display_value="AutoCare Service Outcome Creation">85b0148e83278f1037749ea6feaad3f8</flow>
+        <generation_source/>
+        <order>3</order>
+        <parent_ui_id>897abba6-8e59-40b2-8bbe-545057eb4ff1</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:53</sys_created_on>
+        <sys_id>85b0548e83278f1037749ea6feaad35f</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:12:53</sys_updated_on>
+        <ui_id>4e8afd8b-3407-47bc-8a51-7d878d3bcc82</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VU22obMRD9FaFn23jtuGn8FuwGCrlADe5DCGasnbVFtdJW0vpSE+hH9Av7JR3tyvaSmLaG9KmwLzp7pJlzdDSPO64hRz7kyixmCleoeIuvQJUBkzoztEylKxRspxH9WKMFWNrp0fLhjoulVKlFzYePTy0uU6IN5iKZC/Fu0E+63T598yxJr5LuFYrB+8v0ko5QMKd6Q34b655oxW+LAImlkQLj+jZuG+1BY9PQRrfFceNRp0j1M1AOWzwHnYI3dntALEL6oNURWErt6TQeyBsnv1G9i27gZUiKBNb/DstZtKOGszF4mHhbCl/aSK2bdeTF7iCx3Wb3RiNrtxv+Nlp/bh250eAXtxCZSZP5GayWetEgrwk5kntN8gdrjW1QMa4jt/9MN5diBqXyo/MVJH+toHeOgv4ZCi6Cgtr8h8JLQ2nkScgMzNX+aowqc31f54wf9E5fBL5GxydzXzqKABYhZiE3MUTZZGnWn/YZuZG66ij+VEaAOqzAeyvnpQ/+7jgqzOmgWQ5FQUbMCmtWstpMzeadhaJFJ1NmTUWdXOgOiCCtQ6mGzg3h4wqegpVB5h0dQ5ufW9xt3UiBc0exFOHZ1zJ0UkuPGmaVUdUWYWXhr6nACmO7wf7Gs8zROVhg4w6uS29GYHHIJmhXZD0zpafOkYEKT23LcCOddywzlvmldMxiAdIyslazn99/MPdFVtKZIH51ba9Gzr8p8qcJ1uv/boLhoDHB7g6+nDQrTjFHF19lvTnFJntw/5DebIr1BoO3GWOnBsPrp3bWS/v/HtLTL0ktZd1sBwAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=85b0548e83278f1037749ea6feaad35f"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Records">43400a1587003300663ca1bb36cb0b4b</action_type>
+        <action_type_parent display_value="Look Up Records">d1c56ec50b30030085c083eb37673a50</action_type_parent>
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <comment/>
+        <compiled_snapshot>43400a1587003300663ca1bb36cb0b4b</compiled_snapshot>
+        <display_text/>
+        <flow display_value="AutoCare Service Outcome Creation">85b0148e83278f1037749ea6feaad3f8</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:53</sys_created_on>
+        <sys_id>c9b0548e83278f1037749ea6feaad35d</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:12:53</sys_updated_on>
+        <ui_id>ffaaf5df-0efd-4d4d-b855-0abd15acafa4</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VXW0/bMBT+K1WeoyohpVzeJhDSpAESMF4Yshzbaa25TmY7vVD1v+84dtKsDaywIoH2mHP/jr9z7DwsA4knLDgNSC4pNzyXOgiDKRalFSpWYK5QIbD8UUZRQpfL7wXFhlEU90mpFJOmrxcacbpagR/lGmwX9290L7CCYgxTwekyIGMuKFgEpw+PYcApxDvOBlGE48PjIwiWRNFwmBAcp2kyJGmUHkYQQuCUCTA9a8PpgmgWRafsW1eAXFFbVBwGbG6YpAyqybDQLAwmWAKiXC0aiWKYXkuxFoy5NBAxsMZzzZ8gL+CIrGXGACFhTtt8It9HJ87OscG3RpXElMqbknHOCdOuN5RluBTmrC1zBteFReBcDE5F7Z2LciKvXFeCJkB9bCApNRTBCgvV1g7JAUd2O85nN3WRF1xWTfEgRU6waL6wMYqnpbHlLAMm2ATioAkuCi5HqFD5lFfOUMqkPxLw0c9EPoOcmo9kHxNbdx8ai/sXID+vxPdYcQviEsKA8yoMgDtnAmu9hgI9RL9KW4kD5iGgqguuBdaPKF6YL5BlynzNq7AZBWe2noI5ik8GR9FwgHBpACaKkGZqCv1FeWkAAdum/k4+/8b3Qdri+52veQOCZ3n1iSrdnyyv3HpXTuFZHu2N5cefieMexgcjORTEBTAEuSPUeamqVk4REaWuFApL7WK9YST+Pg06VwZVPFpPRCXDmmzzHvdM3nvagdvRy7v8pMXtW8jWu3MVdBRVb/KKDZtbvBZ6bid743ZysB9uLxuYTes6ulyPpj2X2v7J2uNNeyBXyyFedc3Oq3LGr815sNqezeRVw9mml9OcP8OyPc9wRlHGmaCIS8FltTnh5oM87zbcFI3B1edDbhLRjNMRM+vstRXNzQyLn116zzhUH1QF7132AUwAUkzDobRfivH2Koh32AKDF7fAMG5tgUs87900eTuL8ZsAhpWNqva2V8HXRup5Otjja+7D3nMxPDSfHaM4dNpPcRO+293mOrjN3x3oS45evMQOW/S9tqTrpYuNO6xJ7rnr1k/HS+3CKjZeagf/50vtQ/6NhM9dHnv+TXn8DYuVscuzDwAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=c9b0548e83278f1037749ea6feaad35d"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=85b0148e83278f1037749ea6feaad3f8"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=85b0148e83278f1037749ea6feaad3f8^sys_idNOT IN41b0548e83278f1037749ea6feaad35c,89b0548e83278f1037749ea6feaad359"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <block display_value="">30b0148e83278f1037749ea6feaad3c2</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="AutoCare Service Outcome Creation">85b0148e83278f1037749ea6feaad3f8</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="End">d176605ea76103004f27b0d2187901c7</logic_definition>
+        <order>4</order>
+        <outputs_assigned/>
+        <parent_ui_id>897abba6-8e59-40b2-8bbe-545057eb4ff1</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:53</sys_created_on>
+        <sys_id>41b0548e83278f1037749ea6feaad35c</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:05</sys_updated_on>
+        <ui_id>d23bb21f-1a8e-4fe3-9bc0-008f732e37da</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/6tWyi8tKSgtKQ7JdywuzkzPU7KKjtVRyswDiUHYZYlFmYlJOalQbkpqcmZxZn5eCEjME0ldSmVeYm5mMrJQeX5RdlpOfjlCrBYAD1ouqHEAAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=5000</attributes>
+        <block display_value="">30b0148e83278f1037749ea6feaad3be</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="AutoCare Service Outcome Creation">85b0148e83278f1037749ea6feaad3f8</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>2</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:53</sys_created_on>
+        <sys_id>89b0548e83278f1037749ea6feaad359</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:05</sys_updated_on>
+        <ui_id>897abba6-8e59-40b2-8bbe-545057eb4ff1</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1Vy27bMBD8lYJn26BsybF9CxwECJA2QBP00gbC8mUTpUhVpJKogv+9S0m2g8ZF0ubamzjkLmdGO1JLXB3KOvg7d+693liy+no/ItpGDJ9bogVZETIiFgqJT9xZoYN2FqEHMHXE2lYpAJUJNaZSiXEqUjFmiywbU2AiyYCDgnSydrUNu923mtKZpFgvtC8NNF/e2YZvtRGVHKiXUCHTICuyan/b6qQsIVNZQjM+m85nU0qnizRh8xlLpmIGMp1jQwNMGjy6fqb1hPzQlBHyodJ2M6yvh9LbPegqEalM6YjIpyCtkEhCgfFyRAqwAoKrGrIKVY1AJUHcWNMcTmy1Db39BTx5/VPGTpTGk0qiLi773cMyHzztYXUBAZBKzUNdDUf51mkufe+IkApqE9bPsf7ATdmp7EoCMLOvdqYu7KfeDHJosH+FiNQeScgyKo3cByHqduseP+9ZXmrbuTJsGsfBHFYQ0DtWh8inJdLIAhvlBZQlOpqXlXvQXTFyKSYbg4uJMu4RL43zOwEeiU/QWJhcIn7RwV+g0lHFR2yDxTgLPve80uVeW3c52Y2Ib/zagPdHjWhu/qOODHvFg7a8tyeWdI3O8eIHOcjYjVoSWV27jeZX1gdA2beNv4ojuFieAWMwX8hsmVI2XTAmszSj2ZlkqVIJGUZVUVDJkienRxVmJ8Yy74BjNF+mjLwekTfc+yIiH/rJ/zOjv0lL8kpaBuRNccmy/2l5d1oiTQZe87z7M2C7+MH6x7gMpl9qacTJETqVp/s40z2rw9vg2mPZXcSu9j+suNHgyMXUHaFHV32Pso/Y7hcUJ1e8+gYAAA==</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=85b0148e83278f1037749ea6feaad3f8"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=85b0148e83278f1037749ea6feaad3f8"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_85b0148e83278f1037749ea6feaad3f8</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:52</sys_created_on>
+        <sys_id>41b0548e83278f1037749ea6feaad335</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:12:52</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_85b0148e83278f1037749ea6feaad3f8</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:52</sys_created_on>
+        <sys_id>81b0548e83278f1037749ea6feaad313</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:12:52</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>changed_fields</element>
+        <help/>
+        <hint/>
+        <label>Changed Fields</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_85b0148e83278f1037749ea6feaad3f8</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:52</sys_created_on>
+        <sys_id>81b0548e83278f1037749ea6feaad31e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:12:52</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_85b0148e83278f1037749ea6feaad3f8"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_85b0148e83278f1037749ea6feaad3f8"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>ac498000f2a74815aeb8f6a671e9317d</sys_id>
+        <latest_snapshot>85b0148e83278f1037749ea6feaad3f8</latest_snapshot>
+        <compiler_build/>
+        <version_record/>
+    </sys_hub_flow>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=ac498000f2a74815aeb8f6a671e9317d^sys_idNOT IN11b0548e83278f1037749ea6feaad3b6"/>
+    <sys_flow_trigger_plan action="INSERT_OR_UPDATE">
+        <binding_strategy>com.snc.process_flow.engine.binding.OncePerUniqueChange</binding_strategy>
+        <plan/>
+        <plan_id>ac498000f2a74815aeb8f6a671e9317d</plan_id>
+        <snapshot>85b0148e83278f1037749ea6feaad3f8</snapshot>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 19:12:53</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>11b0548e83278f1037749ea6feaad3b6</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 19:38:06</sys_updated_on>
+        <trigger display_value="">26765c8a83678f1037749ea6feaad337</trigger>
+    </sys_flow_trigger_plan>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=ac498000f2a74815aeb8f6a671e9317d"/>
+</record_update>

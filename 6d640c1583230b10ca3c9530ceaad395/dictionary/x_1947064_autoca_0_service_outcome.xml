@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="2528409d83230b10ca3c9530ceaad3d5" label="Service Outcome" max_length="40" name="x_1947064_autoca_0_service_outcome" type="collection">
-        <element attributes="edge_encryption_enabled=true" label="Description" max_length="40" name="description" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Outcome Type" max_length="40" name="outcome_type" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Parts Replaced" max_length="40" name="parts_replaced" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Follow-up Needed" max_length="40" name="follow_up_needed" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Outcome Number" max_length="40" name="outcome_number" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Outcome Date" max_length="40" name="outcome_date" type="glide_date"/>
-        <element label="Repair Plan" name="repair_plan" reference="x_1947064_autoca_0_repair_plan" type="reference"/>
-        <element attributes="edge_encryption_enabled=true" label="Customer Feedback" max_length="40" name="customer_feedback" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Appointment" max_length="40" name="appointment" type="string"/>
-        <element label="Vehicle" name="vehicle" reference="x_1947064_autoca_0_vehicle" type="reference"/>
-        <element attributes="edge_encryption_enabled=true" label="Final Status" max_length="40" name="final_status" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Description" max_length="40" name="description" type="string"/>
+        <element label="Service Summary" max_length="4000" name="service_summary" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Outcome Type" max_length="40" name="outcome_type" type="string"/>
         <element label="Quality Rating" max_length="40" name="quality_rating" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="Outcome Date" max_length="40" name="outcome_date" type="glide_date"/>
+        <element label="Vehicle" max_length="32" name="vehicle" reference="x_1947064_autoca_0_vehicle" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Parts Replaced" max_length="40" name="parts_replaced" type="string"/>
+        <element label="Repair Plan" max_length="32" name="repair_plan" reference="x_1947064_autoca_0_repair_plan" type="reference"/>
+        <element label="Final Status" max_length="40" name="final_status" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Follow Up Needed" max_length="40" name="follow_up_needed" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Customer Feedback" max_length="40" name="customer_feedback" type="string"/>
         <index name="index">
             <element name="repair_plan"/>
         </index>

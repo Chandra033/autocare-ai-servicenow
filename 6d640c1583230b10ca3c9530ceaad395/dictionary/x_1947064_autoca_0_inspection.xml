@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="80b74c1d83230b10ca3c9530ceaad389" label="Inspection" max_length="40" name="x_1947064_autoca_0_inspection" type="collection">
         <element attributes="edge_encryption_enabled=true" label="Inspection Number" max_length="40" name="inspection_number" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Finding" max_length="40" name="finding" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Recommendation" max_length="43" name="recommendation" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Vehicle" max_length="40" name="vehicle" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Appointment" max_length="40" name="appointment" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Technician Notes" max_length="40" name="technician_notes" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Finding" max_length="40" name="finding" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Status" max_length="40" name="status" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Inspection Date" max_length="40" name="inspection_date" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true" label="Recommendation" max_length="43" name="recommendation" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Technician" max_length="40" name="technician" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Severity" max_length="40" name="severity" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Technician Notes" max_length="40" name="technician_notes" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Inspection Date" max_length="40" name="inspection_date" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true" label="Vehicle" max_length="40" name="vehicle" type="string"/>
     </element>
 </database>
