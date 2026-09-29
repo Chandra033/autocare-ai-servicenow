@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sysevent_email_action">
+    <sysevent_email_action action="INSERT_OR_UPDATE">
+        <action_insert>true</action_insert>
+        <action_update>true</action_update>
+        <active>true</active>
+        <advanced_condition/>
+        <affected_field_on_event/>
+        <category display_value="Uncategorized" name="Uncategorized">c97d83137f4432005f58108c3ffa917a</category>
+        <collection>x_1947064_autoca_0_repair_plan</collection>
+        <condition table="x_1947064_autoca_0_repair_plan">owner_approval=pending^owner_approvalVALCHANGES<item endquery="false" field="owner_approval" goto="false" newquery="false" operator="=" or="false" value="pending"/>
+            <item endquery="false" field="owner_approval" goto="false" newquery="false" operator="VALCHANGES" or="false" value=""/>
+        </condition>
+        <content_type>text/html</content_type>
+        <default_digest>false</default_digest>
+        <default_interval/>
+        <description>Notifies the vehicle owner when a repair plan requires their approval.</description>
+        <digest_from/>
+        <digest_html/>
+        <digest_reply_to/>
+        <digest_separator_html><![CDATA[<p>&nbsp;</p>
+<hr>
+<p>&nbsp;</p>]]></digest_separator_html>
+        <digest_separator_text><![CDATA[--------------------------------------------------------------------------------
+]]></digest_separator_text>
+        <digest_subject/>
+        <digest_template/>
+        <digest_text/>
+        <digest_type>single</digest_type>
+        <digestable>false</digestable>
+        <enable_dynamic_translation>false</enable_dynamic_translation>
+        <event_name/>
+        <event_parm_1>false</event_parm_1>
+        <event_parm_2>false</event_parm_2>
+        <exclude_delegates>false</exclude_delegates>
+        <force_delivery>false</force_delivery>
+        <from/>
+        <generation_type>engine</generation_type>
+        <importance/>
+        <include_attachments>false</include_attachments>
+        <item>event.parm1</item>
+        <item_table/>
+        <mandatory>false</mandatory>
+        <message/>
+        <message_html><![CDATA[<div>
+  <h2>Repair Plan Awaiting Your Approval</h2>
+  <p>Repair Plan <strong>${repair_plan_number}</strong> requires your review and approval.</p>
+  <table style="border-collapse: collapse; width: 100%; max-width: 600px;">
+    <tr><td style="padding: 8px; font-weight: bold;">Vehicle:</td><td style="padding: 8px;">${vehicle}</td></tr>
+    <tr><td style="padding: 8px; font-weight: bold;">Repair Description:</td><td style="padding: 8px;">${repair_description}</td></tr>
+    <tr><td style="padding: 8px; font-weight: bold;">Estimated Cost:</td><td style="padding: 8px;">${estimated_cost}</td></tr>
+    <tr><td style="padding: 8px; font-weight: bold;">Estimated Time (hours):</td><td style="padding: 8px;">${estimated_time_hours}</td></tr>
+    <tr><td style="padding: 8px; font-weight: bold;">Reason / Evidence:</td><td style="padding: 8px;">${reason_evidence}</td></tr>
+  </table>
+  <p>Please review the details above and approve or reject this repair plan at your earliest convenience.</p>
+</div>]]></message_html>
+        <message_list/>
+        <message_text/>
+        <name>AutoCare AI - Repair Plan Awaiting Appro</name>
+        <omit_watermark>false</omit_watermark>
+        <order>100</order>
+        <push_message_only>false</push_message_only>
+        <recipient_fields/>
+        <recipient_groups/>
+        <recipient_users/>
+        <reply_to/>
+        <send_self>true</send_self>
+        <sms_alternate/>
+        <style/>
+        <subject>AutoCare AI: Repair Plan ${repair_plan_number} Awaiting Your Approval</subject>
+        <subscribable>true</subscribable>
+        <sys_class_name>sysevent_email_action</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-29 09:39:57</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>f705c31314e54d21bcacb22c68d8c5c3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>AutoCare AI - Repair Plan Awaiting Appro</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name>sysevent_email_action_f705c31314e54d21bcacb22c68d8c5c3</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-29 09:39:57</sys_updated_on>
+        <sys_version>2</sys_version>
+        <template/>
+        <type>email</type>
+        <weight>0</weight>
+    </sysevent_email_action>
+</record_update>
