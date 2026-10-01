@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="2c2d13fef36f47100c460e554058b349" extends="sys_import_set_row" label="Imp Tmpl X 1947064 Autoca 0 Inspection" max_length="40" name="u_imp_tmpl_x_1947064_autoca_0_inspection" type="collection">
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Appointment" label="Appointment" max_length="40" name="u_appointment" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Inspection Date" label="Inspection Date" max_length="40" name="u_inspection_date" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Recommendation" label="Recommendation" max_length="43" name="u_recommendation" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Status" label="Status" max_length="40" name="u_status" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Finding" label="Finding" max_length="40" name="u_finding" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Technician" label="Technician" max_length="40" name="u_technician" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Severity" label="Severity" max_length="40" name="u_severity" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Vehicle" label="Vehicle" max_length="40" name="u_vehicle" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Technician Notes" label="Technician Notes" max_length="40" name="u_technician_notes" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Inspection Number" label="Inspection Number" max_length="40" name="u_inspection_number" type="string"/>
+    </element>
+</database>

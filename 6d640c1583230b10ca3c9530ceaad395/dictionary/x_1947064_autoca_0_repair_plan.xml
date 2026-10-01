@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="c3d7045d83230b10ca3c9530ceaad3ed" label="Repair Plan" max_length="40" name="x_1947064_autoca_0_repair_plan" type="collection">
-        <element label="Status" max_length="40" name="status" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Repair Description" max_length="40" name="repair_description" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Reason / Evidence" max_length="40" name="reason_evidence" type="string"/>
-        <element label="Estimated Cost" max_length="40" name="estimated_cost" type="integer"/>
-        <element attributes="edge_encryption_enabled=true" label="Repair Plan Number" max_length="40" name="repair_plan_number" type="string"/>
         <element label="Approval Date" max_length="40" name="approval_date" type="glide_date_time"/>
-        <element attributes="edge_encryption_enabled=true" label="Vehicle" max_length="40" name="vehicle" type="string"/>
-        <element label="Estimated Time (Hours)" max_length="38" name="estimated_time_hours" type="decimal"/>
-        <element attributes="edge_encryption_enabled=true" label="Appointment" max_length="40" name="appointment" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Inspection" max_length="40" name="inspection" type="string"/>
+        <element label="Appointment Ref" max_length="32" name="appointment_ref" reference="x_1947064_autoca_0_appointment" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Vehicle" max_length="40" name="vehicle" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Classification" max_length="40" name="classification" type="string"/>
         <element label="Owner Approval" max_length="40" name="owner_approval" type="string"/>
+        <element label="Status" max_length="40" name="status" type="string"/>
+        <element label="Estimated Cost" max_length="40" name="estimated_cost" type="integer"/>
+        <element label="Estimated Time (Hours)" max_length="38" name="estimated_time_hours" type="decimal"/>
+        <element attributes="edge_encryption_enabled=true" label="Appointment" max_length="40" name="appointment" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Repair Description" max_length="40" name="repair_description" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Repair Plan Number" max_length="40" name="repair_plan_number" type="string"/>
+        <element label="Vehicle Ref" max_length="32" name="vehicle_ref" reference="x_1947064_autoca_0_vehicle" type="reference"/>
+        <element label="Inspection Ref" max_length="32" name="inspection_ref" reference="x_1947064_autoca_0_inspection" type="reference"/>
+        <index name="index">
+            <element name="appointment_ref"/>
+        </index>
+        <index name="index2">
+            <element name="inspection_ref"/>
+        </index>
+        <index name="index3">
+            <element name="vehicle_ref"/>
+        </index>
     </element>
 </database>

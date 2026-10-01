@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_dictionary">
+  <sys_dictionary action="DELETE" apply_defaults="true" element="color" table="x_1947064_autoca_0_vehicle">
+    <sys_id>74e205b6f3ab07100c460e554058b362</sys_id>
+    <sys_scope display_value="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+    <sys_update_name>sys_dictionary_x_1947064_autoca_0_vehicle_color</sys_update_name>
+    <active>true</active>
+    <array>false</array>
+    <attributes/>
+    <audit>false</audit>
+    <calculation/>
+    <choice/>
+    <choice_field/>
+    <choice_table/>
+    <column_label>Color</column_label>
+    <default_value/>
+    <dependent/>
+    <dependent_on_field/>
+    <display>false</display>
+    <dynamic_creation/>
+    <dynamic_creation_script/>
+    <dynamic_ref_qual/>
+    <element>color</element>
+    <element_reference>false</element_reference>
+    <formula/>
+    <function_definition/>
+    <function_field>false</function_field>
+    <internal_type>string</internal_type>
+    <mandatory>false</mandatory>
+    <max_length>40</max_length>
+    <name>x_1947064_autoca_0_vehicle</name>
+    <primary>false</primary>
+    <read_only>false</read_only>
+    <read_only_option/>
+    <reference/>
+    <reference_cascade_rule/>
+    <reference_floats/>
+    <reference_key/>
+    <reference_qual/>
+    <spell_check>false</spell_check>
+    <table_reference>false</table_reference>
+    <text_index>false</text_index>
+    <unique>false</unique>
+    <use_dependent_field>false</use_dependent_field>
+    <use_reference_qualifier>simple</use_reference_qualifier>
+    <virtual/>
+    <virtual_type>script</virtual_type>
+    <widget/>
+    <xml_view>false</xml_view>
+  </sys_dictionary>
+<sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</application>
+        <file_path/>
+        <instance_id>d584edeeeb11265056eafddacad0cd20</instance_id>
+        <instance_name>dev347008</instance_name>
+        <name>sys_dictionary_x_1947064_autoca_0_vehicle_color</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_dictionary">
+  <sys_dictionary action="INSERT_OR_UPDATE" apply_defaults="true" element="color" table="x_1947064_autoca_0_vehicle">
+    <sys_id>74e205b6f3ab07100c460e554058b362</sys_id>
+    <sys_scope display_value="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+    <sys_update_name>sys_dictionary_x_1947064_autoca_0_vehicle_color</sys_update_name>
+    <active>true</active>
+    <array>false</array>
+    <attributes/>
+    <audit>false</audit>
+    <calculation/>
+    <choice/>
+    <choice_field/>
+    <choice_table/>
+    <column_label>Color</column_label>
+    <default_value/>
+    <dependent/>
+    <dependent_on_field/>
+    <display>false</display>
+    <dynamic_creation/>
+    <dynamic_creation_script/>
+    <dynamic_ref_qual/>
+    <element>color</element>
+    <element_reference>false</element_reference>
+    <formula/>
+    <function_definition/>
+    <function_field>false</function_field>
+    <internal_type>string</internal_type>
+    <mandatory>false</mandatory>
+    <max_length>40</max_length>
+    <name>x_1947064_autoca_0_vehicle</name>
+    <primary>false</primary>
+    <read_only>false</read_only>
+    <read_only_option/>
+    <reference/>
+    <reference_cascade_rule/>
+    <reference_floats/>
+    <reference_key/>
+    <reference_qual/>
+    <spell_check>false</spell_check>
+    <table_reference>false</table_reference>
+    <text_index>false</text_index>
+    <unique>false</unique>
+    <use_dependent_field>false</use_dependent_field>
+    <use_reference_qualifier>simple</use_reference_qualifier>
+    <virtual/>
+    <virtual_type>script</virtual_type>
+    <widget/>
+    <xml_view>false</xml_view>
+  </sys_dictionary>
+</record_update>]]></payload>
+        <payload_hash>-672849228</payload_hash>
+        <record_name>Vehicle.Color</record_name>
+        <reverted_from/>
+        <source>9803cf1ff3ab4b100c460e554058b359</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-01 05:24:26</sys_created_on>
+        <sys_id>a603c35ff3ab4b100c460e554058b38d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1a0f5ebceb70000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 05:24:26</sys_updated_on>
+        <type>Dictionary</type>
+        <update_guid>9e03c35fb2ab4b107b891cb21cad318b</update_guid>
+        <update_guid_history>9e03c35fb2ab4b107b891cb21cad318b:-672849228,ab13453afbab0710a6de8aa42749d209:0,e313053a78ab0710b9056143049afcc5:-377994770</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-01 07:54:23</sys_created_on>
+        <sys_db_object display_value="" name="sys_dictionary">sys_dictionary</sys_db_object>
+        <sys_id>403259bd4b5241049157b466551fa110</sys_id>
+        <sys_metadata>74e205b6f3ab07100c460e554058b362</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Color</sys_name>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_parent display_value="">8af5c41983230b10ca3c9530ceaad3c2</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_scope_delete display_value="">5939354a40604db1bb405bd64d784c49</sys_scope_delete>
+        <sys_update_name>sys_dictionary_x_1947064_autoca_0_vehicle_color</sys_update_name>
+        <sys_update_version display_value="sys_dictionary_x_1947064_autoca_0_vehicle_color">a603c35ff3ab4b100c460e554058b38d</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 07:54:23</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

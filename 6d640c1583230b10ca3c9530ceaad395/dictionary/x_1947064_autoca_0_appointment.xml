@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="8f77041d83230b10ca3c9530ceaad38c" label="Appointment" max_length="40" name="x_1947064_autoca_0_appointment" type="collection">
-        <element attributes="edge_encryption_enabled=true" label="Assigned Technician" max_length="40" name="assigned_technician" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Preferred Time" max_length="40" name="preferred_time" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Customer Contact" max_length="40" name="customer_contact" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Service Type" max_length="40" name="service_type" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Notes" max_length="40" name="notes" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Appointment Number" max_length="40" name="appointment_number" type="string"/>
-        <element label="Vehicle" max_length="32" name="vehicle" reference="x_1947064_autoca_0_vehicle" type="reference"/>
-        <element attributes="edge_encryption_enabled=true" label="Owner" max_length="40" name="owner" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Estimated Duration" max_length="40" name="estimated_duration" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Preferred Date" max_length="40" name="preferred_date" type="glide_date"/>
-        <element attributes="edge_encryption_enabled=true" label="Appointment Date" max_length="40" name="appointment_date" type="string"/>
-        <element default="pending" label="Status" max_length="40" name="status" type="string"/>
+        <element label="Notes" max_length="40" name="notes" type="string"/>
+        <element label="Estimated Duration" max_length="40" name="estimated_duration" type="string"/>
         <element label="Recommendation" max_length="32" name="recommendation" reference="x_1947064_autoca_0_reccommendation" type="reference"/>
+        <element label="Vehicle" max_length="32" name="vehicle" reference="x_1947064_autoca_0_vehicle" type="reference"/>
+        <element label="Appointment Number" max_length="40" name="appointment_number" type="string"/>
+        <element label="Preferred Date" max_length="40" name="preferred_date" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true" label="Assigned Technician" max_length="32" name="assigned_technician" reference="sys_user" type="reference"/>
+        <element label="Appointment Date" max_length="40" name="appointment_date" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true" label="Customer Contact" max_length="32" name="customer_contact" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Owner" max_length="32" name="owner" reference="sys_user" type="reference"/>
+        <element label="Preferred Time" max_length="40" name="preferred_time" type="string"/>
+        <element label="Status" max_length="40" name="status" type="string"/>
+        <element label="Service Type" max_length="40" name="service_type" type="string"/>
         <index name="index">
             <element name="recommendation"/>
         </index>

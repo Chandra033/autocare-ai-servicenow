@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="46c8a3dbf3238b100c460e554058b34d" extends="sys_import_set_row" label="Imp Tmpl X 1947064 Autoca 0 User  Sys User" max_length="40" name="u_imp_tmpl_x_1947064_autoca_0_user__sys_user_" type="collection">
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=User ID" label="User ID" max_length="40" name="u_user_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=User Name" label="User Name" max_length="40" name="u_user_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Active" label="Active" max_length="40" name="u_active" type="string"/>
+    </element>
+</database>

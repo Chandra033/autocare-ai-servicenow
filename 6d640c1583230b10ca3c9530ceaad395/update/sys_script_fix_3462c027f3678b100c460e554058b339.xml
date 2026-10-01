@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_fix">
+    <sys_script_fix action="INSERT_OR_UPDATE">
+        <before>false</before>
+        <description>Prepare existing Appointment owner and assigned technician values for conversion from String to User Reference.</description>
+        <name>Prepare Appointment User References</name>
+        <record_for_rollback>false</record_for_rollback>
+        <script><![CDATA[(function() {
+
+    var total = 0;
+    var ownerUpdated = 0;
+    var technicianUpdated = 0;
+    var ownerUnmatched = 0;
+    var technicianUnmatched = 0;
+
+    var gr = new GlideRecord('x_1947064_autoca_0_appointment');
+    gr.query();
+
+    while (gr.next()) {
+
+        total++;
+
+        // -----------------------------
+        // OWNER
+        // -----------------------------
+        var ownerName = gr.getValue('owner');
+
+        if (ownerName) {
+
+            var ownerUser = new GlideRecord('sys_user');
+            ownerUser.addQuery('name', ownerName);
+            ownerUser.setLimit(1);
+            ownerUser.query();
+
+            if (ownerUser.next()) {
+                gr.setValue('owner', ownerUser.getUniqueValue());
+                ownerUpdated++;
+            } else {
+                ownerUnmatched++;
+                gs.info('OWNER NOT FOUND: ' + ownerName);
+            }
+        }
+
+        // -----------------------------
+        // ASSIGNED TECHNICIAN
+        // -----------------------------
+        var technicianName = gr.getValue('assigned_technician');
+
+        if (technicianName) {
+
+            var technicianUser = new GlideRecord('sys_user');
+            technicianUser.addQuery('name', technicianName);
+            technicianUser.setLimit(1);
+            technicianUser.query();
+
+            if (technicianUser.next()) {
+                gr.setValue(
+                    'assigned_technician',
+                    technicianUser.getUniqueValue()
+                );
+                technicianUpdated++;
+            } else {
+                technicianUnmatched++;
+                gs.info(
+                    'TECHNICIAN NOT FOUND: ' +
+                    technicianName
+                );
+            }
+        }
+
+        gr.update();
+    }
+
+    gs.info('======================================');
+    gs.info('APPOINTMENT USER REFERENCE PREPARATION');
+    gs.info('======================================');
+    gs.info('TOTAL APPOINTMENTS = ' + total);
+    gs.info('OWNER UPDATED = ' + ownerUpdated);
+    gs.info('OWNER UNMATCHED = ' + ownerUnmatched);
+    gs.info('TECHNICIAN UPDATED = ' + technicianUpdated);
+    gs.info('TECHNICIAN UNMATCHED = ' + technicianUnmatched);
+    gs.info('======================================');
+
+})();]]></script>
+        <sys_class_name>sys_script_fix</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-01 10:02:34</sys_created_on>
+        <sys_id>3462c027f3678b100c460e554058b339</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Prepare Appointment User References</sys_name>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name>sys_script_fix_3462c027f3678b100c460e554058b339</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 10:02:34</sys_updated_on>
+        <unloadable>false</unloadable>
+    </sys_script_fix>
+</record_update>

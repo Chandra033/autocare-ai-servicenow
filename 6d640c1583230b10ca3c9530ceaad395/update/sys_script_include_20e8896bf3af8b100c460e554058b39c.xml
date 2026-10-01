@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_1947064_autoca_0.AutoCareUIDataAjax</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <mobile_callable>false</mobile_callable>
+        <name>AutoCareUIDataAjax</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var AutoCareUIDataAjax = Class.create();
+
+AutoCareUIDataAjax.prototype = Object.extendsObject(AbstractAjaxProcessor, {
+
+    getData: function() {
+
+        var result = {
+            success: true,
+            error: '',
+            vehicles: 0,
+            appointments: 0,
+            inspections: 0,
+            recommendations: 0,
+            repairPlans: 0,
+            serviceOutcomes: 0,
+            serviceHistory: 0,
+            invoices: 0
+        };
+
+        try {
+
+            result.vehicles = this.countTable(
+                'x_1947064_autoca_0_vehicle'
+            );
+
+            result.appointments = this.countTable(
+                'x_1947064_autoca_0_appointment'
+            );
+
+            result.inspections = this.countTable(
+                'x_1947064_autoca_0_inspection'
+            );
+
+            result.recommendations = this.countTable(
+                'x_1947064_autoca_0_reccommendation'
+            );
+
+            result.repairPlans = this.countTable(
+                'x_1947064_autoca_0_repair_plan'
+            );
+
+            result.serviceOutcomes = this.countTable(
+                'x_1947064_autoca_0_service_outcome'
+            );
+
+            result.serviceHistory = this.countTable(
+                'x_1947064_autoca_0_service_history'
+            );
+
+            result.invoices = this.countTable(
+                'x_1947064_autoca_0_invoice'
+            );
+
+        } catch (e) {
+
+            result.success = false;
+            result.error = String(e);
+
+        }
+
+        return JSON.stringify(result);
+    },
+
+
+    countTable: function(tableName) {
+
+        var gr = new GlideRecordSecure(tableName);
+
+        if (!gr.isValid()) {
+            throw new Error(
+                'Invalid table: ' + tableName
+            );
+        }
+
+        gr.query();
+
+        return gr.getRowCount();
+    },
+
+
+    testInspection: function() {
+
+        var result = {
+            success: true,
+            table: 'x_1947064_autoca_0_inspection',
+            count: 0,
+            error: ''
+        };
+
+        try {
+
+            var gr = new GlideRecordSecure(
+                'x_1947064_autoca_0_inspection'
+            );
+
+            if (!gr.isValid()) {
+                throw new Error(
+                    'Inspection table is invalid'
+                );
+            }
+
+            gr.query();
+
+            result.count = gr.getRowCount();
+
+        } catch (e) {
+
+            result.success = false;
+            result.error = String(e);
+
+        }
+
+        return JSON.stringify(result);
+    },
+
+
+    type: 'AutoCareUIDataAjax'
+
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-01 15:12:55</sys_created_on>
+        <sys_id>20e8896bf3af8b100c460e554058b39c</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>AutoCareUIDataAjax</sys_name>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name>sys_script_include_20e8896bf3af8b100c460e554058b39c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 15:37:46</sys_updated_on>
+    </sys_script_include>
+</record_update>

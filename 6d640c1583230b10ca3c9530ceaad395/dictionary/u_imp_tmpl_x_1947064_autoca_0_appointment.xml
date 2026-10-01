@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="d54d97fef36f47100c460e554058b380" extends="sys_import_set_row" label="Imp Tmpl X 1947064 Autoca 0 Appointment" max_length="40" name="u_imp_tmpl_x_1947064_autoca_0_appointment" type="collection">
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Owner" label="Owner" max_length="40" name="u_owner" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Estimated Duration" label="Estimated Duration" max_length="40" name="u_estimated_duration" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Notes" label="Notes" max_length="40" name="u_notes" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Preferred Time" label="Preferred Time" max_length="40" name="u_preferred_time" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Assigned Technician" label="Assigned Technician" max_length="40" name="u_assigned_technician" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Appointment Date" label="Appointment Date" max_length="40" name="u_appointment_date" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Preferred Date" label="Preferred Date" max_length="40" name="u_preferred_date" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Appointment Number" label="Appointment Number" max_length="40" name="u_appointment_number" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Customer Contact" label="Customer Contact" max_length="40" name="u_customer_contact" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Service Type" label="Service Type" max_length="40" name="u_service_type" type="string"/>
+    </element>
+</database>

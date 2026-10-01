@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_1947064_autoca_0.AutoCareBackend</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <mobile_callable>false</mobile_callable>
+        <name>AutoCareBackend</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var AutoCareBackend = Class.create();
+AutoCareBackend.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+
+    getInspections: function() {
+
+        var result = [];
+        var gr = new GlideRecord('x_1947064_autoca_0_inspection');
+
+        gr.query();
+
+        while (gr.next()) {
+
+            result.push({
+                number: gr.getValue('inspection_number'),
+                vehicle: gr.getDisplayValue('vehicle_ref'),
+                appointment: gr.getDisplayValue('appointment_ref'),
+                technician: gr.getDisplayValue('technician_ref'),
+                date: gr.getValue('inspection_date'),
+                finding: gr.getValue('finding'),
+                severity: gr.getValue('severity'),
+                recommendation: gr.getValue('recommendation'),
+                status: gr.getValue('status')
+            });
+        }
+
+        return JSON.stringify(result);
+    },
+
+    type: 'AutoCareBackend'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-01 13:52:26</sys_created_on>
+        <sys_id>1f173067f32f8b100c460e554058b3dd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>AutoCareBackend</sys_name>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name>sys_script_include_1f173067f32f8b100c460e554058b3dd</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 13:52:26</sys_updated_on>
+    </sys_script_include>
+</record_update>

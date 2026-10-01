@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="DELETE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>false</advanced>
+        <applies_to/>
+        <condition/>
+        <controlled_by_refs/>
+        <decision_type>deny</decision_type>
+        <description>Deny vehicle create unless user is a service advisor</description>
+        <local_or_existing/>
+        <name>x_1947064_autoca_0_vehicle</name>
+        <operation display_value="create">create</operation>
+        <script/>
+        <security_attribute/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-24 19:09:13</sys_created_on>
+        <sys_id>56c20c694f43451ba5d2411cad68f49e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_1947064_autoca_0_vehicle</sys_name>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name>sys_security_acl_56c20c694f43451ba5d2411cad68f49e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-24 19:09:13</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+<sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</application>
+        <file_path/>
+        <instance_id>d584edeeeb11265056eafddacad0cd20</instance_id>
+        <instance_name>dev347008</instance_name>
+        <name>sys_security_acl_56c20c694f43451ba5d2411cad68f49e</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>false</advanced>
+        <applies_to/>
+        <condition/>
+        <controlled_by_refs/>
+        <decision_type>deny</decision_type>
+        <description>Deny vehicle create unless user is a service advisor</description>
+        <local_or_existing/>
+        <name>x_1947064_autoca_0_vehicle</name>
+        <operation display_value="create">create</operation>
+        <script/>
+        <security_attribute/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-24 19:09:13</sys_created_on>
+        <sys_id>56c20c694f43451ba5d2411cad68f49e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_1947064_autoca_0_vehicle</sys_name>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name>sys_security_acl_56c20c694f43451ba5d2411cad68f49e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-24 19:09:13</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+</record_update>]]></payload>
+        <payload_hash>-731850078</payload_hash>
+        <record_name>x_1947064_autoca_0_vehicle</record_name>
+        <reverted_from/>
+        <source>20d20d76f3ab07100c460e554058b34d</source>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-29 06:48:53</sys_created_on>
+        <sys_id>bb234d3af3ab07100c460e554058b3e0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1a0ebec668b0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-29 06:48:53</sys_updated_on>
+        <type>Access Control</type>
+        <update_guid>7b234d3a30ab071020bb3f72132803e0</update_guid>
+        <update_guid_history>7b234d3a30ab071020bb3f72132803e0:-731850078</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-01 07:54:14</sys_created_on>
+        <sys_db_object display_value="" name="sys_security_acl">sys_security_acl</sys_db_object>
+        <sys_id>4fe709e8f0e048db8d43bd7db8ff7599</sys_id>
+        <sys_metadata>56c20c694f43451ba5d2411cad68f49e</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_1947064_autoca_0_vehicle</sys_name>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_parent display_value="">fce205b6f3ab07100c460e554058b321</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_scope_delete display_value="">5939354a40604db1bb405bd64d784c49</sys_scope_delete>
+        <sys_update_name>sys_security_acl_56c20c694f43451ba5d2411cad68f49e</sys_update_name>
+        <sys_update_version display_value="sys_security_acl_56c20c694f43451ba5d2411cad68f49e">bb234d3af3ab07100c460e554058b3e0</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 07:54:14</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

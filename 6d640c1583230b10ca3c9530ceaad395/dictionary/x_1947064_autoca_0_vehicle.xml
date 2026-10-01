@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element db_object_id="8af5c41983230b10ca3c9530ceaad3c2" label="Vehicle" max_length="40" name="x_1947064_autoca_0_vehicle" type="collection">
-        <element attributes="edge_encryption_enabled=true" label="Owner" max_length="40" name="owner" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Service Center" max_length="40" name="service_center" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Last Service Date" max_length="40" name="last_service_date" type="glide_date"/>
-        <element attributes="edge_encryption_enabled=true" label="Registration Number" max_length="40" name="registration_number" type="string"/>
-        <element label="Current Mileage" max_length="40" name="current_mileage" type="integer"/>
+    <element db_object_id="bdd6e797f3238b100c460e554058b3fc" label="Vehicle" max_length="40" name="x_1947064_autoca_0_vehicle" type="collection">
         <element attributes="edge_encryption_enabled=true" label="Service Details" max_length="40" name="service_details" type="string"/>
-        <element label="Service Cost" max_length="40" name="service_cost" type="integer"/>
-        <element attributes="edge_encryption_enabled=true" label="Model" max_length="40" name="model" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Vehicle ID" max_length="40" name="vehicle_id" type="string"/>
+        <element label="Current Mileage" max_length="40" name="current_mileage" type="integer"/>
+        <element label="Year" max_length="40" name="year" type="integer"/>
+        <element label="Service Cost (INR)" max_length="40" name="service_cost_inr" type="integer"/>
         <element attributes="edge_encryption_enabled=true" label="Make" max_length="40" name="make" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Color" max_length="40" name="color" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Service Type" max_length="40" name="service_type" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Model" max_length="40" name="model" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Service Status" max_length="40" name="service_status" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Service Center" max_length="40" name="service_center" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Technician Notes" max_length="40" name="technician_notes" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Registration Number" max_length="40" name="registration_number" type="string"/>
+        <element label="owner" max_length="32" name="owner" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Last Service Date" max_length="40" name="last_service_date" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Owner Name" max_length="40" name="owner_name" type="string"/>
+        <index name="index">
+            <element name="owner"/>
+        </index>
     </element>
 </database>

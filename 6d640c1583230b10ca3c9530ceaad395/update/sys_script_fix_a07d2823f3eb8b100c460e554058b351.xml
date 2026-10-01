@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_fix">
+    <sys_script_fix action="INSERT_OR_UPDATE">
+        <before>false</before>
+        <description/>
+        <name>Populate Repair plan Reference Fields1</name>
+        <record_for_rollback>true</record_for_rollback>
+        <script><![CDATA[(function() {
+    var gr = new GlideRecord('x_1947064_autoca_0_repair_plan');
+    gr.query();
+
+    var total = 0;
+    var vehicleRef = 0;
+    var inspectionRef = 0;
+    var appointmentRef = 0;
+
+    while (gr.next()) {
+        total++;
+
+        if (!gr.vehicle_ref.nil())
+            vehicleRef++;
+
+        if (!gr.inspection_ref.nil())
+            inspectionRef++;
+
+        if (!gr.appointment_ref.nil())
+            appointmentRef++;
+    }
+
+    gs.info(
+        'AUTOCARE REPAIR PLAN CHECK' +
+        ' | TOTAL=' + total +
+        ' | VEHICLE_REF=' + vehicleRef +
+        ' | INSPECTION_REF=' + inspectionRef +
+        ' | APPOINTMENT_REF=' + appointmentRef
+    );
+
+})();]]></script>
+        <sys_class_name>sys_script_fix</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-01 13:09:53</sys_created_on>
+        <sys_id>a07d2823f3eb8b100c460e554058b351</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_name>Populate Repair plan Reference Fields1</sys_name>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name>sys_script_fix_a07d2823f3eb8b100c460e554058b351</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 13:39:12</sys_updated_on>
+        <unloadable>false</unloadable>
+    </sys_script_fix>
+</record_update>

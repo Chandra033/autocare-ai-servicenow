@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="855c137ef36f47100c460e554058b390" extends="sys_import_set_row" label="Imp Tmpl X 1947064 Autoca 0 Service Outcome" max_length="40" name="u_imp_tmpl_x_1947064_autoca_0_service_outcome" type="collection">
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Description" label="Description" max_length="40" name="u_description" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Final Status" label="Final Status" max_length="40" name="u_final_status" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Quality Rating" label="Quality Rating" max_length="40" name="u_quality_rating" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Outcome Type" label="Outcome Type" max_length="40" name="u_outcome_type" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Outcome Date" label="Outcome Date" max_length="40" name="u_outcome_date" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Outcome Number" label="Outcome Number" max_length="40" name="u_outcome_number" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Customer Feedback" label="Customer Feedback" max_length="40" name="u_customer_feedback" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Appointment" label="Appointment" max_length="40" name="u_appointment" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Parts Replaced" label="Parts Replaced" max_length="40" name="u_parts_replaced" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=Follow-up Needed" label="Follow-up Needed" max_length="40" name="u_follow_up_needed" type="string"/>
+    </element>
+</database>

@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[var autoCareState = {
+    currentPage: "home",
+    currentVehicleId: "",
+    selectedService: "Brake Inspection",
+    selectedTime: "11:00 AM",
+    data: {user:{},vehicles:[],appointments:[],inspections:[],recommendations:[],repairs:[],outcomes:[],history:[],invoices:[],backend:{}}
+};
+
+function el(id) {
+    return document.getElementById(id);
+}
+
+function setText(id, value) {
+    var node = el(id);
+    if (node) node.textContent = value === null || value === undefined || value === "" ? "Not recorded" : String(value);
+}
+
+function clean(value) {
+    if (value === null || value === undefined || value === "") return "Not recorded";
+    return String(value);
+}
+
+function esc(value) {
+    return clean(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+
+function vehicleName(v) {
+    if (!v) return "Vehicle";
+    var name = ((v.make || "") + " " + (v.model || "")).replace(/^\s+|\s+$/g, "");
+    return name || v.registration || "Vehicle";
+}
+
+function currentVehicle() {
+    var vehicles = autoCareState.data.vehicles || [];
+    if (!vehicles.length) return null;
+    for (var i = 0; i < vehicles.length; i++) {
+        if (vehicles[i].sys_id === autoCareState.currentVehicleId) return vehicles[i];
+    }
+    return vehicles[0];
+}
+
+function recordMatchesVehicle(record, vehicle) {
+    if (!record || !vehicle) return false;
+    if (record.vehicle_id && record.vehicle_id === vehicle.sys_id) return true;
+    var rv = String(record.vehicle || "").toLowerCase();
+    var names = [vehicleName(vehicle), vehicle.registration, vehicle.sys_id].join(" ").toLowerCase();
+    if (rv && names.indexOf(rv) >= 0) return true;
+    if (rv && vehicle.registration && rv === String(vehicle.registration).toLowerCase()) return true;
+    if (rv && vehicleName(vehicle) && rv === vehicleName(vehicle).toLowerCase()) return true;
+    return false;
+}
+
+function recordsForVehicle(records, vehicle) {
+    var out = [];
+    for (var i = 0; i < (records || []).length; i++) {
+        if (recordMatchesVehicle(records[i], vehicle)) out.push(records[i]);
+    }
+    return out;
+}
+
+function latest(records) {
+    return records && records.length ? records[0] : null;
+}
+
+function badgeClass(value) {
+    var s = String(value || "").toLowerCase();
+    if (s.indexOf("high") >= 0 || s.indexOf("critical") >= 0 || s.indexOf("required") >= 0 || s.indexOf("failed") >= 0) return "high";
+    if (s.indexOf("medium") >= 0 || s.indexOf("pending") >= 0 || s.indexOf("recommended") >= 0 || s.indexOf("review") >= 0) return "medium";
+    if (s.indexOf("complete") >= 0 || s.indexOf("approved") >= 0 || s.indexOf("paid") >= 0 || s.indexOf("success") >= 0) return "good";
+    return "info";
+}
+
+function badge(value) {
+    return '<span class="badge ' + badgeClass(value) + '">' + esc(value || "Not specified") + '</span>';
+}
+
+function setCount(id, value) {
+    setText(id, String(value || 0));
+}
+
+function calculateHealth(vehicle) {
+    var inspections = recordsForVehicle(autoCareState.data.inspections, vehicle);
+    var recs = recordsForVehicle(autoCareState.data.recommendations, vehicle);
+    var score = 100;
+    var debt = 0;
+    var latestInspection = latest(inspections);
+    var severity = latestInspection ? String(latestInspection.severity || "").toLowerCase() : "";
+    if (severity.indexOf("critical") >= 0) score -= 30;
+    else if (severity.indexOf("high") >= 0) score -= 20;
+    else if (severity.indexOf("medium") >= 0) score -= 10;
+    else if (severity.indexOf("low") >= 0) score -= 5;
+
+    for (var i = 0; i < recs.length; i++) {
+        var cls = String(recs[i].classification || recs[i].priority || "").toLowerCase();
+        if (cls.indexOf("required") >= 0 || cls.indexOf("high") >= 0) { score -= 8; debt += 1; }
+        else if (cls.indexOf("recommended") >= 0 || cls.indexOf("medium") >= 0) { score -= 4; debt += 1; }
+        if (String(recs[i].review_status || "").toLowerCase().indexOf("pending") >= 0) debt += 1;
+    }
+    if (score < 0) score = 0;
+    if (score > 100) score = 100;
+    return {score:score, debt:debt};
+}
+
+function go(page) {
+    var pages = document.querySelectorAll(".page");
+    for (var i = 0; i < pages.length; i++) pages[i].classList.remove("active");
+    var target = el(page);
+    if (target) target.classList.add("active");
+
+    var buttons = document.querySelectorAll(".nav button[data-page]");
+    for (var j = 0; j < buttons.length; j++) {
+        buttons[j].classList.toggle("active", buttons[j].getAttribute("data-page") === page);
+    }
+    autoCareState.currentPage = page;
+    window.scrollTo(0, 0);
+}
+
+function initNavigation() {
+    var navButtons = document.querySelectorAll(".nav button[data-page]");
+    for (var i = 0; i < navButtons.length; i++) {
+        navButtons[i].addEventListener("click", function () {
+            go(this.getAttribute("data-page"));
+        });
+    }
+    var goButtons = document.querySelectorAll("[data-go]");
+    for (var j = 0; j < goButtons.length; j++) {
+        goButtons[j].addEventListener("click", function () {
+            go(this.getAttribute("data-go"));
+        });
+    }
+}
+
+function initVehicleSelector() {
+    var selector = el("vehicleSelector");
+    if (!selector) return;
+    selector.innerHTML = "";
+    var vehicles = autoCareState.data.vehicles || [];
+    for (var i = 0; i < vehicles.length; i++) {
+        var option = document.createElement("option");
+        option.value = vehicles[i].sys_id;
+        option.textContent = vehicleName(vehicles[i]) + (vehicles[i].registration ? " - " + vehicles[i].registration : "");
+        selector.appendChild(option);
+    }
+    var v = currentVehicle();
+    if (v) selector.value = v.sys_id;
+    selector.addEventListener("change", function () {
+        autoCareState.currentVehicleId = this.value;
+        renderAll();
+    });
+}
+
+function renderHome() {
+    var v = currentVehicle();
+    if (!v) return;
+    setText("homeVehicleName", vehicleName(v));
+    setText("homeRegistration", v.registration);
+    setText("homeMileage", v.mileage);
+    setText("homeOwner", v.owner);
+    setText("homeStatus", v.status);
+    setCount("countVehicles", autoCareState.data.vehicles.length);
+    setCount("countAppointments", autoCareState.data.appointments.length);
+    setCount("countInspections", autoCareState.data.inspections.length);
+    setCount("countRecommendations", autoCareState.data.recommendations.length);
+    setCount("countRepairs", autoCareState.data.repairs.length);
+    setCount("countOutcomes", autoCareState.data.outcomes.length);
+    setCount("countHistory", autoCareState.data.history.length);
+    setCount("countInvoices", autoCareState.data.invoices.length);
+
+    var inspections = recordsForVehicle(autoCareState.data.inspections, v);
+    var recs = recordsForVehicle(autoCareState.data.recommendations, v);
+    var history = recordsForVehicle(autoCareState.data.history, v);
+    var i = latest(inspections), r = latest(recs);
+    setText("homeSeverity", i ? i.severity : "No inspection");
+    setText("homeFinding", i ? (i.finding || i.technician_notes) : "No inspection recorded");
+    setText("homeInspectionStatus", i ? i.status : "No inspection");
+    setText("homeLastService", history.length ? history[0].date : v.last_service_date);
+    setText("homeRecommendation", r ? (r.issue || r.description || "Recommendation available") : "No recommendation available");
+    setText("homeRecommendationClass", r ? (r.classification || "Not specified") : "Not specified");
+    setText("homeRecommendationPriority", r ? (r.priority || "Not specified") : "Not specified");
+}
+
+function renderPassport() {
+    var v = currentVehicle();
+    if (!v) return;
+    var inspections = recordsForVehicle(autoCareState.data.inspections, v);
+    var recs = recordsForVehicle(autoCareState.data.recommendations, v);
+    var history = recordsForVehicle(autoCareState.data.history, v);
+    var invoices = recordsForVehicle(autoCareState.data.invoices, v);
+    var appointments = recordsForVehicle(autoCareState.data.appointments, v);
+    var outcomes = recordsForVehicle(autoCareState.data.outcomes, v);
+    var score = calculateHealth(v);
+    var latestHistory = latest(history), latestInspection = latest(inspections), latestRec = latest(recs);
+
+    setText("passportReg", v.registration);
+    setText("passportMileage", v.mileage);
+    setText("healthScore", score.score);
+    var ring = el("scoreRing"); if (ring) ring.style.setProperty("--score", score.score + "%");
+    setText("maintenanceDebt", score.debt);
+    setText("passportLastService", latestHistory ? latestHistory.date : v.last_service_date);
+    setText("passportLastServiceCenter", latestHistory ? latestHistory.center : v.service_center);
+    setText("passportMakeModel", vehicleName(v));
+    setText("passportYearColor", v.color || "Year not recorded");
+    setText("passportOwner", v.owner);
+    setText("passportStatus", v.status);
+    setText("passportNextService", latestHistory ? latestHistory.next_date : "Not recorded");
+    setText("passportNextMileage", latestHistory ? latestHistory.next_mileage : "Not recorded");
+    setCount("passportServiceCount", history.length); setCount("passportInvoiceCount", invoices.length);
+    setCount("healthInspectionCount", inspections.length); setCount("healthHistoryCount", history.length); setCount("healthRecommendationCount", recs.length);
+    var ib = el("healthInspectionBar"), hb = el("healthHistoryBar"), rb = el("healthRecommendationBar");
+    if (ib) ib.style.width = Math.min(100, inspections.length * 7) + "%";
+    if (hb) hb.style.width = Math.min(100, history.length * 7) + "%";
+    if (rb) rb.style.width = Math.min(100, recs.length * 7) + "%";
+    setText("passportComplianceStatus", v.status); setText("passportComplianceService", v.last_service_date || (latestHistory ? latestHistory.date : "Not recorded"));
+
+    var timeline = el("passportTimeline");
+    if (timeline) {
+        var html = "";
+        if (latestHistory) html += '<div class="timeline-item"><h4>Latest Service</h4><p>' + esc(latestHistory.date) + ' — ' + esc(latestHistory.details || latestHistory.description) + '</p></div>';
+        if (latestInspection) html += '<div class="timeline-item"><h4>Latest Inspection</h4><p>' + esc(latestInspection.date) + ' — ' + esc(latestInspection.finding || latestInspection.technician_notes) + '</p></div>';
+        if (latestRec) html += '<div class="timeline-item"><h4>Latest AI Recommendation</h4><p>' + esc(latestRec.issue || latestRec.action) + '</p></div>';
+        if (appointments.length) html += '<div class="timeline-item"><h4>Latest Appointment</h4><p>' + esc(appointments[0].appointment_date) + ' — ' + esc(appointments[0].service_type) + '</p></div>';
+        if (!html) html = '<div class="empty">No timeline records are available for this vehicle.</div>';
+        timeline.innerHTML = html;
+    }
+    renderPassportRows(history, invoices, appointments, outcomes);
+}
+
+function renderPassportRows(history, invoices, appointments, outcomes) {
+    var h = el("passportServiceRows"), i = el("passportInvoiceRows"), a = el("passportAppointmentRows"), o = el("passportOutcomeRows");
+    if (h) { h.innerHTML = history.length ? history.map(function(r){return '<tr><td>'+esc(r.date)+'</td><td>'+esc(r.vehicle)+'</td><td>'+esc(r.details || r.description)+'</td><td>'+esc(r.parts)+'</td><td>'+esc(r.mileage)+'</td><td>'+esc(r.cost)+'</td><td>'+esc(r.next_date)+'</td></tr>';}).join("") : '<tr><td colspan="7" class="empty">No service history for this vehicle.</td></tr>'; }
+    if (i) { i.innerHTML = invoices.length ? invoices.map(function(r){return '<tr><td><b>'+esc(r.number)+'</b></td><td>'+esc(r.date)+'</td><td>'+esc(r.amount)+'</td><td>'+badge(r.payment)+'</td><td>'+esc(r.document_status)+'</td></tr>';}).join("") : '<tr><td colspan="5" class="empty">No invoices for this vehicle.</td></tr>'; }
+    if (a) { a.innerHTML = appointments.length ? appointments.map(function(r){return '<tr><td>'+esc(r.number)+'</td><td>'+esc(r.appointment_date)+'</td><td>'+esc(r.service_type)+'</td><td>'+badge(r.status)+'</td></tr>';}).join("") : '<tr><td colspan="4" class="empty">No appointments for this vehicle.</td></tr>'; }
+    if (o) { o.innerHTML = outcomes.length ? outcomes.map(function(r){return '<tr><td>'+esc(r.number)+'</td><td>'+esc(r.date)+'</td><td>'+esc(r.type)+'</td><td>'+badge(r.final_status)+'</td><td>'+esc(r.quality)+'</td></tr>';}).join("") : '<tr><td colspan="5" class="empty">No verified outcomes for this vehicle.</td></tr>'; }
+}
+
+function renderRecommendations() {
+    var recs = autoCareState.data.recommendations || [];
+    setCount("recTotal", recs.length);
+    var required=0, high=0, review=0;
+    for (var i=0;i<recs.length;i++) {
+        var c=String(recs[i].classification||"").toLowerCase(), p=String(recs[i].priority||"").toLowerCase(), rs=String(recs[i].review_status||"").toLowerCase();
+        if (c.indexOf("required")>=0) required++;
+        if (p.indexOf("high")>=0 || c.indexOf("required")>=0) high++;
+        if (rs.indexOf("pending")>=0 || rs.indexOf("review")>=0) review++;
+    }
+    setCount("recRequired",required); setCount("recHigh",high); setCount("recReview",review);
+    var v=currentVehicle(), current=recordsForVehicle(recs,v), latestRec=latest(current);
+    setText("aiIssue", latestRec ? latestRec.issue : "No recommendation recorded");
+    setText("aiClass", latestRec ? latestRec.classification : "Not specified");
+    setText("aiAction", latestRec ? latestRec.action : "Not specified");
+    setText("aiEvidence", latestRec ? ((latestRec.description || "") + (latestRec.source ? " Source: " + latestRec.source + "." : "")) : "Recommendation evidence is taken directly from backend Recommendation records.");
+    var cards=el("recommendationCards");
+    if (!cards) return;
+    if (!recs.length) { cards.innerHTML='<div class="card empty">No recommendation records are available.</div>'; return; }
+    cards.innerHTML=recs.map(function(r){return '<div class="recommendation"><div class="recommendation-head"><h3>'+esc(r.issue||r.description||"Recommendation")+'</h3>'+badge(r.classification)+'</div><div class="rec-meta">'+badge(r.priority||"Priority not specified")+badge(r.review_status||"Review status not specified")+badge(r.source||"Source not specified")+'</div><div class="rec-detail"><b>Action:</b> '+esc(r.action)+'<br/><b>Vehicle:</b> '+esc(r.vehicle)+'<br/><b>Confidence:</b> '+esc(r.ai_confidence||r.confidence)+'<br/><b>Estimated Cost:</b> '+esc(r.estimated_cost)+'<br/><b>Due:</b> '+esc(r.due_date)+'</div></div>';}).join("");
+}
+
+function renderAppointments() {
+    var rows=el("appointmentRows"), data=autoCareState.data.appointments||[];
+    if (!rows) return;
+    rows.innerHTML=data.length?data.map(function(r){return '<tr><td><b>'+esc(r.number)+'</b></td><td>'+esc(r.vehicle)+'</td><td>'+esc(r.appointment_date)+'</td><td>'+esc(r.preferred_time)+'</td><td>'+esc(r.service_type)+'</td><td>'+esc(r.technician)+'</td><td>'+badge(r.status)+'</td></tr>';}).join(""):'<tr><td colspan="7" class="empty">No appointment records are available.</td></tr>';
+    var v=currentVehicle(); if(v){setText("bookingVehicleName",vehicleName(v));setText("bookingVehicleReg",v.registration);var hidden=el("bookingVehicle");if(hidden)hidden.value=v.sys_id;}
+}
+
+function renderInspection() {
+    var data=autoCareState.data.inspections||[];
+    setCount("inspectionTotal",data.length); var high=0,complete=0,findings=0;
+    for(var i=0;i<data.length;i++){var s=String(data[i].severity||"").toLowerCase(),st=String(data[i].status||"").toLowerCase();if(s.indexOf("high")>=0||s.indexOf("critical")>=0)high++;if(st.indexOf("complete")>=0)complete++;if(data[i].finding||data[i].technician_notes)findings++;}
+    setCount("inspectionHigh",high);setCount("inspectionCompleted",complete);setCount("inspectionFindings",findings);
+    var rows=el("inspectionRows");if(!rows)return;
+    rows.innerHTML=data.length?data.map(function(r){return '<tr><td><b>'+esc(r.number)+'</b></td><td>'+esc(r.vehicle)+'</td><td>'+esc(r.appointment)+'</td><td>'+esc(r.date)+'</td><td>'+esc(r.technician)+'</td><td>'+badge(r.severity)+'</td><td>'+badge(r.status)+'</td><td>'+esc(r.finding||r.technician_notes)+'</td><td>'+esc(r.recommendation)+'</td></tr>';}).join(""):'<tr><td colspan="9" class="empty">No inspection records are available.</td></tr>';
+}
+
+function renderRepair() {
+    var data=autoCareState.data.repairs||[];setCount("repairTotal",data.length);var pending=0,approved=0,total=0;
+    for(var i=0;i<data.length;i++){var a=String(data[i].approval||"").toLowerCase(),s=String(data[i].status||"").toLowerCase();if(a.indexOf("approved")<0 && s.indexOf("approved")<0)pending++;else approved++;var n=parseFloat(String(data[i].cost||"").replace(/[^0-9.\-]/g,""));if(!isNaN(n))total+=n;}
+    setCount("repairPending",pending);setCount("repairApproved",approved);setText("repairCost",total?total.toFixed(2):"Not recorded");
+    var rows=el("repairRows");if(!rows)return;
+    rows.innerHTML=data.length?data.map(function(r){var action=(String(r.approval||"").toLowerCase().indexOf("approved")<0 && String(r.status||"").toLowerCase().indexOf("approved")<0)?'<button type="button" class="outline repair-approve" data-repair-id="'+esc(r.sys_id)+'">Approve</button>':'<span class="badge good">Approved</span>';return '<tr><td><b>'+esc(r.number)+'</b></td><td>'+esc(r.vehicle)+'</td><td>'+esc(r.description)+'</td><td>'+badge(r.classification)+'</td><td>'+esc(r.cost)+'</td><td>'+esc(r.evidence)+'</td><td>'+esc(r.approval)+'</td><td>'+badge(r.status)+'</td><td>'+action+'</td></tr>';}).join(""):'<tr><td colspan="9" class="empty">No repair plan records are available.</td></tr>';
+    var btns=document.querySelectorAll(".repair-approve");for(var j=0;j<btns.length;j++){btns[j].addEventListener("click",function(){approveRepair(this.getAttribute("data-repair-id"));});}
+}
+
+function renderOutcomes() {
+    var data=autoCareState.data.outcomes||[];setCount("outcomeTotal",data.length);var completed=0,follow=0,totalQ=0,qCount=0;
+    for(var i=0;i<data.length;i++){var st=String(data[i].final_status||"").toLowerCase(),fu=String(data[i].follow_up||"").toLowerCase();if(st.indexOf("complete")>=0)completed++;if(fu && fu!=="no" && fu!=="false")follow++;var q=parseFloat(String(data[i].quality||"").replace(/[^0-9.\-]/g,""));if(!isNaN(q)){totalQ+=q;qCount++;}}
+    setCount("outcomeCompleted",completed);setCount("outcomeFollowup",follow);setText("outcomeQuality",qCount?(totalQ/qCount).toFixed(1):"Not recorded");
+    var rows=el("outcomeRows");if(!rows)return;rows.innerHTML=data.length?data.map(function(r){return '<tr><td><b>'+esc(r.number)+'</b></td><td>'+esc(r.vehicle)+'</td><td>'+esc(r.date)+'</td><td>'+esc(r.type)+'</td><td>'+esc(r.description)+'</td><td>'+esc(r.parts)+'</td><td>'+badge(r.final_status)+'</td><td>'+esc(r.quality)+'</td><td>'+esc(r.follow_up)+'</td></tr>';}).join(""):'<tr><td colspan="9" class="empty">No service outcome records are available.</td></tr>';
+}
+
+function renderHistory() {
+    var data=autoCareState.data.history||[];setCount("historyTotal",data.length);setText("historyLatest",data.length?data[0].date:"Not recorded");var total=0;for(var i=0;i<data.length;i++){var n=parseFloat(String(data[i].cost||"").replace(/[^0-9.\-]/g,""));if(!isNaN(n))total+=n;}setText("historyCost",total?total.toFixed(2):"Not recorded");
+    var rows=el("historyRows");if(!rows)return;rows.innerHTML=data.length?data.map(function(r){return '<tr><td>'+esc(r.date)+'</td><td>'+esc(r.vehicle)+'</td><td>'+esc(r.details||r.description)+'</td><td>'+esc(r.parts)+'</td><td>'+esc(r.mileage)+'</td><td>'+esc(r.cost)+'</td><td>'+esc(r.center)+'</td><td>'+esc(r.next_date)+' / '+esc(r.next_mileage)+'</td></tr>';}).join(""):'<tr><td colspan="8" class="empty">No service history records are available.</td></tr>';
+}
+
+function renderInvoices() {
+    var data=autoCareState.data.invoices||[];setCount("invoiceTotal",data.length);var total=0,paid=0,pending=0;for(var i=0;i<data.length;i++){var n=parseFloat(String(data[i].amount||"").replace(/[^0-9.\-]/g,""));if(!isNaN(n))total+=n;var p=String(data[i].payment||"").toLowerCase();if(p.indexOf("paid")>=0)paid++;else pending++;}setText("invoiceAmount",total?total.toFixed(2):"Not recorded");setCount("invoicePaid",paid);setCount("invoicePending",pending);
+    var rows=el("invoiceRows");if(!rows)return;rows.innerHTML=data.length?data.map(function(r){return '<tr><td><b>'+esc(r.number)+'</b></td><td>'+esc(r.date)+'</td><td>'+esc(r.vehicle)+'</td><td>'+esc(r.description)+'</td><td>'+esc(r.amount)+'</td><td>'+badge(r.payment)+'</td><td>'+esc(r.due)+'</td><td>'+esc(r.document_status)+'</td><td>'+esc(r.center)+'</td></tr>';}).join(""):'<tr><td colspan="9" class="empty">No invoice records are available.</td></tr>';
+}
+
+function renderProfile() {
+    var d=autoCareState.data;var v=currentVehicle();setText("profileEmailText",d.user.email||"Email not recorded");setCount("profileVehicleCount",d.vehicles.length);setCount("profileServiceCount",d.history.length);setCount("profileAppointmentCount",d.appointments.length);var email=el("profileEmail");if(email)email.value=d.user.email||"";var vfield=el("profileVehicle"),rfield=el("profileRegistration");if(vfield)vfield.value=v?vehicleName(v):"";if(rfield)rfield.value=v?v.registration:"";
+}
+
+function initTabs() {
+    var tabs=document.querySelectorAll(".tab[data-tab]");for(var i=0;i<tabs.length;i++){tabs[i].addEventListener("click",function(){var key=this.getAttribute("data-tab");for(var j=0;j<tabs.length;j++)tabs[j].classList.remove("active");this.classList.add("active");var panes=document.querySelectorAll(".passport-tab");for(var k=0;k<panes.length;k++)panes[k].style.display="none";var pane=el("passport-"+key);if(pane)pane.style.display="block";});}
+}
+
+function initBooking() {
+    var services=document.querySelectorAll(".service-option");for(var i=0;i<services.length;i++){services[i].addEventListener("click",function(){for(var j=0;j<services.length;j++)services[j].classList.remove("selected");this.classList.add("selected");autoCareState.selectedService=this.getAttribute("data-service")||this.textContent;setText("bookingServiceText",autoCareState.selectedService);var h=el("bookingServiceHidden");if(h)h.value=autoCareState.selectedService;});}
+    var slots=document.querySelectorAll(".slot");for(var s=0;s<slots.length;s++){slots[s].addEventListener("click",function(){for(var j=0;j<slots.length;j++)slots[j].classList.remove("selected");this.classList.add("selected");autoCareState.selectedTime=this.getAttribute("data-time")||this.textContent;setText("bookingTimeText",autoCareState.selectedTime);var h=el("bookingTimeHidden");if(h)h.value=autoCareState.selectedTime;});}
+    var date=el("bookingDate");if(date){date.addEventListener("change",function(){setText("bookingDateText",formatDate(this.value));var h=el("bookingDateHidden");if(h)h.value=this.value;});var now=new Date(),m=String(now.getMonth()+1),d=String(now.getDate());if(m.length<2)m="0"+m;if(d.length<2)d="0"+d;date.min=now.getFullYear()+"-"+m+"-"+d;}
+}
+
+function formatDate(value){if(!value)return "Select date";var d=new Date(value+"T00:00:00");if(isNaN(d.getTime()))return value;return d.toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});}
+
+function submitBooking(){var v=currentVehicle(),date=el("bookingDate"),action=el("formAction"),vehicle=el("bookingVehicle"),service=el("bookingServiceHidden"),dateH=el("bookingDateHidden"),timeH=el("bookingTimeHidden");if(!v){showToast("No vehicle is available.");return false;}if(!date || !date.value){showToast("Select a service date.");return false;}if(vehicle)vehicle.value=v.sys_id;if(service)service.value=autoCareState.selectedService;if(dateH)dateH.value=date.value;if(timeH)timeH.value=autoCareState.selectedTime;if(action)action.value="book";return true;}
+
+function approveRepair(sysId){if(!sysId){showToast("Repair plan is missing.");return false;}var action=el("formAction"),repair=el("repairSysid");if(action)action.value="approve_repair";if(repair)repair.value=sysId;var form=document.querySelector("form");if(form)form.submit();return false;}
+
+function saveProfile(){var name=el("profileName"),email=el("profileEmail"),action=el("formAction"),nameH=el("profileNameHidden"),emailH=el("profileEmailHidden");if(!name||!email)return false;if(!name.value.replace(/^\s+|\s+$/g,"")){showToast("Display name is required.");return false;}if(nameH)nameH.value=name.value;if(emailH)emailH.value=email.value;if(action)action.value="save_profile";return true;}
+
+function showToast(message){var toast=el("toast");if(!toast)return;toast.textContent=message;toast.style.display="block";window.clearTimeout(window.autoCareToastTimer);window.autoCareToastTimer=window.setTimeout(function(){toast.style.display="none";},3000);}
+
+function initChat(){var open=el("chatOpen"),chat=el("chatbot"),close=el("closeChat");if(open)open.addEventListener("click",function(){chat.style.display="flex";open.style.display="none";});if(close)close.addEventListener("click",function(){chat.style.display="none";open.style.display="flex";});var qs=document.querySelectorAll(".quick-option");for(var i=0;i<qs.length;i++){qs[i].addEventListener("click",function(){var option=this.getAttribute("data-option");addUserMessage(option);if(option.indexOf("Health")>=0)go("healthPassport");else if(option.indexOf("Recommendation")>=0)go("recommendations");else if(option.indexOf("Appointment")>=0)go("appointments");else if(option.indexOf("Inspection")>=0)go("inspection");else if(option.indexOf("Repair")>=0)go("repair");else if(option.indexOf("Invoice")>=0)go("invoices");setTimeout(function(){addBotMessage(getChatResponse(option));}.bind(this),180);});}}
+function addUserMessage(m){var b=el("chatBody");if(!b)return;var d=document.createElement("div");d.className="message user-message";d.textContent=m;b.appendChild(d);b.scrollTop=b.scrollHeight;}
+function addBotMessage(m){var b=el("chatBody");if(!b)return;var d=document.createElement("div");d.className="message bot-message";d.textContent=m;b.appendChild(d);b.scrollTop=b.scrollHeight;}
+function sendMessage(){var input=el("chatInput");if(!input)return;var m=input.value.replace(/^\s+|\s+$/g,"");if(!m)return;addUserMessage(m);input.value="";setTimeout(function(){addBotMessage(getChatResponse(m));},200);}
+function getChatResponse(message){var t=String(message||"").toLowerCase(),v=currentVehicle(),r=recordsForVehicle(autoCareState.data.recommendations,v),i=recordsForVehicle(autoCareState.data.inspections,v);if(t.indexOf("health")>=0)return "Your Vehicle Health Passport currently shows a calculated health score of "+calculateHealth(v).score+" based on stored inspection and recommendation signals.";if(t.indexOf("recommend")>=0||t.indexOf("maintenance")>=0)return r.length?"There are "+r.length+" recommendation records. The latest action is: "+(r[0].action||"not recorded")+".":"No recommendation records are available.";if(t.indexOf("appointment")>=0||t.indexOf("book")>=0)return "Open Appointments, select a service, date and time, then confirm. The record is inserted into the Appointment table.";if(t.indexOf("inspection")>=0)return i.length?"There are "+i.length+" inspection records. The latest finding is: "+(i[0].finding||i[0].technician_notes||"not recorded")+".":"No inspection records are available.";if(t.indexOf("repair")>=0)return "Repair Plan displays backend repair plans and provides an Approve action for pending owner approval.";if(t.indexOf("invoice")>=0)return "Invoices displays live invoice, amount, payment and document status records.";return "I can help with vehicle health, recommendations, appointments, inspections, repair plans, service history and invoices.";}
+
+function renderBackendStatus(){var b=autoCareState.data.backend||{},t=b.tables||{},keys=["vehicles","appointments","inspections","recommendations","repairs","outcomes","history","invoices"],valid=0;for(var i=0;i<keys.length;i++){if(t[keys[i]]&&t[keys[i]].valid&&t[keys[i]].readable)valid++;}var connected=valid===keys.length;var dot=el("backendDot"),status=el("backendStatus"),details=el("backendDetails");if(dot)dot.className="status-dot "+(connected?"connected":"error");if(status)status.textContent=connected?"Connected to AutoCare AI backend":"Backend table access needs attention";if(details){var d="Vehicles: "+(autoCareState.data.vehicles||[]).length+" | Appointments: "+(autoCareState.data.appointments||[]).length+" | Inspections: "+(autoCareState.data.inspections||[]).length+" | Recommendations: "+(autoCareState.data.recommendations||[]).length+" | Repair Plans: "+(autoCareState.data.repairs||[]).length+" | Outcomes: "+(autoCareState.data.outcomes||[]).length+" | History: "+(autoCareState.data.history||[]).length+" | Invoices: "+(autoCareState.data.invoices||[]).length;if(b.error)d+=" | Error: "+b.error;details.textContent=d;}}
+
+function renderAll(){renderHome();renderPassport();renderRecommendations();renderAppointments();renderInspection();renderRepair();renderOutcomes();renderHistory();renderInvoices();renderProfile();}
+
+
+function loadAutoCareData(callback) {
+    var loading = el("dataLoading");
+    if (loading) loading.style.display = "block";
+    var ga = new GlideAjax("AutoCareUIDataAjax");
+    ga.addParam("sysparm_name", "getData");
+    ga.getXMLAnswer(function(answer) {
+        var data = null;
+        try { data = JSON.parse(answer || "{}"); } catch (e) { data = null; }
+        if (!data || !data.backend) {
+            autoCareState.data = {user:{},vehicles:[],appointments:[],inspections:[],recommendations:[],repairs:[],outcomes:[],history:[],invoices:[],backend:{error:"The backend response could not be parsed."}};
+        } else {
+            autoCareState.data = data;
+        }
+        autoCareState.currentVehicleId = autoCareState.data.vehicles && autoCareState.data.vehicles.length ? autoCareState.data.vehicles[0].sys_id : "";
+        if (loading) loading.style.display = "none";
+        if (callback) callback();
+    });
+}
+
+function autoCareInit(){
+    initNavigation();
+    initVehicleSelector();
+    initTabs();
+    initBooking();
+    initChat();
+    loadAutoCareData(function(){
+        renderAll();
+        renderBackendStatus();
+        go("home");
+    });
+}
+
+if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",autoCareInit); else autoCareInit();]]></client_script>
+        <description>AutoCare AI dashboard for vehicle inspections, appointments, recommendations, repair plans and service outcomes.</description>
+        <direct>false</direct>
+        <endpoint>x_1947064_autoca_0_AutoCare_AI_UI.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+    <div id="autocareDataPayload" style="display:none"></div>
+
+    <style>
+
+        *{box-sizing:border-box}
+        body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:#f5f8fc;color:#172033}
+        button,input,select,textarea{font:inherit}
+        button{cursor:pointer}
+        .app{display:flex;min-height:100vh}
+        .sidebar{width:225px;background:#0b1d3a;color:#fff;padding:18px 12px;position:fixed;left:0;top:0;bottom:0;overflow-y:auto;z-index:100}
+        .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;padding:8px 9px 22px}
+        .brand-mark{overflow:hidden;width:54px;height:54px;border-radius:10px;background:#fff;display:grid;place-items:center;flex:0 0 54px}
+        .brand-mark img{width:100%;height:100%;object-fit:cover}
+        .brand-name{font-size:18px;font-weight:800;letter-spacing:.1px}
+        .nav{display:flex;flex-direction:column;gap:5px}
+        .nav-title{color:#7f94b5;font-size:9px;font-weight:800;text-transform:uppercase;padding:14px 10px 6px}
+        .nav button{border:0;background:transparent;color:#c8d5e8;padding:10px 12px;border-radius:7px;text-align:left;font-size:11px}
+        .nav button:hover,.nav button.active{background:#173665;color:#fff}
+        .main{margin-left:225px;width:calc(100% - 225px);min-height:100vh;padding:24px}
+        .page{display:none}.page.active{display:block}
+        .heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+        .heading h1{margin:0;font-size:22px}.sub{color:#718096;font-size:11px;margin-top:5px}
+        .primary{border:0;background:#1260df;color:#fff;padding:10px 14px;border-radius:7px;font-size:11px;font-weight:700}
+        .primary:hover{background:#0d4fb9}
+        .outline{border:1px solid #d7dfeb;background:#fff;color:#172033;padding:9px 13px;border-radius:7px;font-size:11px}
+        .outline:hover{background:#f3f6fa}
+        .grid{display:grid;gap:14px}.grid-4{grid-template-columns:repeat(4,1fr)}.grid-3{grid-template-columns:repeat(3,1fr)}.grid-2{grid-template-columns:repeat(2,1fr)}
+        .card{background:#fff;border:1px solid #e1e7ef;border-radius:10px;padding:15px}
+        .card-title{font-size:12px;font-weight:800;margin-bottom:8px}.stat{font-size:24px;font-weight:800;margin-top:6px}
+        .badge{display:inline-block;padding:4px 7px;border-radius:5px;font-size:9px;font-weight:800}
+        .badge.good{background:#e9f8ef;color:#18864b}.badge.high{background:#fff0f0;color:#d8484d}
+        .badge.medium{background:#fff7e5;color:#a66a00}.badge.info{background:#edf4ff;color:#1260df}
+        .vehicle-card{display:flex;align-items:center;justify-content:space-between;gap:20px}
+        .vehicle-info h2{margin:0;font-size:18px}.vehicle-meta{display:flex;gap:18px;margin-top:12px;flex-wrap:wrap}
+        .vehicle-meta div{font-size:10px;color:#6d7b90}.vehicle-meta b{display:block;color:#172033;font-size:12px;margin-top:3px}
+        .vehicle-art{width:220px;height:120px;background:#eef5ff;border-radius:10px;display:grid;place-items:center;font-size:70px}
+        .table{width:100%;border-collapse:collapse}.table th{text-align:left;font-size:9px;color:#738197;padding:10px;border-bottom:1px solid #e4e9f0;text-transform:uppercase}
+        .table td{padding:11px 10px;border-bottom:1px solid #edf0f4;font-size:10px;vertical-align:top}
+        .table-wrap{overflow-x:auto}.empty{padding:28px;text-align:center;color:#718096;font-size:11px}
+        .health-row{margin-bottom:14px}.health-head{display:flex;justify-content:space-between;margin-bottom:6px}
+        .health-head span{font-size:10px;font-weight:700}.progress{width:100%;height:7px;background:#edf1f5;border-radius:10px;overflow:hidden}
+        .progress span{display:block;height:100%;background:#1260df;border-radius:10px}
+        .timeline{border-left:2px solid #d9e1ed;margin-left:8px;padding-left:18px}
+        .timeline-item{position:relative;margin-bottom:20px}.timeline-item:before{content:"";position:absolute;left:-25px;top:2px;width:10px;height:10px;background:#1260df;border-radius:50%}
+        .timeline-item h4{margin:0 0 4px;font-size:11px}.timeline-item p{margin:0;color:#758298;font-size:10px}
+        .recommendation{border:1px solid #dce5f1;border-radius:9px;padding:14px;margin-bottom:10px}
+        .recommendation-head{display:flex;justify-content:space-between;align-items:center}.recommendation h3{margin:0;font-size:12px}
+        .booking-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin-top:14px}
+        .booking-section{padding:14px;border:1px solid #e1e7ef;border-radius:9px;background:#fff}
+        .booking-label{font-size:10px;font-weight:800;color:#536176;margin-bottom:7px;display:block}
+        .service-options{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+        .service-option{border:1px solid #dce4ef;background:#fff;border-radius:8px;padding:11px;text-align:left;color:#172033;font-size:10px}
+        .service-option strong{display:block;font-size:11px;margin-bottom:3px}.service-option span{color:#788599;font-size:9px}
+        .service-option.selected{border-color:#1260df;background:#eef5ff;box-shadow:0 0 0 1px #1260df}
+        .date-box{width:100%;padding:10px;border:1px solid #dce3ed;border-radius:7px;background:#fff;color:#172033}
+        .booking-summary{background:#f7faff;border:1px solid #d7e5f8;border-radius:9px;padding:14px}
+        .summary-line{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #e7edf5;font-size:10px}
+        .summary-line:last-child{border-bottom:0}.slot{border:1px solid #dce4ef;background:#fff;border-radius:7px;padding:9px 11px;font-size:10px;margin:4px;display:inline-block}
+        .slot.selected{background:#1260df;border-color:#1260df;color:#fff}
+        .profile{display:grid;grid-template-columns:.8fr 1.2fr;gap:14px}.bigavatar{width:70px;height:70px;background:#eaf2ff;color:#1260df;border-radius:50%;display:grid;place-items:center;font-size:22px;font-weight:800;margin-bottom:12px}
+        .field{margin-bottom:13px}.field label{display:block;font-size:10px;font-weight:700;margin-bottom:5px}
+        .field input,.field textarea,.field select{width:100%;border:1px solid #dce3ed;border-radius:7px;padding:9px;font-size:11px;outline:none;background:#fff;color:#172033}
+        .field textarea{min-height:80px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:#1260df}
+        .summary-box{border:1px solid #e1e7ef;background:#f8fafc;padding:12px;border-radius:8px}
+        .chatbot{position:fixed;right:24px;bottom:24px;width:360px;height:520px;background:#fff;border:1px solid #dbe4f0;border-radius:18px;box-shadow:0 18px 55px rgba(18,38,72,.22);overflow:hidden;display:flex;flex-direction:column;z-index:9999}
+        .chat-header{height:68px;background:linear-gradient(135deg,#0f56c7,#1260df);color:white;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+        .chat-title{display:flex;align-items:center;gap:11px}.bot-icon{width:38px;height:38px;border-radius:12px;background:white;color:#1260df;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+        .chat-title h3{font-size:14px;margin:0 0 4px}.chat-title span{font-size:10px;opacity:.9}.chat-online{display:inline-block;width:7px;height:7px;background:#59e391;border-radius:50%;margin-right:5px}
+        .close-chat{width:34px;height:34px;border:1px solid rgba(255,255,255,.35);border-radius:9px;background:rgba(255,255,255,.10);color:white;font-size:20px;line-height:1;cursor:pointer}.close-chat:hover{background:rgba(255,255,255,.20)}
+        .chat-body{flex:1;padding:16px;overflow-y:auto;background:#f5f8fc}.message{max-width:82%;padding:11px 13px;margin-bottom:11px;border-radius:13px;font-size:12px;line-height:1.55}.bot-message{background:white;color:#172033;border:1px solid #e0e7f0;border-top-left-radius:5px;box-shadow:0 2px 7px rgba(20,40,70,.04)}.user-message{margin-left:auto;background:#1260df;color:white;border-top-right-radius:5px}
+        .quick-label{font-size:9px;font-weight:800;color:#718096;text-transform:uppercase;letter-spacing:.5px;margin:14px 0 7px}.quick-options{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}.quick-option{border:1px solid #cbd9ed;background:white;color:#24589d;border-radius:18px;padding:8px 10px;font-size:10px;cursor:pointer}.quick-option:hover{border-color:#1260df;background:#eef5ff}
+        .chat-input-area{display:flex;gap:8px;padding:12px;background:white;border-top:1px solid #e2e7ef}.chat-input{flex:1;height:42px;border:1px solid #d7dee9;border-radius:10px;padding:0 12px;outline:none;font-size:12px;color:#172033}.chat-input:focus{border-color:#1260df}.send-btn{width:54px;border:0;border-radius:10px;background:#1260df;color:white;cursor:pointer;font-size:11px;font-weight:700}.send-btn:hover{background:#0d4fb9}
+        .chat-open-btn{position:fixed;right:25px;bottom:25px;width:58px;height:58px;border:0;border-radius:50%;background:#1260df;color:white;font-size:25px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.20);z-index:9998;display:none;align-items:center;justify-content:center}
+        #toast{position:fixed;right:25px;bottom:25px;background:#172033;color:white;padding:11px 15px;border-radius:7px;font-size:11px;display:none;z-index:10000}
+        @media(max-width:900px){.grid-4{grid-template-columns:1fr 1fr}.grid-3{grid-template-columns:1fr 1fr}.booking-grid{grid-template-columns:1fr}.profile{grid-template-columns:1fr}}
+        @media(max-width:700px){.sidebar{width:190px}.main{margin-left:190px;width:calc(100% - 190px);padding:15px}.vehicle-card{flex-direction:column;align-items:flex-start}.vehicle-art{width:100%}}
+        @media(max-width:500px){.sidebar{display:none}.main{margin-left:0;width:100%}.grid-4,.grid-3,.grid-2{grid-template-columns:1fr}.chatbot{right:10px;bottom:10px;width:calc(100% - 20px);height:calc(100vh - 20px)}.chat-open-btn{right:18px;bottom:18px}}
+    
+        .health-score{display:flex;align-items:center;gap:18px}.score-ring{width:94px;height:94px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#1260df var(--score),#e7edf5 0);position:relative}.score-ring:after{content:"";position:absolute;inset:10px;background:#fff;border-radius:50%}.score-number{position:relative;z-index:2;font-size:23px;font-weight:800;color:#1260df}.metric{display:flex;justify-content:space-between;gap:15px;font-size:10px;padding:8px 0;border-bottom:1px solid #edf1f5}.metric:last-child{border-bottom:0}.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}.tab{border:1px solid #dbe3ee;background:#fff;padding:8px 11px;border-radius:7px;font-size:10px;color:#4e5d72}.tab.active{background:#1260df;color:#fff;border-color:#1260df}.rec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.recommendation{border:1px solid #dce5f1;border-radius:10px;padding:14px;background:#fff}.recommendation-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.recommendation h3{margin:0;font-size:12px;line-height:1.4}.rec-meta{display:flex;gap:7px;flex-wrap:wrap;margin:9px 0}.rec-detail{font-size:10px;color:#66758a;line-height:1.6}.notice{background:#edf4ff;border:1px solid #d5e4fb;border-radius:8px;padding:11px;font-size:10px;color:#36577e}.backend-status{display:flex;align-items:center;gap:8px;font-size:12px;margin:5px 0}.status-dot{width:9px;height:9px;border-radius:50%;background:#f0ad00;display:inline-block}.status-dot.connected{background:#1da66a}.status-dot.error{background:#d8484d}.profile-card{overflow:hidden}.profile-cover{height:88px;background:linear-gradient(120deg,#0d2c59,#1260df)}.profile-body{padding:0 18px 18px}.profile-logo{width:82px;height:82px;border-radius:50%;background:#fff;border:5px solid #fff;box-shadow:0 3px 14px rgba(0,0,0,.12);margin-top:-41px;overflow:hidden}.profile-logo img{width:100%;height:100%;object-fit:cover}.passport-tab{display:none}.passport-tab.active{display:block}
+
+        .data-loading{background:#fff;border:1px solid #dbe4ef;border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 3px 12px rgba(20,40,70,.05)}
+        .loading-title{font-size:13px;font-weight:800;color:#172033}.loading-sub{font-size:11px;color:#718096;margin-top:5px}
+        .chatbot{width:390px;height:560px;right:24px;bottom:24px;border-radius:16px;box-shadow:0 20px 65px rgba(13,38,75,.28)}
+        .chat-header{height:72px;padding:0 15px}.bot-icon{width:40px;height:40px;border-radius:10px;font-size:13px}.chat-title h3{font-size:15px}.chat-title span{font-size:10px}
+        .close-chat{width:auto;padding:8px 10px;font-size:11px}.chat-body{padding:15px}.message{max-width:88%;font-size:12px}.quick-options{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.quick-option{border:1px solid #d8e1ed;background:#fff;border-radius:8px;padding:9px 8px;font-size:10px;text-align:left;color:#34445b}.quick-option:hover{border-color:#1260df;color:#1260df;background:#f7faff}
+        .chat-open-btn{width:58px;height:58px;font-size:14px;font-weight:800;background:#1260df}.chat-open-btn:hover{background:#0d4fb9}
+        .chat-input-area{padding:11px}.chat-input{height:40px}.send-btn{height:40px}
+    </style>
+        <g:ui_form>
+        <input type="hidden" name="action" id="formAction" value="" />
+        <input type="hidden" name="booking_vehicle" id="bookingVehicle" value="" />
+        <input type="hidden" name="booking_service" id="bookingServiceHidden" value="" />
+        <input type="hidden" name="booking_date" id="bookingDateHidden" value="" />
+        <input type="hidden" name="booking_time" id="bookingTimeHidden" value="" />
+        <input type="hidden" name="repair_sysid" id="repairSysid" value="" />
+        <input type="hidden" name="profile_name" id="profileNameHidden" value="" />
+        <input type="hidden" name="profile_email" id="profileEmailHidden" value="" />
+        <div class="app">
+            <aside class="sidebar">
+                <div class="brand"><div class="brand-mark"><img src="data:image/jpeg;base64,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" alt="AutoCare AI" /></div><div><div class="brand-name">AutoCare AI</div></div></div>
+                <div class="nav">
+                    <div class="nav-title">Overview</div>
+                    <button type="button" data-page="home" class="active">Home</button>
+                    <button type="button" data-page="healthPassport">Vehicle Health Passport</button>
+                    <button type="button" data-page="recommendations">AI Recommendations</button>
+                    <button type="button" data-page="appointments">Appointments</button>
+                    <button type="button" data-page="inspection">Inspection</button>
+                    <button type="button" data-page="repair">Repair Plan</button>
+                    <button type="button" data-page="completion">Service Completion</button>
+                    <div class="nav-title">Records</div>
+                    <button type="button" data-page="history">Service History</button>
+                    <button type="button" data-page="invoices">Invoices</button>
+                    <button type="button" data-page="profile">Profile</button>
+                </div>
+            </aside>
+            <main class="main">
+                <div id="dataLoading" class="data-loading"><div class="loading-title">Connecting to AutoCare AI backend</div><div class="loading-sub">Loading live vehicle and service records from ServiceNow...</div></div>
+                <section class="page active" id="home">
+                    <div class="heading"><div><h1>AutoCare AI Dashboard</h1><div class="sub">Live service intelligence connected to your ServiceNow records.</div></div><button type="button" class="primary" data-go="appointments">Book Service</button></div>
+                    <div class="hero"><div><h2 id="homeVehicleName">Vehicle</h2><div class="sub">Current vehicle context</div><div class="vehicle-meta"><div>Registration<b id="homeRegistration">-</b></div><div>Mileage<b id="homeMileage">-</b></div><div>Owner<b id="homeOwner">-</b></div><div>Status<b id="homeStatus">-</b></div></div></div><div class="hero-art"><img src="data:image/jpeg;base64,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" alt="AutoCare AI" /></div></div>
+                    <div class="grid grid-4"><div class="card"><div class="card-title">Vehicles</div><div class="stat" id="countVehicles">0</div><div class="muted">Live vehicle records</div></div><div class="card"><div class="card-title">Appointments</div><div class="stat" id="countAppointments">0</div><div class="muted">Scheduled service records</div></div><div class="card"><div class="card-title">Inspections</div><div class="stat" id="countInspections">0</div><div class="muted">Inspection work orders</div></div><div class="card"><div class="card-title">Recommendations</div><div class="stat" id="countRecommendations">0</div><div class="muted">AI and trust records</div></div></div>
+                    <div class="grid grid-4" style="margin-top:14px"><div class="card"><div class="card-title">Repair Plans</div><div class="stat" id="countRepairs">0</div><div class="muted">Repair workflow records</div></div><div class="card"><div class="card-title">Service Outcomes</div><div class="stat" id="countOutcomes">0</div><div class="muted">Verified completion records</div></div><div class="card"><div class="card-title">Service History</div><div class="stat" id="countHistory">0</div><div class="muted">Historical service records</div></div><div class="card"><div class="card-title">Invoices</div><div class="stat" id="countInvoices">0</div><div class="muted">Invoice records</div></div></div>
+                    <div class="card" style="margin-top:14px"><div class="card-title">Backend Connection</div><div class="backend-status"><span class="status-dot" id="backendDot"></span><b id="backendStatus">Checking backend...</b></div><div class="muted" id="backendDetails">Loading ServiceNow table status.</div></div><div class="grid grid-2" style="margin-top:14px"><div class="card"><h3 class="section-title">Latest Vehicle Signal</h3><div class="metric"><span>Inspection severity</span><b id="homeSeverity">-</b></div><div class="metric"><span>Inspection finding</span><b id="homeFinding">-</b></div><div class="metric"><span>Inspection status</span><b id="homeInspectionStatus">-</b></div><div class="metric"><span>Last service</span><b id="homeLastService">-</b></div></div><div class="card"><h3 class="section-title">Latest AI Recommendation</h3><div id="homeRecommendation" class="rec-detail">No recommendation available.</div><div class="rec-meta"><span class="badge info" id="homeRecommendationClass">Not specified</span><span class="badge medium" id="homeRecommendationPriority">Not specified</span></div><button type="button" class="outline" data-go="recommendations">View AI Recommendations</button></div></div>
+                </section>
+                <section class="page" id="healthPassport">
+                    <div class="heading"><div><h1>Vehicle Health Passport</h1><div class="sub">One connected view of vehicle profile, maintenance, documents, intelligence and service outcomes.</div></div><button type="button" class="outline" data-go="home">Home</button></div>
+                    <div class="card" style="margin-bottom:14px"><div class="grid grid-3"><div class="field" style="margin:0"><label>Select Vehicle</label><select id="vehicleSelector"></select></div><div><div class="card-title">Registration</div><div id="passportReg" class="stat" style="font-size:17px">-</div></div><div><div class="card-title">Current Mileage</div><div id="passportMileage" class="stat" style="font-size:17px">-</div></div></div></div>
+                    <div class="tabs"><button type="button" class="tab active" data-tab="overview">Overview</button><button type="button" class="tab" data-tab="service">Service &amp; Repairs</button><button type="button" class="tab" data-tab="documents">Documents &amp; Compliance</button><button type="button" class="tab" data-tab="outcomes">Appointments &amp; Outcomes</button></div>
+                    <div class="passport-tab active" id="passport-overview"><div class="grid grid-3"><div class="card health-score"><div class="score-ring" id="scoreRing" style="--score:0%"><span class="score-number" id="healthScore">0</span></div><div><h3 class="section-title">Calculated Health Score</h3><div class="muted">Derived from inspection severity and recommendation urgency.</div></div></div><div class="card"><div class="card-title">Maintenance Debt</div><div class="stat" style="font-size:20px" id="maintenanceDebt">0</div><div class="muted">Open recommendation signals</div></div><div class="card"><div class="card-title">Latest Service</div><div class="stat" style="font-size:15px" id="passportLastService">No service</div><div class="muted" id="passportLastServiceCenter">Service center not recorded</div></div></div>
+                        <div class="grid grid-2" style="margin-top:14px"><div class="card"><h3 class="section-title">Vehicle Profile</h3><div class="metric"><span>Make &amp; Model</span><b id="passportMakeModel">-</b></div><div class="metric"><span>Year / Color</span><b id="passportYearColor">Not recorded</b></div><div class="metric"><span>Owner</span><b id="passportOwner">-</b></div><div class="metric"><span>Vehicle Status</span><b id="passportStatus">-</b></div></div><div class="card"><h3 class="section-title">Maintenance Status</h3><div class="metric"><span>Upcoming service</span><b id="passportNextService">Not recorded</b></div><div class="metric"><span>Next mileage</span><b id="passportNextMileage">Not recorded</b></div><div class="metric"><span>Service records</span><b id="passportServiceCount">0</b></div><div class="metric"><span>Invoice records</span><b id="passportInvoiceCount">0</b></div></div></div>
+                        <div class="card" style="margin-top:14px"><h3 class="section-title">Health Signals</h3><div class="metric"><span>Inspection coverage</span><b id="healthInspectionCount">0</b></div><div class="progress"><span id="healthInspectionBar" style="width:0%"></span></div><div class="metric"><span>Service history</span><b id="healthHistoryCount">0</b></div><div class="progress"><span id="healthHistoryBar" style="width:0%"></span></div><div class="metric"><span>AI recommendations</span><b id="healthRecommendationCount">0</b></div><div class="progress"><span id="healthRecommendationBar" style="width:0%"></span></div></div>
+                        <div class="card" style="margin-top:14px"><h3 class="section-title">Vehicle Timeline</h3><div class="timeline" id="passportTimeline"></div></div>
+                    </div>
+                    <div class="passport-tab" id="passport-service"><div class="card"><h3 class="section-title">Service and Repair Records</h3><div class="table-wrap"><table class="table"><thead><tr><th>Date</th><th>Service</th><th>Details</th><th>Parts</th><th>Mileage</th><th>Cost</th><th>Next Service</th></tr></thead><tbody id="passportServiceRows"></tbody></table></div></div></div>
+                    <div class="passport-tab" id="passport-documents"><div class="grid grid-2"><div class="card"><h3 class="section-title">Invoices &amp; Documents</h3><div class="table-wrap"><table class="table"><thead><tr><th>Invoice</th><th>Date</th><th>Amount</th><th>Payment</th><th>Document</th></tr></thead><tbody id="passportInvoiceRows"></tbody></table></div></div><div class="card"><h3 class="section-title">Warranty &amp; Compliance</h3><div class="notice">Warranty, insurance, pollution certificate, inspection due date and recall fields are not present in the current Vehicle table schema. This panel shows only supported backend fields.</div><div class="metric"><span>Vehicle status</span><b id="passportComplianceStatus">-</b></div><div class="metric"><span>Last service date</span><b id="passportComplianceService">-</b></div></div></div></div>
+                    <div class="passport-tab" id="passport-outcomes"><div class="grid grid-2"><div class="card"><h3 class="section-title">Appointments</h3><div class="table-wrap"><table class="table"><thead><tr><th>Number</th><th>Date</th><th>Service</th><th>Status</th></tr></thead><tbody id="passportAppointmentRows"></tbody></table></div></div><div class="card"><h3 class="section-title">Verified Service Outcomes</h3><div class="table-wrap"><table class="table"><thead><tr><th>Outcome</th><th>Date</th><th>Type</th><th>Final Status</th><th>Quality</th></tr></thead><tbody id="passportOutcomeRows"></tbody></table></div></div></div></div>
+                </section>
+                <section class="page" id="recommendations"><div class="heading"><div><h1>AI Maintenance Recommendations</h1><div class="sub">Live Recommendation records with confidence, trust classification, cost and review state.</div></div><button type="button" class="outline" data-go="healthPassport">Vehicle Health Passport</button></div><div class="grid grid-4"><div class="card"><div class="card-title">Total Recommendations</div><div class="stat" id="recTotal">0</div></div><div class="card"><div class="card-title">Required</div><div class="stat" id="recRequired">0</div></div><div class="card"><div class="card-title">High Priority</div><div class="stat" id="recHigh">0</div></div><div class="card"><div class="card-title">Pending Review</div><div class="stat" id="recReview">0</div></div></div><div class="card" style="margin-top:14px"><h3 class="section-title">Latest AI Insight</h3><div class="grid grid-3"><div><div class="muted">Issue</div><b id="aiIssue">-</b></div><div><div class="muted">Classification</div><b id="aiClass">-</b></div><div><div class="muted">Recommended Action</div><b id="aiAction">-</b></div></div><div class="notice" style="margin-top:12px" id="aiEvidence">Recommendation evidence is taken directly from backend Recommendation records.</div></div><div class="rec-grid" id="recommendationCards" style="margin-top:14px"></div></section>
+                <section class="page" id="appointments"><div class="heading"><div><h1>Service Appointments</h1><div class="sub">Book a new service and review live appointment records.</div></div><button type="button" class="outline" data-go="inspection">View Inspections</button></div><div class="booking-grid"><div class="booking-section"><span class="booking-label">1. SELECT SERVICE</span><div class="service-options"><button type="button" class="service-option selected" data-service="Brake Inspection"><strong>Brake Inspection</strong><span>Inspect brake system</span></button><button type="button" class="service-option" data-service="Periodic Maintenance"><strong>Periodic Maintenance</strong><span>Routine scheduled maintenance</span></button><button type="button" class="service-option" data-service="Vehicle Health Check"><strong>Vehicle Health Check</strong><span>Complete health assessment</span></button><button type="button" class="service-option" data-service="General Inspection"><strong>General Inspection</strong><span>General vehicle inspection</span></button></div><div style="margin-top:17px"><span class="booking-label">2. DATE</span><input type="date" id="bookingDate" class="date-box" /></div><div style="margin-top:17px"><span class="booking-label">3. TIME</span><div><button type="button" class="slot" data-time="09:00 AM">09:00 AM</button><button type="button" class="slot selected" data-time="11:00 AM">11:00 AM</button><button type="button" class="slot" data-time="02:00 PM">02:00 PM</button><button type="button" class="slot" data-time="04:00 PM">04:00 PM</button><button type="button" class="slot" data-time="05:30 PM">05:30 PM</button></div></div></div><div class="booking-section"><span class="booking-label">REVIEW &amp; CONFIRM</span><div class="booking-summary"><div class="summary-line"><span>Vehicle</span><b id="bookingVehicleName">-</b></div><div class="summary-line"><span>Registration</span><b id="bookingVehicleReg">-</b></div><div class="summary-line"><span>Service</span><b id="bookingServiceText">Brake Inspection</b></div><div class="summary-line"><span>Date</span><b id="bookingDateText">Select date</b></div><div class="summary-line"><span>Time</span><b id="bookingTimeText">11:00 AM</b></div></div><button type="submit" class="primary" style="width:100%;margin-top:14px" onclick="return submitBooking()">Confirm Appointment</button><div class="notice" style="margin-top:12px">This action inserts a record into the AutoCare Appointment table.</div></div></div><div class="card" style="margin-top:14px"><h3 class="section-title">Existing Appointments</h3><div class="table-wrap"><table class="table"><thead><tr><th>Number</th><th>Vehicle</th><th>Date</th><th>Time</th><th>Service</th><th>Technician</th><th>Status</th></tr></thead><tbody id="appointmentRows"></tbody></table></div></div></section>
+                <section class="page" id="inspection"><div class="heading"><div><h1>Inspection &amp; Work Orders</h1><div class="sub">All inspection records from the Inspection table, including technician and severity details.</div></div><button type="button" class="outline" data-go="repair">Repair Plans</button></div><div class="grid grid-4"><div class="card"><div class="card-title">Total Inspections</div><div class="stat" id="inspectionTotal">0</div></div><div class="card"><div class="card-title">High Severity</div><div class="stat" id="inspectionHigh">0</div></div><div class="card"><div class="card-title">Completed</div><div class="stat" id="inspectionCompleted">0</div></div><div class="card"><div class="card-title">With Findings</div><div class="stat" id="inspectionFindings">0</div></div></div><div class="card" style="margin-top:14px"><div class="table-wrap"><table class="table"><thead><tr><th>Inspection #</th><th>Vehicle</th><th>Appointment</th><th>Date</th><th>Technician</th><th>Severity</th><th>Status</th><th>Finding</th><th>Recommendation</th></tr></thead><tbody id="inspectionRows"></tbody></table></div></div></section>
+                <section class="page" id="repair"><div class="heading"><div><h1>Repair Plan &amp; Owner Approval</h1><div class="sub">Repair plans generated from the inspection workflow with approval actions connected to the backend.</div></div><button type="button" class="outline" data-go="completion">Service Completion</button></div><div class="grid grid-4"><div class="card"><div class="card-title">Repair Plans</div><div class="stat" id="repairTotal">0</div></div><div class="card"><div class="card-title">Pending Approval</div><div class="stat" id="repairPending">0</div></div><div class="card"><div class="card-title">Approved</div><div class="stat" id="repairApproved">0</div></div><div class="card"><div class="card-title">Estimated Cost</div><div class="stat" id="repairCost">-</div></div></div><div class="card" style="margin-top:14px"><div class="table-wrap"><table class="table"><thead><tr><th>Repair Plan</th><th>Vehicle</th><th>Description</th><th>Classification</th><th>Cost</th><th>Evidence</th><th>Approval</th><th>Status</th><th>Action</th></tr></thead><tbody id="repairRows"></tbody></table></div></div></section>
+                <section class="page" id="completion"><div class="heading"><div><h1>Service Completion &amp; Verified Outcomes</h1><div class="sub">Completed work, replaced parts, quality and customer feedback from Service Outcome records.</div></div><button type="button" class="outline" data-go="history">Service History</button></div><div class="grid grid-4"><div class="card"><div class="card-title">Outcomes</div><div class="stat" id="outcomeTotal">0</div></div><div class="card"><div class="card-title">Completed</div><div class="stat" id="outcomeCompleted">0</div></div><div class="card"><div class="card-title">Follow-up Needed</div><div class="stat" id="outcomeFollowup">0</div></div><div class="card"><div class="card-title">Average Quality</div><div class="stat" id="outcomeQuality">-</div></div></div><div class="card" style="margin-top:14px"><div class="table-wrap"><table class="table"><thead><tr><th>Outcome</th><th>Vehicle</th><th>Date</th><th>Type</th><th>Description</th><th>Parts Replaced</th><th>Final Status</th><th>Quality</th><th>Follow-up</th></tr></thead><tbody id="outcomeRows"></tbody></table></div></div></section>
+                <section class="page" id="history"><div class="heading"><div><h1>Service History</h1><div class="sub">Validated service and repair history directly from the Service History table.</div></div><button type="button" class="outline" data-go="invoices">View Invoices</button></div><div class="grid grid-3"><div class="card"><div class="card-title">Service Records</div><div class="stat" id="historyTotal">0</div></div><div class="card"><div class="card-title">Latest Service</div><div class="stat" style="font-size:15px" id="historyLatest">-</div></div><div class="card"><div class="card-title">Total Recorded Cost</div><div class="stat" style="font-size:18px" id="historyCost">-</div></div></div><div class="card" style="margin-top:14px"><div class="table-wrap"><table class="table"><thead><tr><th>Date</th><th>Vehicle</th><th>Service Details</th><th>Parts</th><th>Mileage</th><th>Cost</th><th>Center</th><th>Next Service</th></tr></thead><tbody id="historyRows"></tbody></table></div></div></section>
+                <section class="page" id="invoices"><div class="heading"><div><h1>Invoices &amp; Payments</h1><div class="sub">Invoice, amount, payment and document status from the Invoice table.</div></div><button type="button" class="outline" data-go="history">Service History</button></div><div class="grid grid-4"><div class="card"><div class="card-title">Invoices</div><div class="stat" id="invoiceTotal">0</div></div><div class="card"><div class="card-title">Total Amount</div><div class="stat" id="invoiceAmount">-</div></div><div class="card"><div class="card-title">Paid</div><div class="stat" id="invoicePaid">0</div></div><div class="card"><div class="card-title">Pending</div><div class="stat" id="invoicePending">0</div></div></div><div class="card" style="margin-top:14px"><div class="table-wrap"><table class="table"><thead><tr><th>Invoice</th><th>Date</th><th>Vehicle</th><th>Description</th><th>Amount</th><th>Payment</th><th>Due</th><th>Document</th><th>Center</th></tr></thead><tbody id="invoiceRows"></tbody></table></div></div></section>
+                <section class="page" id="profile"><div class="heading"><div><h1>AutoCare Member Profile</h1><div class="sub">Owner-facing profile connected to your ServiceNow account and vehicle records.</div></div><button type="button" class="outline" data-go="healthPassport">Vehicle Health Passport</button></div><div class="profile"><div class="card profile-card"><div class="profile-cover"></div><div class="profile-body"><div class="profile-logo"><img src="data:image/jpeg;base64,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" alt="AutoCare AI" /></div><h2 style="font-size:18px;margin:10px 0 4px">AutoCare Member</h2><div class="sub" id="profileEmailText">-</div><div class="summary-box" style="margin-top:17px"><div class="metric"><span>Account</span><b>AutoCare AI Service User</b></div><div class="metric"><span>Vehicles visible</span><b id="profileVehicleCount">0</b></div><div class="metric"><span>Service records</span><b id="profileServiceCount">0</b></div><div class="metric"><span>Appointments</span><b id="profileAppointmentCount">0</b></div></div></div></div><div class="card"><h3 class="section-title">Account Details</h3><div class="field"><label>Display Name</label><input id="profileName" value="AutoCare Member" /></div><div class="field"><label>Email</label><input id="profileEmail" value="" /></div><div class="field"><label>Current Vehicle</label><input id="profileVehicle" readonly="readonly" /></div><div class="field"><label>Registration</label><input id="profileRegistration" readonly="readonly" /></div><button type="submit" class="primary" onclick="return saveProfile()">Save Profile</button><button type="button" class="outline" style="margin-left:7px" data-go="home">Back to Dashboard</button></div></div><div class="grid grid-3" style="margin-top:14px"><div class="card"><div class="card-title">Maintenance Journey</div><div class="muted">Vehicle → Appointment → Inspection → Repair Plan → Service Outcome</div></div><div class="card"><div class="card-title">Data Connection</div><div class="muted">Counts and records are read from the AutoCare AI scoped tables.</div></div><div class="card"><div class="card-title">AI Assistance</div><div class="muted">Recommendations use the Recommendation and trust-engine fields stored in ServiceNow.</div></div></div></section>
+            </main>
+        </div>
+        <div class="chatbot" id="chatbot"><div class="chat-header"><div class="chat-title"><div class="bot-icon">AI</div><div><h3>AutoCare AI</h3><span><span class="chat-online"></span>Live ServiceNow data</span></div></div><button type="button" class="close-chat" id="closeChat" aria-label="Close">Close</button></div><div class="chat-body" id="chatBody"><div class="message bot-message">Hello. I am AutoCare AI. I can help you understand your vehicle health, recommendations, appointments, inspections, repairs, service history and invoices.</div><div class="quick-label">Quick actions</div><div class="quick-options"><button type="button" class="quick-option" data-option="Vehicle Health Passport">Vehicle Health</button><button type="button" class="quick-option" data-option="Recommendations">Recommendations</button><button type="button" class="quick-option" data-option="Appointments">Appointments</button><button type="button" class="quick-option" data-option="Inspection">Inspection</button><button type="button" class="quick-option" data-option="Repair Plan">Repair Plan</button><button type="button" class="quick-option" data-option="Invoices">Invoices</button></div></div><div class="chat-input-area"><input type="text" id="chatInput" class="chat-input" placeholder="Ask AutoCare AI..." /><button type="button" class="send-btn" id="sendChat">Send</button></div></div>
+        <button type="button" class="chat-open-btn" id="chatOpen">AI</button><div id="toast"></div>
+        </g:ui_form>
+
+</j:jelly>]]></html>
+        <name>AutoCare_AI_UI</name>
+        <processing_script><![CDATA[if (action == "approve_repair") {
+    var repairId = (repair_sysid || "").toString();
+    if (!repairId) {
+        gs.addErrorMessage("Repair plan record is required.");
+    } else {
+        var repair = new GlideRecordSecure("x_1947064_autoca_0_repair_plan");
+        if (!repair.get(repairId)) {
+            gs.addErrorMessage("Repair plan could not be found.");
+        } else {
+            if (repair.isValidField("owner_approval")) repair.setValue("owner_approval", "approved");
+            if (repair.isValidField("approval_date")) repair.setValue("approval_date", gs.nowDateTime());
+            if (repair.isValidField("status")) repair.setValue("status", "approved");
+            var updated = repair.update();
+            if (updated) gs.addInfoMessage("Repair plan approved successfully.");
+            else gs.addErrorMessage("Repair plan approval failed.");
+        }
+    }
+} else if (action == "book") {
+    var vehicleId = (booking_vehicle || "").toString();
+    var serviceType = (booking_service || "").toString();
+    var appointmentDate = (booking_date || "").toString();
+    var preferredTime = (booking_time || "").toString();
+    if (!vehicleId || !appointmentDate || !serviceType) {
+        gs.addErrorMessage("Vehicle, service and date are required.");
+    } else {
+        var vehicle = new GlideRecordSecure("x_1947064_autoca_0_vehicle");
+        if (!vehicle.get(vehicleId)) {
+            gs.addErrorMessage("The selected vehicle could not be found.");
+        } else {
+            var appt = new GlideRecordSecure("x_1947064_autoca_0_appointment");
+            appt.initialize();
+            if (appt.isValidField("appointment_number")) appt.setValue("appointment_number", "APT-" + new GlideDateTime().getNumericValue());
+            if (appt.isValidField("vehicle")) appt.setValue("vehicle", vehicle.getUniqueValue());
+            if (appt.isValidField("owner")) appt.setValue("owner", vehicle.getValue("owner"));
+            if (appt.isValidField("appointment_date")) appt.setValue("appointment_date", appointmentDate);
+            if (appt.isValidField("preferred_date")) appt.setValue("preferred_date", appointmentDate);
+            if (appt.isValidField("preferred_time")) appt.setValue("preferred_time", preferredTime);
+            if (appt.isValidField("service_type")) appt.setValue("service_type", serviceType);
+            if (appt.isValidField("status")) appt.setValue("status", "pending");
+            if (appt.isValidField("customer_contact")) appt.setValue("customer_contact", gs.getUser().getEmail());
+            if (appt.isValidField("notes")) appt.setValue("notes", "Created from AutoCare AI Vehicle Health Passport UI.");
+            var newId = appt.insert();
+            if (newId) gs.addInfoMessage("Appointment created successfully.");
+            else gs.addErrorMessage("Appointment could not be created.");
+        }
+    }
+} else if (action == "save_profile") {
+    var profileNameValue = (profile_name || "").toString();
+    var profileEmailValue = (profile_email || "").toString();
+    var user = new GlideRecordSecure("sys_user");
+    if (!user.get(gs.getUserID())) {
+        gs.addErrorMessage("Your ServiceNow user record could not be found.");
+    } else {
+        if (profileNameValue && user.isValidField("name")) user.setValue("name", profileNameValue);
+        if (user.isValidField("email")) user.setValue("email", profileEmailValue);
+        var saved = user.update();
+        if (saved) gs.addInfoMessage("Profile updated successfully.");
+        else gs.addErrorMessage("Profile update could not be completed.");
+    }
+}
+]]></processing_script>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-01 13:57:00</sys_created_on>
+        <sys_id>8b67f867f32f8b100c460e554058b30b</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>AutoCare_AI_UI</sys_name>
+        <sys_package display_value="Autocare AI" source="x_1947064_autoca_0">6d640c1583230b10ca3c9530ceaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Autocare AI">6d640c1583230b10ca3c9530ceaad395</sys_scope>
+        <sys_update_name>sys_ui_page_8b67f867f32f8b100c460e554058b30b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 15:35:24</sys_updated_on>
+    </sys_ui_page>
+</record_update>
